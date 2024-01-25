@@ -1,1 +1,1 @@
-sudo docker build -f Dockerfile . -t pallywebsite:v1
+sudo docker build -f Dockerfile . -t pallyloanuser:v1
