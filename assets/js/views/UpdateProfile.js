@@ -15,26 +15,22 @@ export default class extends DefaultView {
                 <div class="right-pane">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-10 col-12 ms-auto me-auto mt-4">
-                                <div id="onboarding-forms" class="white-bg rounded div-shadow signin-form">
-                                    <form id="step-1"  >
+                            <div class="col-md-10 col-12 ms-auto me-auto mb-4">
+                                <div id="updateProfile" class="white-bg rounded div-shadow signin-form">
+                                    <form id="updateProfileForm"  >
                                         <div class="text-center mt-3 px-8">
                                             <h3>Update Profile</h3>
+                                            <p>Complete the form below to update your profile.</p>
                                         </div>
                                         <div class="form-group mt-3">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Firstname <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" 
-                                                        id="firstname" 
-                                                        name="firstname">
+                                                    <input type="text" class="form-control" id="firstname" name="firstname">
                                                 </div>
                                                 <div class="col-md-6">
-                                                        <label>Lastname <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" 
-                                                            id="lastname" 
-                                                            name="lastname">
-                                                    
+                                                    <label>Lastname <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="lastname" name="lastname">
                                                 </div>
                                             </div>
                                             
@@ -44,23 +40,64 @@ export default class extends DefaultView {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Othernames </label>
-                                                    <input type="text" class="form-control" 
-                                                        id="othernames" 
-                                                        name="othernams">
+                                                    <input type="text" class="form-control" id="othernames" name="othernames">
                                                 </div>
                                                 <div class="col-md-6">
-                                                        <label>Date of Birth <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" 
-                                                            id="lastname" 
-                                                            name="lastname"
-                                                            required>
-                                                    
+                                                    <label>Date of Birth <span class="text-danger">*</span></label>
+                                                    <input type="date" class="form-control mydatepicker" id="dob" name="dob"  placeholder="mm/dd/yyyy" required>
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                        
-                                        
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Phone </label>
+                                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Gender <span class="text-danger">*</span></label>
+                                                    <select id="sex" required name="sex" class="form-control">
+                                                        <option value="">Select Gender</option>
+                                                        <option>Male</option>
+                                                        <option>female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Email </label>
+                                                    <input type="email" class="form-control" id="email" name="email">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Employment Status </label>
+                                                    <select id="employmentStatus" name="employmentStatus" class="form-control">
+                                                        <option value="">Select Status</option>
+                                                        <option>Employed</option>
+                                                        <option>Self Employed</option>
+                                                        <option>Unemployed</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label>Address </label>
+                                                    <textarea class="form-control" required id="address" name="address"></textarea>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mt-4">
+                                            <button id="update-profile" class="continue-button">Update Profile</button>
+                                        </div>
+                                            
                                         
                                         
                                         <hr class="mt-4 mb-4">
