@@ -137,6 +137,16 @@ body.loaded #preloader {
     margin-top: 150px;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+
+
 .white-bg {
     background-color: #ffffff;
 }

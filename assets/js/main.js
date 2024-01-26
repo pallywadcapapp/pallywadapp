@@ -33,6 +33,21 @@
 const api_url = 'https://auth.pallywad.com'; 
 const loan_app_url = 'https://user.pallywad.com';
 
+$.ajaxSetup({
+    beforeSend: function (xhr) {
+        try {
+            var auth = localStorage.getItem('token');
+            var expirydate = localStorage.getItem('expiry');
+            xhr.setRequestHeader('Expiry', expirydate);
+            xhr.setRequestHeader('Authorization', 'Bearer ' + auth);
+        } catch(ex){
+            var auth = '';
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + auth);
+        }
+    }
+});
+
 
 /*-------------------------------------
 2. initialize onscroll animations
@@ -316,6 +331,7 @@ function fetchLoggedInUserDetails(email, token, expiration){
             if(d.email){
                 localStorage.setItem("firstname", d.firstname);
                 localStorage.setItem("lastname", d.lastname);
+                
                 localStorage.setItem("email", email);
                 localStorage.setItem("token", token);
                 localStorage.setItem("tokenExpiration", expiration)
@@ -331,22 +347,27 @@ function fetchLoggedInUserDetails(email, token, expiration){
 7. Add Loan
 -------------------------------------*/
 
+//is eligible
 function addLoan(email){
     let api_endpoint = "/api/Profile/iseligible";
-    data = {
-        "username": email
-    };
-
     $.ajax({
         type:'get',
         url: api_url+api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        data: JSON.stringify(data),
         error: function(d){
             displayToast('error',d.responseJSON.message, d.responseJSON.status)
         },
         success: function(d){
-            console.log(d);
+            if(d.message=="update date of birth profile"){
+                let message = `You need to update your profile in order to add a loan. 
+                <a href="update-profile">Click here</a> to update now.`;
+                $('#stepsNotification').html(message).show();
+            }
+            else {
+                location.href = "request-loan";
+            }
         }
     })
 }
+
+

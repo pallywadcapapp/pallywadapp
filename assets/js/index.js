@@ -1,7 +1,7 @@
 import Dashboard from "./views/Dashboard.js";
 import NotFound from "./views/NotFound.js";
 import Loans from "./views/Loans.js";
-import Onboarding from "./views/Onboarding.js";
+import UpdateProfile from "./views/UpdateProfile.js";
 import Onboarding2 from "./views/Onboarding2.js";
 import Onboarding3 from "./views/Onboarding3.js";
 import Signin from "./views/SignIn.js";
@@ -30,7 +30,7 @@ const router = async () => {
         {path:"/dashboard", view: Dashboard},
         {path:"/404", view: NotFound},
         {path:"/loans" , view: Loans },
-        {path:"/onboarding" , view: Onboarding },
+        {path:"/update-profile" , view: UpdateProfile },
         {path:"/onboarding-2" , view: Onboarding2 },
         {path:"/onboarding-3" , view: Onboarding3 },
         {path:"/sign-in" , view: Signin },
