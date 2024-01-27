@@ -44,7 +44,7 @@ export default class extends DefaultView {
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Date of Birth <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control mydatepicker" id="dob" name="dob"  placeholder="mm/dd/yyyy" required>
+                                                    <input type="text" class="form-control mydatepicker" id="dob" name="dob"  placeholder="mm/dd/yyyy" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@ export default class extends DefaultView {
                                                     <select id="sex" required name="sex" class="form-control">
                                                         <option value="">Select Gender</option>
                                                         <option>Male</option>
-                                                        <option>female</option>
+                                                        <option>Female</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -2,8 +2,9 @@ import Dashboard from "./views/Dashboard.js";
 import NotFound from "./views/NotFound.js";
 import Loans from "./views/Loans.js";
 import UpdateProfile from "./views/UpdateProfile.js";
-import Onboarding2 from "./views/Onboarding2.js";
-import Onboarding3 from "./views/Onboarding3.js";
+import UploadDocuments from "./views/UploadDocuments.js";
+import Kyc1 from "./views/Kyc1.js";
+import Kyc2 from "./views/Kyc2.js";
 import Signin from "./views/SignIn.js";
 import Logout from "./views/Logout.js";
 
@@ -31,8 +32,9 @@ const router = async () => {
         {path:"/404", view: NotFound},
         {path:"/loans" , view: Loans },
         {path:"/update-profile" , view: UpdateProfile },
-        {path:"/onboarding-2" , view: Onboarding2 },
-        {path:"/onboarding-3" , view: Onboarding3 },
+        {path:"/upload-documents" , view: UploadDocuments },
+        {path:"/kyc-1" , view: Kyc1 },
+        {path:"/kyc-2" , view: Kyc2 },
         {path:"/sign-in" , view: Signin },
         {path:"/logout" , view: Logout }
     ]

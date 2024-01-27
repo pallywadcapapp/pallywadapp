@@ -23,9 +23,7 @@
         });
     });
 
-    $('.mydatepicker, #dob').datepicker();
-
-
+    
 })(jQuery);
 
 
@@ -34,6 +32,7 @@
 -------------------------------------*/
 const api_url = 'https://auth.pallywad.com'; 
 const loan_app_url = 'https://user.pallywad.com';
+const setup_url = 'https://setup.pallywad.com';
 
 $.ajaxSetup({
     beforeSend: function (xhr) {
@@ -44,6 +43,7 @@ $.ajaxSetup({
             xhr.setRequestHeader('Authorization', 'Bearer ' + auth);
         } catch(ex){
             var auth = '';
+            localStorage.removeItem('token');
             xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
             xhr.setRequestHeader('Authorization', 'Bearer ' + auth);
         }
@@ -83,7 +83,6 @@ $('body').on('click','#continue', function(e){
                 displayToast('error',d.responseJSON.message, d.responseJSON.status)
             },
             success: function(d){
-                console.log(d.status);
                 if(d.status=="success"){
                     localStorage.setItem("email", email);
                     localStorage.setItem("password", password);
@@ -134,7 +133,6 @@ $('body').on('click', '#verifyEmail', function(e){
             displayToast('error', "Token not provided!", "Error");
         },
         success: function(d){
-            console.log(d.status);
             if(d.status=="Ok"){
                 location.href = "/onboarding-3";
             }
@@ -182,7 +180,6 @@ $('body').on('click', '#submit-onboarding', function(e){
                 displayToast('error', d.responseJSON.message, d.responseJSON.status);
             },
             success: function(d){
-                console.log(d.status);
                 if(d.status=='Success'){
                     displayToast('success', "Your account was created successfully", "Signup Successful");
                     
@@ -205,7 +202,6 @@ $('body').on('click', '#submit-onboarding', function(e){
 4. Toggle password
 -------------------------------------*/
 $("body").on('click','.toggle-password',function () {
-    console.log("toggle clicked");
     $(this).toggleClass("fa-eye-slash fa-eye");
     var input = $($(this).attr("toggle"));
     if (input.attr("type") == "password") {
@@ -365,12 +361,18 @@ function addLoan(email){
                 <a href="update-profile">Click here</a> to update now.`;
                 $('#stepsNotification').html(message).show();
             }
+            if(d.message=="upload all required documents profile"){
+                let message = `You need to upload required documents. 
+                <a href="upload-documents">Click here</a> to get started.`;
+                $('#stepsNotification').html(message).show();
+            }
             else {
-                location.href = "request-loan";
+                //location.href = "request-loan";
             }
         }
     })
 }
+
 
 
 /*-------------------------------------
@@ -419,14 +421,7 @@ $('body').on('click','#update-profile', function(e){
                 displayToast('error',d.responseJSON.message, d.responseJSON.title)
             },
             success: function(d){
-                console.log(d);
-                // if(d.token){
-                //     fetchLoggedInUserDetails(email, d.token, d.expiration);
-                // }
-                // else {
-                //     displayToast('error', "The email or password you entered is incorrect", "Login Failed");
-                // }
-                
+                displayToast('success', "Your profile was updated successfully", "Profile update successful")
             }
         })
 
@@ -434,32 +429,103 @@ $('body').on('click','#update-profile', function(e){
     }
 })
 
-// Date Picker
 
 
-let email = localStorage.getItem("email");
-preloadProfileDetails(email);
-function preloadProfileDetails(email){
-    console.log("preload here");
-    let api_endpoint = "/api/Profile";
-    let data = {
-        username: email
-    }
-    $.ajax({
-        type:'get',
-        url: api_url+api_endpoint,
-        headers: { 'Content-Type': 'application/json' },
-        data: data,
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
-        },
-        success: function(d){
-            $('[name="firstname"]').val(d.firstname);
-            $('[name="lastname"]').val(d.lastname);
-            $('[name="othernames"]').val(d.othernames);
-            $('[name="email"]').val(d.email);
-            $('[name="phoneNumber"]').val(d.phoneNumber);
-         
+//section to get all needed ids loaded by import
+$(window).on('load', function(){
+
+    //prefill document types
+    if($("#kyc1-form").length > 0) {
+        fetchDocumentsList();
+        function fetchDocumentsList(){
+            let api_endpoint = "/api/Documents";
+            $.ajax({
+                type:'get',
+                url: setup_url+api_endpoint,
+                headers: { 'Content-Type': 'application/json' },
+                error: function(d){
+                    displayToast('error',d.responseJSON.message, d.responseJSON.status)
+                },
+                success: function(d){
+                    let lists = d;
+                    let documents = "";
+                    for (let i = 0; i < lists.length; i++) {
+                        documents += `
+                            <div class="form-check">
+                                <input class="form-check-input singleCheck" name="verificationDocument" required type="checkbox" value="${lists[i]}">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    ${lists[i]}
+                                </label>
+                            </div>
+                        `
+                    }
+                    $('#documentsList').html(documents);
+                }
+            })
         }
-    })
-}
+    }
+
+    if($("#kyc2-form").length > 0) {
+        let document = localStorage.getItem('chosenDocument');  
+        $('#selected-document').html(document);
+    }
+
+    
+    // Prefill profile 
+    if($("#updateProfile").length > 0) {
+        let email = localStorage.getItem("email");
+        preloadProfileDetails(email);
+        function preloadProfileDetails(email){
+            console.log("preload here");
+            let api_endpoint = "/api/Profile";
+            let data = {
+                username: email
+            }
+            $.ajax({
+                type:'get',
+                url: api_url+api_endpoint,
+                headers: { 'Content-Type': 'application/json' },
+                data: data,
+                error: function(d){
+                    displayToast('error',d.responseJSON.message, d.responseJSON.status)
+                },
+                success: function(d){
+                    $('[name="firstname"]').val(d.firstname);
+                    $('[name="lastname"]').val(d.lastname);
+                    $('[name="othernames"]').val(d.othernames);
+                    $('[name="email"]').val(d.email);
+                    $('[name="phoneNumber"]').val(d.phoneNumber);
+                    $('[name="address"]').val(d.address);
+                    $('[name="dob"]').val(d.dob);
+                    $('[name="sex"] option:contains("'+d.sex+'")').prop('selected', true);
+                    $('[name="employmentStatus"] option:contains("'+d.employmentStatus+'")').prop('selected', true);
+                    
+                }
+            })
+        }
+    }
+
+    //load datepicker
+    $('.mydatepicker, #dob').datepicker();
+
+})
+
+$("body").on('change', '.singleCheck', function() {
+    $(".singleCheck").prop('checked', false);
+    $(this).prop('checked', true);
+});
+
+/*
+kyc page 1
+*/ 
+$('body').on('click', '#continue-button-2', function(){
+    console.log("happening here");
+    if($('#kyc1-form-step input:checked').length < 1){
+        displayToast('error','You must select at least one document', 'Select a Document')
+    }
+    else {
+        let doc = $('#kyc1-form-step input:checked').val();
+        localStorage.setItem('chosenDocument', doc);
+        window.location.replace("kyc-2");
+    }
+})

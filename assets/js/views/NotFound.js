@@ -1,6 +1,6 @@
-import DefaultView from "./DefaultView.js";
+import DefaultViewNoAuth from "./DefaultViewNoAuth.js";
 
-export default class extends DefaultView {
+export default class extends DefaultViewNoAuth {
     constructor(params) {
         super(params);
         this.setTitle("Error 404 | Page not found ");

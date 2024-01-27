@@ -16,6 +16,8 @@ export default class Auth {
 
     logout(){
         localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        localStorage.removeItem("expiry");
         window.location.replace("/sign-in");
     }
     

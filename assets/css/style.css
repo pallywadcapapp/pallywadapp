@@ -9,7 +9,8 @@
 4. Onboarding
 5. Sign in 
 6. Sidebar
-
+7. Dashboard
+8. Upload Form
 
 /*=======================================================================
 1. Typography
@@ -145,7 +146,9 @@ body.loaded #preloader {
     display: block;
 }
 
-
+.grey-text {
+    color: #666666;
+}
 
 .white-bg {
     background-color: #ffffff;
@@ -738,6 +741,26 @@ hr.footerline {
     color: #fff;
 }
 
+
+.continue-button-2 {
+    background-color: #24488F;
+    color: #ffffff;
+    border: none;
+    line-height: 40px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    width: 100%;
+    display: block;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.continue-button-2:hover { 
+    background-color: #999;
+    color: #fff;
+}
+
+
 .have-account {
     background: #E4EBFE;
     border: 1px solid #24488F;
@@ -886,10 +909,11 @@ input[type="file"]{
 
 .right-pane {
     width: calc(100% - 300px);
-    padding-top: 98px;
+    padding-top: 70px;
     padding-left: 50px;
     padding-right: 50px;
 }
+
 /*========================================================================
 7. User Dashboard
 =========================================================================*/
@@ -968,4 +992,105 @@ input[type="file"]{
     height: 20px;
     line-height: 20px;
     margin-right: 5px;
+}
+
+
+
+/*========================================================================
+8. Upload Form
+=========================================================================*/
+
+.upload-form {
+    font-size: 15px;
+    line-height: 20px;
+    padding: 35px 60px;
+}
+
+.upload-form h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.upload-form label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.upload-form hr {
+    border-top: 1px solid #000;
+}
+
+.upload-form input[type=text],
+.upload-form input[type=email],
+.upload-form input[type=password],
+.upload-form input[type=number]
+{
+    padding-left : 40px;
+    border: 1px solid #24488F;
+}
+
+.upload-form input[type=password] {
+    padding-right: 35px;
+}
+
+.upload-form input::placeholder {
+    color: #999;
+}
+
+.nav-arrow-areas {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 88%;
+    margin-left: 4%;
+    top: 2%;
+}
+
+.illustration-space {
+    margin-top: 80px;
+    margin-bottom: 140px;
+}
+
+.illustration-space-2 {
+    margin-top: 40px;
+    margin-bottom: 70px;
+}
+
+.illustration-space-3 {
+    margin-top: 60px;
+    margin-bottom: 70px;
+}
+
+.search-box {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #B7B7B7 !important;
+    border-radius: 10px;
+    background-image: url(../img/search-icon.png);
+    background-repeat: no-repeat;
+    background-position-x: 13px;
+    background-position-y: 17px;
+}
+
+.form-check {
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: 0.125rem;
+    line-height: 31px;
+}
+
+.singleCheck {
+    border: 1px solid #b7b7b7;
+}
+
+#ddArea img {
+    margin-bottom: 20px;
+}
+
+.drag_over {
+    color: #000;
+    border-color: #000;
 }
