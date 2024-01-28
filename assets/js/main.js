@@ -356,7 +356,7 @@ function addLoan(email){
             displayToast('error',d.responseJSON.message, d.responseJSON.status)
         },
         success: function(d){
-            if(d.message=="update date of birth profile"){
+            /*if(d.message=="update date of birth profile"){
                 let message = `You need to update your profile in order to add a loan. 
                 <a href="update-profile">Click here</a> to update now.`;
                 $('#stepsNotification').html(message).show();
@@ -368,6 +368,13 @@ function addLoan(email){
             }
             else {
                 //location.href = "request-loan";
+            }*/
+            if(d.message != true){
+                let message = `You need to update your profile in order to add a loan. 
+                <a href="update-profile">Click here</a> to update now.`;
+                $('#stepsNotification').html(message).show();
+            }else{
+                
             }
         }
     })
