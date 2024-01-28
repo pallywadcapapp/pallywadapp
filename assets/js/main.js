@@ -371,6 +371,9 @@ function addLoan(email){
             }*/
             if(d.message == "upload all required documents profile"){
                 //redirect to document upload page
+                let message = `You need to update your profile in order to add a loan. 
+                <a href="upload-profile-documents">Click here</a> to update now.`;
+                $('#stepsNotification').html(message).show();
             }else if(d.message != true){
                 let message = `You need to update your profile in order to add a loan. 
                 <a href="update-profile">Click here</a> to update now.`;
