@@ -18,8 +18,8 @@ export default class extends DefaultView {
                         <div class="row">
                             <div class="col-md-7 col-12 ms-auto me-auto relative">
                                 <div class="nav-arrow-areas" >
-                                    <a href="/upload-documents"><img src="assets/img/left-arrow.png" /></a>
-                                    <a href="/upload-documents"><img src="assets/img/close-icon.png" /></a>
+                                    <a href="/upload-documents" data-link><img src="assets/img/left-arrow.png" /></a>
+                                    <a href="/upload-documents" data-link><img src="assets/img/close-icon.png" /></a>
                                 </div>
                                 <div id="kyc1-form" class="white-bg rounded div-shadow upload-form ">
                                     <form id="kyc1-form-step" action="POST" >
@@ -29,7 +29,15 @@ export default class extends DefaultView {
                                              on the next page.</p>
                                         </div>
                                         <div class="text-left illustration-space-2">
-                                            <div id="documentsList"></div>
+                                            <div id="documentsList">
+                                                <p class="placeholder-glow">
+                                                    <span class="placeholder col-6"></span><br>
+                                                    <span class="placeholder col-7"></span><br>
+                                                    <span class="placeholder col-9"></span><br>
+                                                    <span class="placeholder col-7"></span><br>
+                                                    <span class="placeholder col-4"></span>
+                                                </p>
+                                            </div>
                                         </div>
                                         
                                         

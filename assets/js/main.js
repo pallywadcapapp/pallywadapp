@@ -450,7 +450,7 @@ $(window).on('load', function(){
     if($("#kyc1-form").length > 0) {
         fetchDocumentsList();
         function fetchDocumentsList(){
-            let api_endpoint = "/api/Documents";
+            let api_endpoint = "/api/Documents/all";
             $.ajax({
                 type:'get',
                 url: setup_url+api_endpoint,
@@ -461,24 +461,43 @@ $(window).on('load', function(){
                 success: function(d){
                     let lists = d;
                     let documents = "";
+                    let addressDocName = "";
+                    let addressDocId = "";
                     for (let i = 0; i < lists.length; i++) {
-                        documents += `
-                            <div class="form-check">
-                                <input class="form-check-input singleCheck" name="verificationDocument" required type="checkbox" value="${lists[i]}">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    ${lists[i]}
-                                </label>
-                            </div>
-                        `
+                        if(lists[i].type=="Identity"){
+                            documents += `
+                                <div class="form-check">
+                                    <input class="form-check-input singleCheck" 
+                                        name="verificationDocument" required 
+                                        type="checkbox" 
+                                        valueName="${lists[i].name}"
+                                        value="${lists[i].id}">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        ${lists[i].name}
+                                    </label>
+                                </div>
+                            `
+                        }
+                        if(lists[i].type=="Address"){
+                            localStorage.setItem('addressDocName',lists[i].name);
+                            localStorage.setItem('addressDocId',lists[i].id);
+                        }
+                       
                     }
                     $('#documentsList').html(documents);
+                    
                 }
             })
         }
     }
 
     if($("#kyc2-form").length > 0) {
-        let document = localStorage.getItem('chosenDocument');  
+        let document = localStorage.getItem('chosenDocumentName');  
+        $('#selected-document').html(document);
+    }
+
+    if($("#kyc3-form").length > 0) {
+        let document = localStorage.getItem('addressDocName');  
         $('#selected-document').html(document);
     }
 
@@ -537,7 +556,127 @@ $('body').on('click', '#continue-button-2', function(){
     }
     else {
         let doc = $('#kyc1-form-step input:checked').val();
+        let name = $('#kyc1-form-step input:checked').attr('valueName');
         localStorage.setItem('chosenDocument', doc);
+        localStorage.setItem('chosenDocumentName', name);
         window.location.replace("kyc-2");
     }
 })
+
+
+/*
+document upload
+*/ 
+$(document).ready(function() {
+    var formData = new FormData();
+    $("#ddArea").on("dragover", function() {
+        $(this).addClass("drag_over");
+        return false;
+    });
+
+    $("#ddArea").on("dragleave", function() {
+        $(this).removeClass("drag_over");
+        return false;
+    });
+
+    $("#ddArea").on("click", function(e) {
+        file_explorer();
+    });
+
+    $("#ddArea").on("drop", function(e) {
+        e.preventDefault();
+        $(this).removeClass("drag_over");
+        var files = e.originalEvent.dataTransfer.files[0];
+        console.log(files);
+        showFile(files);
+        formData.append("file", files);
+    });
+
+    $('#upload-from-gallery').click(function(e){
+        file_explorer();
+    })
+
+    function file_explorer() {
+        document.getElementById("selectfile").click();
+        document.getElementById("selectfile").onchange = function() {
+        files = document.getElementById("selectfile").files[0];
+        showFile(files);
+        formData.append("file", files);
+      };
+    }
+
+    function showFile(file){
+        let fileType = file.type; 
+        let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; 
+        let imgPreview = document.getElementById('imgPreview');
+            if(validExtensions.includes(fileType)){ 
+                let fileReader = new FileReader();
+                fileReader.onload = ()=>{
+                let fileURL = fileReader.result; 
+                let imgTag = `<img src="${fileURL}" class="imgTag" alt="">`; 
+                imgPreview.innerHTML = imgTag; 
+                $('#upload-from-gallery').hide();
+                $('#uploadDocumentExtrafields').removeClass('hide');
+            }
+            fileReader.readAsDataURL(file);
+        }else {
+          displayToast("error","The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+        }
+    }
+    
+    /**
+     Kyc page 2 
+    */ 
+    $('#uploadDocument').click(function(){
+        let api_endpoint = "/api/Documents/UploadFile";
+        let documentRefId = localStorage.getItem("chosenDocument");
+        let documentNo = $('#documentNo').val() ?? 0;
+        let expiryDate = $('#expiryDate').val() ?? 0;
+        formData.append("documentRefId", documentRefId);
+        formData.append("documentNo", documentNo);
+        formData.append("expiryDate", expiryDate);
+
+        $(".preloader-2").show();
+        $.ajax({
+            url: loan_app_url+api_endpoint,
+            method: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                location.href = "/kyc-3";
+            }
+        });
+    })
+
+    /**
+     Kyc page 3 
+    */ 
+     $('#uploadAddress').click(function(){
+        console.log("upload address doc clicked");
+        let api_endpoint = "/api/Documents/UploadFile";
+        let documentRefId = localStorage.getItem("addressDocId");
+        let documentNo = 0;
+        let expiryDate = '1900/1/1';
+        formData.append("documentRefId", documentRefId);
+        formData.append("documentNo", documentNo);
+        formData.append("expiryDate", expiryDate);
+
+        $(".preloader-2").show();
+        $.ajax({
+            url: loan_app_url+api_endpoint,
+            method: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                //console.log(data);
+                location.href = "/kyc-complete";
+            }
+        });
+    })
+
+
+});

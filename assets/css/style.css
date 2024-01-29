@@ -760,6 +760,24 @@ hr.footerline {
     color: #fff;
 }
 
+.continue-button-3 {
+    background-color: #33D290;
+    color: #ffffff;
+    border: none;
+    line-height: 40px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    width: 100%;
+    display: block;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.continue-button-2:hover { 
+    background-color: #999;
+    color: #fff;
+}
+
 
 .have-account {
     background: #E4EBFE;
@@ -1027,8 +1045,8 @@ input[type="file"]{
 .upload-form input[type=password],
 .upload-form input[type=number]
 {
-    padding-left : 40px;
-    border: 1px solid #24488F;
+    padding: 10px 15px;
+    border: 1px solid #ADADAD;
 }
 
 .upload-form input[type=password] {
@@ -1060,7 +1078,7 @@ input[type="file"]{
 
 .illustration-space-3 {
     margin-top: 60px;
-    margin-bottom: 70px;
+    margin-bottom: 25px;
 }
 
 .search-box {
@@ -1086,6 +1104,8 @@ input[type="file"]{
     border: 1px solid #b7b7b7;
 }
 
+
+
 #ddArea img {
     margin-bottom: 20px;
 }
@@ -1093,4 +1113,68 @@ input[type="file"]{
 .drag_over {
     color: #000;
     border-color: #000;
+}
+
+
+.preloader-2 {
+    display: inline-block;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left:55%;
+    top: 40%;
+    display: none;
+}
+.preloader-2 div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: #7571f9;
+    animation: preloader-2 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.preloader-2 div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+}
+.preloader-2 div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+}
+.preloader-2 div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+}
+@keyframes preloader-2 {
+    0% {
+      top: 8px;
+      height: 64px;
+    }
+    50%, 100% {
+      top: 24px;
+      height: 32px;
+    }
+}
+
+.imgTag{
+    height: 200px;
+}
+
+
+.re-upload {
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #000;
+    background: #fff;
+    display: none;
+}
+
+.re-upload:hover { 
+    background: #24488F;
+    color: #fff;
+}
+
+.kyc-complete {
+    height: 130px;
 }
