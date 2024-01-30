@@ -9,14 +9,18 @@ export default class extends DefaultView {
     async getHtml() {
         return `
         <div id="main" class="has-animation">
-            <default-header></default-header>
-        
+            <dashboard-header></dashboard-header>
+            <div class="dashboard-area">
+                <left-sidebar></left-sidebar>
+                <div class="right-pane">
             <div class="hero">
                 <div class="container-fluid">
                     <div class="row ">
                         <div class="col-md-12 col-12 pe-5 ps-8 text-center">
+                            <p class="about-title">About Us</p>
                             <h3 class="mt-10 translate-bottom-50 transition-100 transition-delay-600">
-                                Unlock Your Financial <br>Potential
+                                Explore our comprehensive
+                                selection of loans
                             </h3>
                             <p class="sub-title translate-bottom-50 transition-100 transition-delay-800">
                                 Tell us about your loan needs, and let's make it happen!
@@ -167,7 +171,8 @@ export default class extends DefaultView {
                     </div>
                 </div>
             </div>
-        
+            </div>
+            </div>
             <default-footer></default-footer>
         </div>
         `

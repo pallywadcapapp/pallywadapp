@@ -9,6 +9,9 @@ import Kyc3 from "./views/Kyc3.js";
 import KycComplete from "./views/KycComplete.js";
 import Signin from "./views/SignIn.js";
 import Logout from "./views/Logout.js";
+import LoanRequest from "./views/LoanRequest.js";
+import LoanRequest2 from "./views/LoanRequest2.js";
+import LoanRequestComplete from "./views/LoanRequestComplete.js";
 
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
@@ -39,6 +42,9 @@ const router = async () => {
         {path:"/kyc-2" , view: Kyc2 },
         {path:"/kyc-3" , view: Kyc3 },
         {path:"/kyc-complete" , view: KycComplete },
+        {path:"/loan-request" , view: LoanRequest },
+        {path:"/loan-request2" , view: LoanRequest2 },
+        {path:"/loan-request-complete" , view: LoanRequestComplete },
         {path:"/sign-in" , view: Signin },
         {path:"/logout" , view: Logout }
     ]

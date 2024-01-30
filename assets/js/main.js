@@ -356,19 +356,6 @@ function addLoan(email){
             displayToast('error',d.responseJSON.message, d.responseJSON.status)
         },
         success: function(d){
-            /*if(d.message=="update date of birth profile"){
-                let message = `You need to update your profile in order to add a loan. 
-                <a href="update-profile">Click here</a> to update now.`;
-                $('#stepsNotification').html(message).show();
-            }
-            if(d.message=="upload all required documents profile"){
-                let message = `You need to upload required documents. 
-                <a href="upload-documents">Click here</a> to get started.`;
-                $('#stepsNotification').html(message).show();
-            }
-            else {
-                //location.href = "request-loan";
-            }*/
             if(d.message == "upload all required documents profile"){
                 //redirect to document upload page
                 let message = `You need to update your profile in order to add a loan. 
@@ -379,7 +366,7 @@ function addLoan(email){
                 <a href="update-profile">Click here</a> to update now.`;
                 $('#stepsNotification').html(message).show();
             }else{
-                
+                location.href = "loan-request";
             }
         }
     })
@@ -507,7 +494,6 @@ $(window).on('load', function(){
         let email = localStorage.getItem("email");
         preloadProfileDetails(email);
         function preloadProfileDetails(email){
-            console.log("preload here");
             let api_endpoint = "/api/Profile";
             let data = {
                 username: email
@@ -536,15 +522,178 @@ $(window).on('load', function(){
         }
     }
 
+    if($('#loanType').length > 0) {
+        let api_endpoint = "/api/Loan";
+        $.ajax({
+            type:'get',
+            url: setup_url+api_endpoint,
+            headers: { 'Content-Type': 'application/json' },
+            error: function(d){
+                displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            },
+            success: function(d){
+
+                let lists = d;
+                let documents = "";
+                for (let i = 0; i < lists.length; i++) {
+                    documents += `
+                        <option value="${lists[i].loancode}" 
+                            loanCategory="${lists[i].category}"
+                            loanDescription="${lists[i].loandesc}">
+                            ${lists[i].category}
+                        </option>
+                    `;
+                }
+                $('#loanTypeDescription').html(`<b>Loan Type Description</b><br><br>${lists[0].loandesc}`);
+                $('#category').val(lists[0].category);
+                $('#loanType').html(documents);
+            }
+        })
+
+        uploadedDocuments();
+    }
+
+    if($('#collateralType').length > 0) {
+        loadCollateralTypes();
+    }
+
     //load datepicker
     $('.mydatepicker, #dob').datepicker();
 
+    
+
 })
+
+function loadCollateralTypes(){
+    let api_endpoint = "/api/Collateral/all";
+    $.ajax({
+        type:'get',
+        url: setup_url+api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            let lists = d;
+            let documents = "";
+            for (let i = 0; i < lists.length; i++) {
+                documents += `
+                    <option value="${lists[i].name}">
+                        ${lists[i].name}
+                    </option>
+                `;
+            }
+            $('#collateralType').html(documents);
+            
+        }
+    })
+}
+
 
 $("body").on('change', '.singleCheck', function() {
     $(".singleCheck").prop('checked', false);
     $(this).prop('checked', true);
 });
+
+$("body").on('change', '#loanType', function(){
+    let description = $("#loanType :selected").attr("loanDescription");
+    let category = $("#loanType :selected").attr("loanCategory");
+    console.log(description, category);
+    let descriptionBox = $('#loanTypeDescription');
+    let categoryBox = $('#category');
+    descriptionBox.html(`<b>Loan Type Description:</b><br><br> ${description}`);
+    categoryBox.val(category);
+})
+
+/***
+** PRELOAD FUNCTIONS
+***/
+
+function uploadedDocuments() {
+    let api_endpoint = "/api/Documents";
+    $.ajax({
+        type:'get',
+        url: loan_app_url+api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+
+            let lists = d;
+            let documents = "";
+            for (let i = 0; i < lists.length; i++) {
+                documents += `
+                    <div class="form-check">
+                        <input class="form-check-input" 
+                            name="verificationDocument" required 
+                            type="checkbox" 
+                            valueName="${lists[i].name}"
+                            value="${lists[i].id}">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <b>${lists[i].name}</b><br>
+                            ${lists[i].url}
+                        </label>
+                </div>`;
+            }
+            $('#uploadedDocumentList').html(documents);
+            
+        }
+    })
+}
+
+
+function fetchUploadedCollaterals() {
+    let api_endpoint = "/api/Collateral/all";
+    $.ajax({
+        type:'get',
+        url: loan_app_url+api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+           
+            let lists = d;
+            let documents = [];
+            for (let i = 0; i < lists.length; i++) {
+                documents.push(lists[i].colleteralId); 
+            }
+            localStorage.setItem('collateralRefId', JSON.stringify(documents));
+            
+        }
+    })
+}
+
+//loan request page 1
+$('body').on('click', '#continue-loan-button-1', function(){
+    console.log("happening here");
+    if($('#uploadedDocumentList input:checked').length < 1){
+        displayToast('error','You must select at least one document', 'Select a Document')
+    }
+    else if(!$('#loanAmountRequested').val()){
+        displayToast('error','You must enter loan amount', 'Enter loan amount')
+    }
+    else {
+        
+        let loancode = $('#loanType :selected').val();
+        let amount = $('#loanAmountRequested').val();
+        let category = $('#category').val();
+        let documentIdRefs = []; 
+        $("input:checkbox[name=verificationDocument]:checked").each(function() { 
+            documentIdRefs.push($(this).val()); 
+        });  
+    
+        localStorage.setItem("loancode", loancode);
+        localStorage.setItem("amount", amount);
+        localStorage.setItem("category", category);
+        localStorage.setItem("documentIdRefs", JSON.stringify(documentIdRefs));
+        window.location.replace("loan-request2");
+             
+        
+        
+    }
+})
 
 /*
 kyc page 1
@@ -594,6 +743,46 @@ $(document).ready(function() {
 
     $('#upload-from-gallery').click(function(e){
         file_explorer();
+    })
+
+    $('#upload-collateral-document').click(function(e){
+        if(!$('#estimatedValue').val()){
+            displayToast('error', 'Please enter collateral estimated value', 'Enter Estimate Value');
+        }
+        else {
+            document.getElementById("selectfile").click();
+            document.getElementById("selectfile").onchange = function() {
+            files = document.getElementById("selectfile").files[0];
+                showFile(files);
+                formData = new FormData();
+                formData.append("file", files);
+
+                let api_endpoint = "/api/Collateral/UploadFile";
+                let estimatedValue = $('#estimatedValue').val() ?? "None";
+                let collateralRefId = $('#collateralType :selected').val();
+                let otherdetails = $('#otherdetails').val() ?? 0;
+                formData.append("estimatedValue", estimatedValue);
+                formData.append("collateralRefId", collateralRefId);
+                formData.append("otherdetails", otherdetails);
+
+                $(".preloader-2").show();
+                $.ajax({
+                    url: loan_app_url+api_endpoint,
+                    method: "POST",
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
+                        displayToast('success', 'Document was uploaded successfully', 'File upload successful');
+                        fetchUploadedCollaterals();
+                        $('#upload-collateral-document').hide();
+                    }
+                });
+            }
+            
+        }
+        
     })
 
     function file_explorer() {
@@ -680,3 +869,42 @@ $(document).ready(function() {
 
 
 });
+
+
+//submit loan request
+$('body').on('click','#submitLoanRequest',function(){
+    console.log("loan request submitted");
+    let api_endpoint = "/api/LoanRequest";
+    let documentIdRefs = JSON.parse(localStorage.getItem("documentIdRefs"));
+    let loancode = localStorage.getItem("loancode");
+    let amount = localStorage.getItem("amount");
+    let category = localStorage.getItem("category");
+    let collateralRefId = JSON.parse(localStorage.getItem("collateralRefId"));
+
+    let formData = {
+        documentIdRefs,
+        loancode,
+        amount,
+        category,
+        collateralRefId
+    }
+
+ 
+
+    $(".preloader-2").show();
+    $.ajax({
+        url: loan_app_url+api_endpoint,
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        data: JSON.stringify(formData),
+        success: function(data) {
+            //console.log(data);
+            localStorage.removeItem("documentIdRefs");
+            localStorage.removeItem("loancode");
+            localStorage.removeItem("amount");
+            localStorage.removeItem("category");
+            localStorage.removeItem("collateralRefId");
+            location.href = "/loan-request-complete";
+        }
+    });
+})

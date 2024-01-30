@@ -773,7 +773,26 @@ hr.footerline {
     text-align: center;
 }
 
-.continue-button-2:hover { 
+.continue-button-3:hover { 
+    background-color: #999;
+    color: #fff;
+}
+
+.continue-button-4 {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #24488F;
+    border: none;
+    line-height: 40px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    width: 100%;
+    display: block;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.continue-button-4:hover { 
     background-color: #999;
     color: #fff;
 }
@@ -1043,10 +1062,16 @@ input[type="file"]{
 .upload-form input[type=text],
 .upload-form input[type=email],
 .upload-form input[type=password],
-.upload-form input[type=number]
+.upload-form input[type=number],
+.upload-form select
 {
     padding: 10px 15px;
     border: 1px solid #ADADAD;
+}
+
+.upload-form select {
+    width: 100%;
+    border-radius: 5px;
 }
 
 .upload-form input[type=password] {
@@ -1177,4 +1202,52 @@ input[type="file"]{
 
 .kyc-complete {
     height: 130px;
+}
+
+.loan-description-box {
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #E4EBFE;
+    color: #000;
+}
+.select-glow {
+    padding: 7px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+.loanArea select { 
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.loanArea select:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+  
+/* Point the arrow upwards when the select box is open (active): */
+.loanArea select.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+  
+.loanArea input[type=text],
+.loanArea input[type=number] {
+    border: 1px solid #ADADAD;
+    background-color: transparent;
+    width: 100%;
+    border-radius: 7px;
+    padding: 10px 20px;
 }
