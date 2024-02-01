@@ -558,6 +558,7 @@ $(window).on('load', function(){
     }
 
     fetchLoanRequests();
+    fetchProcessedLoanRequests();
         
     
     //load datepicker
@@ -670,6 +671,8 @@ function fetchUploadedCollaterals() {
 
 function fetchLoanRequests() {
     let api_endpoint = "/api/LoanRequest";
+    var fmt = new DateFormatter();
+    
     $.ajax({
         type:'get',
         url: loan_app_url+api_endpoint,
@@ -686,6 +689,16 @@ function fetchLoanRequests() {
                     : (lists[i].status =="Declined" ? "loan-status-declined" 
                     : (lists[i].status =="Awaiting Approval" ? "loan-status-awaiting" 
                     : "loan-status-running"));
+
+                //Handle date and time formatting
+                var fmt = new DateFormatter();
+                let rawDate = lists[i].requestDate.split("T");
+
+                let dayDate = fmt.parseDate(rawDate[0], 'Y-m-d');
+                let timeDate = fmt.parseDate(rawDate[1], 'H:i:s');
+                let dayOutput = fmt.formatDate(dayDate, 'D, M d, Y');
+                let timeOutput = fmt.formatDate(timeDate, 'g:i A' );
+
                 display += `
                 <div class="top-line py-2">
                         <div class="row">
@@ -698,8 +711,8 @@ function fetchLoanRequests() {
                             </div>
                             <div class="col-md-3 loan-display">
                                 <p class="grey-text">
-                                02:45 GMT<br>
-                                Fri, Dec 11, 2024
+                                ${timeOutput}<br>
+                                ${dayOutput}
                                 </p>
                             </div>
                         </div>
@@ -708,6 +721,28 @@ function fetchLoanRequests() {
                 
             }
             $('#allLoanRequests').html(display);
+            
+        }
+    })
+}
+
+function fetchProcessedLoanRequests() {
+    let api_endpoint = "/api/LoanRequest/ProcessedLoanRequests";
+    $.ajax({
+        type:'get',
+        url: loan_app_url+api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            let lists = d;
+            if(lists.length <1) {
+                $('.currentLoan').hide();
+            }
+            else {
+                $('.currentLoan').show();
+            }
             
         }
     })

@@ -907,10 +907,11 @@ input[type="file"]{
 .left-sidebar {
     background-color: #ffffff;
     width: 300px;
-    height: 650px;
+    height: 100%;
     padding: 30px 20px;
     position: relative;
     z-index: 20;
+    min-height: 600px;
 }
 
 .left-sidebar .navbar-brand img {
@@ -948,7 +949,9 @@ input[type="file"]{
 }
 
 .place-at-botttom {
-    margin-top: 300px;
+    position: absolute;
+    bottom: 5px;
+    width: 260px;
 }
 
 .right-pane {
@@ -1264,6 +1267,11 @@ input[type="file"]{
 9. LOANS
 =========================================================================*/
 
+.page-lead h3 {
+    margin-bottom: 0;
+    font-size: 30px;
+}
+
 .loan-display {
     color: #000;
 }
@@ -1363,4 +1371,84 @@ input[type="file"]{
 .payment-radio {
     background-color: transparent;
     border-color: #000;
+}
+
+.loan-duration-area {
+    background-color: #24488F;
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px 20px;
+}
+
+.loan-duration-area .row {
+    border-top:1px solid rgba(173, 173, 173, 0.5);
+    --bs-gutter-x: 0rem;
+}
+
+.loan-duration-area .row:last-child {
+    border-bottom:1px solid rgba(173, 173, 173, 0.5);
+}
+
+.loan-duration-area .row > div:not(:last-child) {
+    border-right: 1px solid rgba(173, 173, 173, 0.5);
+}
+
+.loan-duration-area .row > div {
+    padding: 10px 10px;
+}
+
+.loan-repayment-area {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.loan-repayment-area p {
+    margin-bottom: 5px;
+}
+
+.loan-repayment-area .row {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.loan-repayment-area .row:hover {
+    background-color: #BCBEC0;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.proof-of-payment {
+    background-color:  #E4EBFE;
+    padding: 15px 20px;
+    border-radius: 10px;
+    line-height: 22px;
+}
+
+.proof-of-payment hr {
+    margin: 11px 0;
+    color: inherit;
+    border: 0;
+    border-top: 3px solid;
+    opacity: .25;
+}
+.info-area .row {
+    border-top:1px solid rgba(173, 173, 173, 0.5);
+    --bs-gutter-x: 0rem;
+}
+
+.info-area .row:last-child {
+    border-bottom:1px solid rgba(173, 173, 173, 0.5);
+}
+
+.info-area .row > div:not(:last-child) {
+    border-right: 1px solid rgba(173, 173, 173, 0.5);
+}
+
+.info-area .row > div {
+    padding: 10px 10px;
+}
+
+.repayment-item {
+    line-height: 20px;
 }
