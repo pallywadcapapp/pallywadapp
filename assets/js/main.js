@@ -557,6 +557,9 @@ $(window).on('load', function(){
         loadCollateralTypes();
     }
 
+    fetchLoanRequests();
+        
+    
     //load datepicker
     $('.mydatepicker, #dob').datepicker();
 
@@ -663,6 +666,75 @@ function fetchUploadedCollaterals() {
             
         }
     })
+}
+
+function fetchLoanRequests() {
+    let api_endpoint = "/api/LoanRequest";
+    $.ajax({
+        type:'get',
+        url: loan_app_url+api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            let lists = d;
+            let display = "";
+            for (let i = 0; i < lists.length; i++) {
+                let loanTypeStyle = (lists[i].status =="Pending") 
+                    ? "loan-status-pending"
+                    : (lists[i].status =="Declined" ? "loan-status-declined" 
+                    : (lists[i].status =="Awaiting Approval" ? "loan-status-awaiting" 
+                    : "loan-status-running"));
+                display += `
+                <div class="top-line py-2">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="${loanTypeStyle}">${lists[i].status}</span>
+                            </div>
+                            <div class="col-md-7 loan-display">
+                                <h4>&#8358;${number_format(lists[i].amount,2)}</h4>
+                                <p class="grey-text">${lists[i].category}</p>
+                            </div>
+                            <div class="col-md-3 loan-display">
+                                <p class="grey-text">
+                                02:45 GMT<br>
+                                Fri, Dec 11, 2024
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+            }
+            $('#allLoanRequests').html(display);
+            
+        }
+    })
+}
+
+function number_format (number, decimals, dec_point, thousands_sep) {
+    // Strip all characters but numerical ones.
+    number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+    var n = !isFinite(+number) ? 0 : +number,
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function (n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+        };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
 }
 
 //loan request page 1

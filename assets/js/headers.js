@@ -203,9 +203,9 @@ class LeftSidebar extends HTMLElement {
                     <img src="assets/img/padwally-logo.png" />
                 </a>
                 <ul class="mt-3 sidebar-links">
-                    <li><a href="/dashboard" data-link><img src="assets/img/overview.png" /> Overview</a></li>
-                    <li><a href="/loans" data-link><img src="assets/img/loans.png" /> Loans</a></li>
-                    <li><a href="/payment-history data-link"><img src="assets/img/payment-history.png" /> Payment History</a></li>
+                    <li><a href="/dashboard" ><img src="assets/img/overview.png" /> Overview</a></li>
+                    <li><a href="/loans"><img src="assets/img/loans.png" /> Loans</a></li>
+                    <li><a href="/payment-history"><img src="assets/img/payment-history.png" /> Payment History</a></li>
                 </ul>
 
 

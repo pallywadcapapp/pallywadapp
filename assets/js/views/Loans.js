@@ -13,165 +13,78 @@ export default class extends DefaultView {
             <div class="dashboard-area">
                 <left-sidebar></left-sidebar>
                 <div class="right-pane">
-            <div class="hero">
-                <div class="container-fluid">
-                    <div class="row ">
-                        <div class="col-md-12 col-12 pe-5 ps-8 text-center">
-                            <p class="about-title">About Us</p>
-                            <h3 class="mt-10 translate-bottom-50 transition-100 transition-delay-600">
-                                Explore our comprehensive
-                                selection of loans
-                            </h3>
-                            <p class="sub-title translate-bottom-50 transition-100 transition-delay-800">
-                                Tell us about your loan needs, and let's make it happen!
-                            </p>
-                            <p class="translate-bottom-50 transition-100 transition-delay-1000">
-                                <a href="" class="default-button default-button-large">Request Loan</a>
-                            </p>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-12 col-md-12"> <hr class="greybg"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-fluid light-blue py-5">
-                <div class="col-md-12 col-12  text-center ">
-                    <p class="about-title">LOANING</p>
-                    <h3 class="mt-3 translate-bottom-50 transition-100 transition-delay-600">
-                        Available loans
-                    </h3>
-                    <div class="col-md-6 offset-3 mt-3">
-                        <ul class="nav nav-pills nav-fill">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="javascript:;">Personal Loan</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="javascript:;">Business Loan</a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-            </div>
-        
-            <div class="container mt-5">
-
-                <div class="row ">
-                    <div class="col-12 col-md-12">
-                        <div class="px-5 py-5 d-lg-flex align-items-center ">
-                            <div class="col-md-6 col-12">
-                                <p class="about-title">LOANING</p>
-                                <h4 class="stop-worry-title">Loans, minus the
-                                paperwork and haggling.
-                                </h4>
-                                <p class="stop-worry-sub-title" > 
-                                    We make loaning uncomplicated by setting clear
-                                    criteria that you can view beforehand to decide if we
-                                    fit your needs.
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 loan-display">
+                                <p class="current-loan-amount">Current Loan Amount</p>
+                                <div class="d-flex justify-content-between">
+                                    <h3>${this.currency} 250,000</h3>
+                                    <a href="javascript:;" class="default-button-green">Pay </a>
+                                </div>
+                                <p class="about-title">APPROVED LOAN DETAILS</p>
+                                <p class="mt-3">
+                                    Dear <b>${this.userFirstname}</b>, Please enter the amount you want to
+                                    repay and select the repayment method.
                                 </p>
-                                <ul class="loan-type-list">
-                                    <li><i class="fa fa-check green-circle"></i> Competitively priced and tailored for you</li>
-                                    <li><i class="fa fa-check green-circle"></i> Get an overview on your loans.</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6 col-12 text-center">
-                                <img src="assets/img/woman-on-pc.jpg" class="stop-worry-pic"  />
-                        
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                
-        
-                <div class="row mt-4">
-                    <div class="col-md-6 col-12">
-                        <div class="dark-grey-1 px-5 py-5">
-                            <h4 class="stop-worry-title">
-                                Change the way you
-                                manage you money.</h4>
-                            <p class="stop-worry-sub-title"> Don't let the lack of funds stop you from
-                                living your dreams. Get the financial support
-                                you need to make the most out of money.
-                            </p>
-                            <div>
-                                <img src="assets/img/get-access.png" class="img-fluid" />
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="dark-grey-1 px-5 py-5">
-                            <h4 class="stop-worry-title">
-                                Access business fundings in hours/days.</h4>
-                            <p class="stop-worry-sub-title"> 
-                                Get your business and projects on the move with our lending plans.
-                            </p>
-                            <div class="white-bg-form shadow py-4 px-5 rounded">
-                                <form action="" method="POST">
-                                    <div class="form-group">
-                                        <label><b>Name<span class="text-danger">*</span></b></label>
-                                        <input type="text" class="form-control" placeholder="Enter your name and surname" />
+                                <div class="mt-3">
+                                    <input type="text" id="repayment-amount" placeholder="Enter amount you want to repay">
+                                    <p class="grey-text mt-2">Repayment methods</p>
+                                    <div>
+                             
+
+                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                            <label class="form-check-label repayment-text d-flex justify-content-between">
+                                                <img src="./assets/img/profile-interface.png" class="align-self-center" />
+                                                <div class="align-self-center">
+                                                    <b>Transfer Repayment</b><br>
+                                                    <small class="grey-text">Virtual Account</small>
+                                                </div>
+                                            </label>
+                                            <input class="form-check-input payment-radio align-self-start" type="radio" name="flexRadioDefault">
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                            <label class="form-check-label repayment-text d-flex justify-content-between">
+                                                <img src="./assets/img/money.png" class="align-self-center" />
+                                                <div class="align-self-center">
+                                                    <b>Bank Card or USSD</b>
+                                                </div>
+                                            </label>
+                                            <input class="form-check-input payment-radio " type="radio" name="flexRadioDefault">
+                                        </div>
+                                        
                                     </div>
-        
-                                    <div class="form-group mt-3">
-                                        <label><b>What type of loan works for you?
-                                            <span class="text-danger">*</span></b></label><br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                            <label class="form-check-label" for="inlineRadio1">Personal</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                            <label class="form-check-label" for="inlineRadio2">Business</label>
-                                        </div>
-                                        <div class="">
-                                            <p class="mt-3 text-center">
-                                                <a href="" class="default-button default-rounded ">Continue &raquo;</a>
-                                            </p>
-                                        </div>
+                                    <div>
+                                        <a href="" class="default-button block text-center mt-3">Repay</a>
                                     </div>
-                                    
-                                </form>
+
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <a href="javascript:;" class="add-loan-button mt-3" onclick="addLoan('${this.userEmail}');"><i class="fa fa-plus"></i> Add Loan</a>
+                                <div>
+                                
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-5">
+                                <p class="about-title">LOANS</p>
+                                <div id="allLoanRequests">
+                                    <p class="placeholder-glow">
+                                        <span class="placeholder col-3"></span>
+                                        <span class="placeholder col-6"></span>
+                                        <span class="placeholder col-3"></span>
+                                    </p>
+                                    <p class="placeholder-glow">
+                                        <span class="placeholder col-3"></span>
+                                        <span class="placeholder col-6"></span>
+                                        <span class="placeholder col-3"></span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
+
                 </div>
-            
-            </div>
-        
-            <div class="light-blue px-5 py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <div class="about-holder">
-                                <p class="about-title">About Us</p>
-                                <hr class="greybg2">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <h4>
-                                Pallywad Capital is a leading
-                                financial institution dedicated to
-                                empowering individuals and 
-                                businesses with financial
-                                solutions.
-                            </h4>
-                            <p>
-                                Our innovative and accessible lending solutions redefine the financial experience, making
-        capital accessible to every aspiring individual and business in Lagos.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
             </div>
             <default-footer></default-footer>
         </div>

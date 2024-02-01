@@ -146,6 +146,11 @@ body.loaded #preloader {
     display: block;
 }
 
+.block {
+    display: block;
+    width: 100%;
+}
+
 .grey-text {
     color: #666666;
 }
@@ -904,6 +909,8 @@ input[type="file"]{
     width: 300px;
     height: 650px;
     padding: 30px 20px;
+    position: relative;
+    z-index: 20;
 }
 
 .left-sidebar .navbar-brand img {
@@ -1250,4 +1257,110 @@ input[type="file"]{
     width: 100%;
     border-radius: 7px;
     padding: 10px 20px;
+}
+
+
+/*========================================================================
+9. LOANS
+=========================================================================*/
+
+.loan-display {
+    color: #000;
+}
+
+.loan-display .current-loan-amount {
+    margin-bottom: 0;
+}
+
+.loan-display p {
+    margin-bottom: 0px;
+    line-height: 22px;
+}
+
+.loan-display h3 {
+    font-size: 39px;
+    font-weight: 600;
+}
+
+.loan-display h4 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.loan-display p {
+    line-height: 22px;
+}
+
+.loan-display input[type=text] {
+    border:2px solid #191919;
+    background-color: transparent;
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.loan-status-pending { 
+    background-color: #FFD600;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+.loan-status-approved { 
+    background-color: #33D290;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+.loan-status-declined { 
+    background-color: #FF0000;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+
+.loan-status-running { 
+    background-color: #24488F;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+.top-line {
+    border-top: 1px solid #BCBEC0;
+}
+
+
+
+.repayment-text {
+    line-height: 17px;
+}
+
+.repayment-text img {
+    margin-right: 10px;
+}
+
+.payment-radio {
+    background-color: transparent;
+    border-color: #000;
 }

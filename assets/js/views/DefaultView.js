@@ -6,6 +6,7 @@ export default class {
         this.userFirstname = localStorage.getItem("firstname");
         this.userLastname = localStorage.getItem("lastname");
         this.userEmail = localStorage.getItem("email");
+        this.currency = "&#8358;";
     }
 
     setTitle(title) {
