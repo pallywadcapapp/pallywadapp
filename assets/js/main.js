@@ -50,6 +50,16 @@ $.ajaxSetup({
     }
 });
 
+$(document).ajaxError(function (event, request, settings) {
+    console.log(event);
+    console.log(request);
+    if (request.status === 401) {
+        window.location.href = "/logout";
+    }
+    if (request.statusText === 'Unauthorized') {
+        window.location.href = "/logout";
+    }
+});
 
 /*-------------------------------------
 2. initialize onscroll animations
@@ -334,11 +344,13 @@ function fetchLoggedInUserDetails(email, token, expiration){
                 localStorage.setItem("token", token);
                 localStorage.setItem("tokenExpiration", expiration)
                 localStorage.setItem("isLoggedIn", "1");
+
                 location.href = "/dashboard";
             } 
         }
     })
 }
+
 
 
 /*-------------------------------------

@@ -9,8 +9,8 @@ export default class extends DefaultViewNoAuth {
     async getHtml() {
         return `
         <div class="text-center mt-5">
-            <h3>Page not found</h3>
-            <p>Sorry, the page you requested could not be found, please try again.</p>
+            <img src="assets/img/404.png" />
+            <p>Sorry, the page you requested could not be found, please <a href="/dashboard">click here</a> to return to the dashboard.</p>
         </div>
         `;
     }
