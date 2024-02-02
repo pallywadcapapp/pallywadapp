@@ -24,6 +24,7 @@
     });
 
     
+    
 })(jQuery);
 
 
@@ -33,6 +34,8 @@
 const api_url = 'https://auth.pallywad.com'; 
 const loan_app_url = 'https://user.pallywad.com';
 const setup_url = 'https://setup.pallywad.com';
+
+var colls = '';
 
 $.ajaxSetup({
     beforeSend: function (xhr) {
@@ -569,7 +572,8 @@ $(window).on('load', function(){
     }
 
     if($('#collateralType').length > 0) {
-        loadCollateralTypes();
+        loadUserCollateralTypes();
+        //loadCollateralTypes();
     }
 
     fetchLoanRequests();
@@ -579,15 +583,26 @@ $(window).on('load', function(){
     //load datepicker
     $('.mydatepicker, #dob').datepicker();
 
-    
+    $('#userCollateralType').on('change', function (e) {
+        var value = $(this).find('option:selected').val();
+        var memberId = $(this).val();
+        var p = colls[value];
+        var selItem = [];
+        selItem.push(`${p.id}`);
+        console.log(JSON.stringify(selItem));
+        localStorage.setItem('collateralRefId', JSON.stringify(selItem));
+        //loadMember(memberId)
+    });
 
 })
+
+
 
 function loadCollateralTypes(){
     let api_endpoint = "/api/Collateral/all";
     $.ajax({
         type:'get',
-        url: setup_url+api_endpoint,
+        url: setup_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function(d){
             displayToast('error',d.responseJSON.message, d.responseJSON.status)
@@ -603,6 +618,41 @@ function loadCollateralTypes(){
                 `;
             }
             $('#collateralType').html(documents);
+            
+        }
+    })
+}
+
+function loadUserCollateralTypes(){
+    let api_endpoint = "/api/Collateral/all";
+    $.ajax({
+        type:'get',
+        url: loan_app_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            let lists = d;
+            colls = d;
+            if(lists.length <1){
+                $('.nc').show();
+                $('.oc').hide();
+                loadCollateralTypes();
+            }else{
+                $('.nc').hide();
+                $('.oc').show();
+                let documents = '<option value="0">- Select Collateral -</option>';
+            for (let i = 0; i < lists.length; i++) {
+                documents += `
+                    <option value="${i}">
+                        ${lists[i].name} - ${lists[i].otherdetails}
+                    </option>
+                `;
+            }
+            $('#userCollateralType').html(documents);
+            }
+            
             
         }
     })
