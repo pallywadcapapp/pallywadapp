@@ -27,7 +27,7 @@ export default class extends DefaultView {
                             <div class="col-md-5 loan-display currentLoan">
                                 <p class="current-loan-amount">Current Loan Amount</p>
                                 <div class="d-flex justify-content-between">
-                                    <h3>${this.currency} 250,000</h3>
+                                    <h3>${this.currency} <span class="loanAmount">0</span></h3>
                                     <a href="javascript:;" class="default-button-green">Pay </a>
                                 </div>
                                 <p class="about-title">APPROVED LOAN DETAILS</p>
@@ -74,10 +74,10 @@ export default class extends DefaultView {
                                 <div class="loan-duration-area mt-2">
                                     <div class="row">
                                         <div class="col-md-6">Loan Duration</div>
-                                        <div class="col-md-6">6 Months</div>
+                                        <div class="col-md-6"><span class="loanDuration">1 Months<span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">Next Due Date</div>
+                                        <div class="col-md-6">Loan Due Date</div>
                                         <div class="col-md-6">13/02/24</div>
                                     </div>
                                     
@@ -122,7 +122,7 @@ export default class extends DefaultView {
 
                                 <div class="proof-of-payment mt-2">
                                     <b>Proof of payment</b>
-                                    <a href="" class="default-button block text-center mt-1">
+                                    <a href="javascript:;" class="default-button block text-center mt-1">
                                         <i class="fa fa-upload"></i> Upload
                                     </a>
                                 </div>
@@ -136,11 +136,11 @@ export default class extends DefaultView {
                                             <div class="info-area mt-2">
                                                 <div class="row">
                                                     <div class="col-md-6">Disbursement Date</div>
-                                                    <div class="col-md-6">6 Months</div>
+                                                    <div class="col-md-6"><span class="disbursementDate">0</span></div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">Disbursement Amount</div>
-                                                    <div class="col-md-6">${this.currency}250,000</div>
+                                                    <div class="col-md-6">${this.currency}<span class="loanAmount">0</span></div>
                                                 </div>
                                                 
                                             </div>
@@ -149,7 +149,7 @@ export default class extends DefaultView {
                                     <div class="col-md-5">
                                         <div class="proof-of-payment">
                                             Repayment Starts on <b>Thur, Feb 17 2024</b> with
-                                            Interest Rate of <b>0.9%</b>
+                                            Interest Rate of <b><span class="interestDisplay">0.9</span>%</b>
                                             <hr>
                                         </div>
                                     </div>

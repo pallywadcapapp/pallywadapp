@@ -394,6 +394,7 @@ $('body').on('click','#update-profile', function(e){
     if($("#updateProfileForm").valid()){
         e.preventDefault();
         let dob  = $('[name=dob]').val();
+        dob = formatDate2(dob).date;
         let address  = $('[name=address]').val();
         let phoneNumber  = $('[name=phoneNumber]').val();
         let firstname  = $('[name=firstname]').val();
@@ -525,7 +526,9 @@ $(window).on('load', function(){
                     $('[name="email"]').val(d.email);
                     $('[name="phoneNumber"]').val(d.phoneNumber);
                     $('[name="address"]').val(d.address);
-                    $('[name="dob"]').val(d.dob);
+                    let newdate = formatDate3(d.dob);
+                    finaldate = newdate.date;
+                    $('[name="dob"]').val(finaldate);
                     $('[name="sex"] option:contains("'+d.sex+'")').prop('selected', true);
                     $('[name="employmentStatus"] option:contains("'+d.employmentStatus+'")').prop('selected', true);
                     
@@ -700,16 +703,13 @@ function fetchLoanRequests() {
                     ? "loan-status-pending"
                     : (lists[i].status =="Declined" ? "loan-status-declined" 
                     : (lists[i].status =="Awaiting Approval" ? "loan-status-awaiting" 
-                    : "loan-status-running"));
+                    : (lists[i].status =="Approved" ? "loan-status-approved" 
+                    : "loan-status-running") ));
 
                 //Handle date and time formatting
-                var fmt = new DateFormatter();
-                let rawDate = lists[i].requestDate.split("T");
-
-                let dayDate = fmt.parseDate(rawDate[0], 'Y-m-d');
-                let timeDate = fmt.parseDate(rawDate[1], 'H:i:s');
-                let dayOutput = fmt.formatDate(dayDate, 'D, M d, Y');
-                let timeOutput = fmt.formatDate(timeDate, 'g:i A' );
+                let records = formatDate(lists[i]);
+                timeOutput = records.time;
+                dayOutput = records.date;
 
                 display += `
                 <div class="top-line py-2">
@@ -718,7 +718,7 @@ function fetchLoanRequests() {
                                 <span class="${loanTypeStyle}">${lists[i].status}</span>
                             </div>
                             <div class="col-md-7 loan-display">
-                                <h4>&#8358;${number_format(lists[i].amount,2)}</h4>
+                                <h4>&#8358;${number_format(lists[i].amount)}</h4>
                                 <p class="grey-text">${lists[i].category}</p>
                             </div>
                             <div class="col-md-3 loan-display">
@@ -745,16 +745,30 @@ function fetchProcessedLoanRequests() {
         url: loan_app_url+api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
         success: function(d){
-            let lists = d;
-            if(lists.length <1) {
-                $('.currentLoan').hide();
+           
+            if(d.length > 0){
+                console.log(d);
+                let lists = d;
+                let amount = lists[0].amount;
+                let duration = lists[0].duration == 1 ? lists[0].duration + " Month" :  lists[0].duration + " Months";
+                let disbursementDate = lists[0].approvalDate;
+                disbursementDate = formatDate3(disbursementDate).date2;
+                let interestDisplay =  lists[0].loaninterest;
+                if(lists.length <1) {
+                    $('.currentLoan').hide();
+                }
+                else {
+                    $('.currentLoan').show();
+                    $('.loanAmount').html(number_format(amount));
+                    $('.loanDuration').html(duration);
+                    $('.disbursementDate').html(disbursementDate);
+                    $('.interestDisplay').html(interestDisplay);
+                }
             }
-            else {
-                $('.currentLoan').show();
-            }
+            
             
         }
     })
@@ -783,6 +797,64 @@ function number_format (number, decimals, dec_point, thousands_sep) {
     }
     return s.join(dec);
 }
+
+function formatDate(dateInput){
+    //Handle date and time formatting from DB
+    var fmt = new DateFormatter();
+    let rawDate = dateInput.requestDate.split("T");
+
+    let dayDate = fmt.parseDate(rawDate[0], 'Y-m-d');
+    let timeDate = fmt.parseDate(rawDate[1], 'H:i:s');
+
+    let dayOutput = fmt.formatDate(dayDate, 'D, M d, Y');
+    let timeOutput = fmt.formatDate(timeDate, 'g:i A' );
+
+    
+    return {
+        "date":dayOutput,
+        "time":timeOutput
+    }
+        
+}
+
+function formatDate2(dateInput){
+    //Handle date and time formatting from DB
+    var fmt = new DateFormatter();
+   
+    //handle date formatting from input field
+    let dayDate = fmt.parseDate(dateInput, 'm/d/Y');
+    let dayOutput = fmt.formatDate(dayDate, 'Y-m-d');
+    let dayOutput2 = fmt.formatDate(dayDate, 'm/d/Y');
+
+    
+    return {
+        "date":dayOutput,
+        "date2": dayOutput2
+    }
+        
+}
+
+function formatDate3(dateInput){
+    //Handle date and time formatting from DB
+    var fmt = new DateFormatter();
+    let rawDate = dateInput.split("T");
+
+    let dayDate = fmt.parseDate(rawDate[0], 'Y-m-d');
+    let timeDate = fmt.parseDate(rawDate[1], 'H:i:s');
+
+    let dayOutput = fmt.formatDate(dayDate, 'm/d/Y');
+    let dayOutput2 = fmt.formatDate(dayDate, 'D, M d, Y');
+    let timeOutput = fmt.formatDate(timeDate, 'g:i A' );
+
+    
+    return {
+        "date":dayOutput,
+        "date2":dayOutput2,
+        "time":timeOutput
+    }
+        
+}
+
 
 //loan request page 1
 $('body').on('click', '#continue-loan-button-1', function(){

@@ -1320,6 +1320,17 @@ input[type="file"]{
     border-radius: 5px;
 }
 
+.loan-status-awaiting { 
+    background-color: #FFD600;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
 .loan-status-approved { 
     background-color: #33D290;
     display: block;
