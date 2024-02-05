@@ -155,6 +155,10 @@ body.loaded #preloader {
     color: #666666;
 }
 
+.black-text {
+    color: #000;
+}
+
 .white-bg {
     background-color: #ffffff;
 }
@@ -779,6 +783,28 @@ hr.footerline {
 }
 
 .continue-button-3:hover { 
+    background-color: #999;
+    color: #fff;
+}
+
+
+
+
+.continue-button-5 { 
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #999;
+    line-height: 22px;
+    box-shadow: 1px 1px 10px #ccc;
+    border-radius: 3px;
+    transition: all 0.3s;
+    width: 100%;
+    display: block;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.continue-button-5:hover { 
     background-color: #999;
     color: #fff;
 }
@@ -1462,4 +1488,12 @@ input[type="file"]{
 
 .repayment-item {
     line-height: 20px;
+}
+
+.imgTag2 {
+    border:1px solid #ddd;
+    border-radius: 5px;
+    padding:10px;
+    width: 60px;
+    height: 60px;
 }

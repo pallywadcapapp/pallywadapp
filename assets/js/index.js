@@ -7,6 +7,7 @@ import Kyc1 from "./views/Kyc1.js";
 import Kyc2 from "./views/Kyc2.js";
 import Kyc3 from "./views/Kyc3.js";
 import KycComplete from "./views/KycComplete.js";
+import PreviewLoanRequest from "./views/PreviewLoanRequest.js";
 import Signin from "./views/SignIn.js";
 import Logout from "./views/Logout.js";
 import LoanRequest from "./views/LoanRequest.js";
@@ -45,6 +46,7 @@ const router = async () => {
         {path:"/loan-request" , view: LoanRequest },
         {path:"/loan-request2" , view: LoanRequest2 },
         {path:"/loan-request-complete" , view: LoanRequestComplete },
+        {path:"/preview-loan-request" , view: PreviewLoanRequest },
         {path:"/sign-in" , view: Signin },
         {path:"/logout" , view: Logout }
     ]

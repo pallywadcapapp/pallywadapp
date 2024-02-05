@@ -116,13 +116,10 @@ export default class extends DefaultView {
                                     </div>
                                 </div>
 
-                                
-
-
 
                                 <div class="proof-of-payment mt-2">
                                     <b>Proof of payment</b>
-                                    <a href="javascript:;" class="default-button block text-center mt-1">
+                                    <a href="javascript:;" class="default-button uploadPaymentProof block text-center mt-1">
                                         <i class="fa fa-upload"></i> Upload
                                     </a>
                                 </div>

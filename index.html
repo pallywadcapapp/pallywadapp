@@ -18,13 +18,14 @@
     <link href="assets/plugins/jquery-steps/css/jquery.steps.css" rel="stylesheet">
     <link href="assets/plugins/toastr/css/toastr.min.css" rel="stylesheet">
     <link href="assets/plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
-    <link href="assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" />
     <link href="assets/plugins/jquery-ui-1.13.2.custom/jquery-ui.min.css" />
+    <link rel="stylesheet" href="assets/plugins/dobjs/css/date-of-birth-js.min.css" />
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/plugins/dobjs/css/date-of-birth-js.min.css" />
 </head>
 
 <body>
@@ -44,8 +45,18 @@
 	<!-- Page Loader End --> 
     <div id="app"></div>
    
+    <div class="modal fade" id="pallywadModal" aria-hidden="true"  tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" ></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
     
-
     <!-- MAIN AREA END -->
     
     <!-- jquery-->
@@ -62,8 +73,9 @@
     <script src="assets/plugins/sweetalert/js/sweetalert.min.js"></script>
     <script src="assets/plugins/jquerySegmentedInput/jquery.segmentedInput.js"></script>
     <script src="assets/plugins/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
-    <script src="assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="assets/js/php-date-formatter.min.js"></script>
+    <script src="assets/plugins/dobjs/js/date-of-birth-js.min.js"></script>
+   
     <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     
     <script src="assets/js/headers.js"></script>

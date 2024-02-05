@@ -1,9 +1,11 @@
 import DefaultView from "./DefaultView.js";
 
+
 export default class extends DefaultView {
     constructor(params) {
         super(params);
         this.setTitle("Update Profile  | Pallywad Capital ");
+        
     }
 
     async getHtml() {
@@ -17,7 +19,7 @@ export default class extends DefaultView {
                         <div class="row">
                             <div class="col-md-10 col-12 ms-auto me-auto mb-4">
                                 <div id="updateProfile" class="white-bg rounded div-shadow signin-form">
-                                    <form id="updateProfileForm"  >
+                                    <form id="updateProfileForm" method="GET" >
                                         <div class="text-center mt-3 px-8">
                                             <h3>Update Profile</h3>
                                             <p>Complete the form below to update your profile.</p>
@@ -44,7 +46,7 @@ export default class extends DefaultView {
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Date of Birth <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control mydatepicker" id="dob" name="dob"  placeholder="mm/dd/yyyy" required>
+                                                    <input type="text" class="form-control" id="dob" name="dob"  placeholder="mm/dd/yyyy" required>
                                                 </div>
                                             </div>
                                         </div>

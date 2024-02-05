@@ -23,24 +23,23 @@ export default class extends DefaultView {
                                 </div>
                                 <div id="kyc2-form" class="white-bg rounded div-shadow upload-form ">
                                     <form id="kyc1-form-step2" action="POST" >
+                                        
+
                                         <div class="text-center">
                                             <h3>Upload Collateral Document</h3>
-                                            <select id="userCollateralType" class=""form-control oc>
+                                            <select id="collateralType">
                                                 <option>Type of collateral</option>
                                             </select>
-                                            <select id="collateralType" class="form-control nc">
-                                                <option>Type of collateral</option>
-                                            </select>
-                                            <input type="text" id="estimatedValue" class="form-control mb-2 mt-2 nc" placeholder="Enter estimated value of Collateral in Naira">
-                                            <input type="text" id="otherdetails" class="form-control mb-2 nc" placeholder="Other important details about Collateral">
+                                            <input type="text" id="estimatedValue" class="form-control mb-2 mt-2" placeholder="Enter estimated value of Collateral in Naira">
+                                            <input type="text" id="otherdetails" class="form-control mb-2" placeholder="Other important details about Collateral">
                                             
                                         </div>
-                                        <div class="text-center illustration-space-3 nc">
+                                        <div class="text-center illustration-space-3">
                                             <div id="imgPreview"></div>
                                            
                                         </div>
                                         
-                                        <div class="form-group mt-2 nc">
+                                        <div class="form-group mt-2">
                                             <a href="javascript:;" id="upload-collateral-document" class="continue-button-3" >Upload Collateral Info</a>
                                             
                                         </div>
