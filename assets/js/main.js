@@ -380,6 +380,7 @@ function addLoan(email){
                 let message = `You need to update your profile in order to add a loan. 
                 <a href="update-profile">Click here</a> to update now.`;
                 $('#stepsNotification').html(message).show();
+                localStorage.setItem('gotoDocuments', 'true');
             }else{
                 location.href = "loan-request";
             }
@@ -436,6 +437,11 @@ $('body').on('click','#update-profile', function(e){
             },
             success: function(d){
                 displayToast('success', "Your profile was updated successfully", "Profile update successful")
+                let redirect = localStorage.getItem('gotoDocuments');
+                if(redirect) {
+                    localStorage.removeItem('gotoDocuments');
+                    location.href = "/upload-documents";
+                }
             }
         })
 
