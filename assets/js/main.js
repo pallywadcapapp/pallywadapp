@@ -34,7 +34,7 @@
 const api_url = 'https://auth.pallywad.com'; 
 const loan_app_url = 'https://user.pallywad.com';
 const setup_url = 'https://setup.pallywad.com';
-
+var uploadedFilesHolder = [];
 var colls = '';
 
 $.ajaxSetup({
@@ -670,41 +670,6 @@ function loadUserCollateralTypes(){
     })
 }
 
-function uploadPaymentProofFile(){
-    console.log("it has happened");
-    if(!$('#amount').val()){
-        displayToast('error', 'Please enter amount you repaid', 'Enter Repayment Amount');
-    }
-    else {
-        document.getElementById("selectfile").click();
-        document.getElementById("selectfile").onchange = function() {
-            files = document.getElementById("selectfile").files[0];
-            let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-            let fileType = file.type; 
-            if(validExtensions.includes(fileType)){ 
-                let fileReader = new FileReader();
-                let uploadedFilesPreview = $('#uploadedFilesPreview');
-                fileReader.onload = ()=>{
-                    let fileURL = fileReader.result; 
-                    let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`; 
-                    let output = `
-                        ${imgTag}
-                    `;
-                    
-                    uploadedFiles.push({
-                        "file": file,
-                    });
-
-                    uploadedFilesPreview.append(`${output}`);
-                    console.log(uploadedFiles);
-                }
-                fileReader.readAsDataURL(file);
-                
-            }
-        }
-        
-    }
-}
 
 
 $("body").on('change', '.singleCheck', function() {
@@ -1076,9 +1041,7 @@ $(document).ready(function() {
                         ${imgTag}
                     `;
                     
-                    uploadedFiles.push({
-                        "file": file,
-                    });
+                    uploadedFiles.push('file', file);
 
                     uploadedFilesPreview.append(`${output}`);
                     console.log(uploadedFiles);
@@ -1136,29 +1099,14 @@ $(document).ready(function() {
         
     })
 
+    $('body').on('click', '#submitPaymentProof',function(e){
+        let api_endpoint = "/api/Payments";
 
-    $('#upload-payment-proof').click(function(e){
-        if(!$('#amount').val()){
-            displayToast('error', 'Please enter amount you repaid', 'Enter Repayment Amount');
-        }
-        else {
-            document.getElementById("selectfile").click();
-            document.getElementById("selectfile").onchange = function() {
-            files = document.getElementById("selectfile").files[0];
-                showFile(files);
-            localStorage.setItem('uploadedFile', JSON.stringify(files));
-                
-            }
-            
+        let files = uploadedFilesHolder;
+        for (let i = 0; i < files.length; i++) {
+            formData.append("file", files[i].file );
         }
         
-    })
-
-    $('#submitPaymentProof').click(function(e){
-        let api_endpoint = "/api/Collateral/UploadFile";
-
-        let file = localStorage.getItem('uploadedFile');
-        file = JSON.parse(file);
         let loanRefId = $('#loanRefId').val();
         let amount = $('#amount').val();
         let channel = $('#channel').val();
@@ -1181,15 +1129,18 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data) {
-                displayToast('success', 'Payment Proof Document was uploaded successfully. Adwin will review payment and confirm accordingly', 'Upload successful');
-                $('#pallywadModal').hide()
+                displayToast('success', 'Payment Proof Document was uploaded successfully.', 'Upload successful');
+                hideModal();
             }
         });
         
     })
 
 
-   
+    function hideModal(){
+        $('#pallywadModal').hide();
+        $('.modal-backdrop').hide();
+    }
 
     function file_explorer() {
         document.getElementById("selectfile").click();
@@ -1316,6 +1267,36 @@ $('body').on('click','#submitLoanRequest',function(){
 })
 
 
+$('body').on('click', '#uploadPaymentProofFile', function(){
+    document.getElementById("selectfile").click();
+    document.getElementById("selectfile").onchange = function() 
+        {
+        file = document.getElementById("selectfile").files[0];
+
+        //check if uploaded file is valid
+        let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+        let fileType = file.type; 
+        if(validExtensions.includes(fileType)){ 
+            let fileReader = new FileReader();
+            let uploadedFilesPreview = $('#uploadedFilesPreview');
+            fileReader.onload = ()=>{
+                let fileURL = fileReader.result; 
+                let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`; 
+                let output = `
+                    ${imgTag}
+                `;
+                uploadedFilesHolder.push('file', file);
+                uploadedFilesPreview.append(`${output}`);
+            }
+            fileReader.readAsDataURL(file);
+            
+        }
+        else {
+            displayToast("error","The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+        }
+    }
+})
+
 //upload proof of payment
 $('body').on('click', '.uploadPaymentProof', function(){
 
@@ -1375,14 +1356,15 @@ $('body').on('click', '.uploadPaymentProof', function(){
                 </div>
 
                 <a href="javascript:;" 
-                    onclick="uploadPaymentProofFile"
+                    id="uploadPaymentProofFile"
                     class="continue-button-5 mb-3"><i class="fa fa-upload"></i> 
                     Upload Payment Proof Screenshot
                 </a>
                 
             </div>
+
             <div id="uploadDocumentExtrafields" class="form-group mt-2" >
-                
+                <input type="file" class="d-none" id="selectfile" />
                 <a href="javascript:;" id="submitPaymentProof" 
                 class="default-button block text-center" >Submit Form</a>
                 
