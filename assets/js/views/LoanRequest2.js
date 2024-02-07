@@ -27,26 +27,26 @@ export default class extends DefaultView {
 
                                         <div class="text-center">
                                             <h3>Upload Collateral Document</h3>
-                                            <select id="collateralType">
-                                                <option>Type of collateral</option>
-                                            </select>
-                                            <input type="text" id="estimatedValue" class="form-control mb-2 mt-2" placeholder="Enter estimated value of Collateral in Naira">
+                                            <div class="text-center illustration-space-3">
+                                            
+                                                <div id="uploadedFilesPreview" class="table table-striped table-hover"> 
+                                                </div>
+                                            </div>
+                                            <a href="javascript:;" id="upload-collateral-document" 
+                                                class="continue-button-5 mb-3"><i class="fa fa-upload"></i> Upload Collateral Document(s)</a>
+                                                <div class="text-start"><label >Type Of Collateral</label></div>
+                                                <select id="collateralType"></select>
+                                            <div class="text-start mt-2"><label >Estimated Value</label></div>
+                                            <input type="number" id="estimatedValue" class="form-control mb-2 mt-2" placeholder="Enter estimated value of Collateral in Naira">
+                                            <div class="text-start mt-2"><label >Other Details</label></div>
                                             <input type="text" id="otherdetails" class="form-control mb-2" placeholder="Other important details about Collateral">
                                             
                                         </div>
-                                        <div class="text-center illustration-space-3">
-                                            <div id="imgPreview"></div>
-                                           
-                                        </div>
-                                        
-                                        <div class="form-group mt-2">
-                                            <a href="javascript:;" id="upload-collateral-document" class="continue-button-3" >Upload Collateral Info</a>
-                                            
-                                        </div>
-                                        <div id="uploadDocumentExtrafields" class="form-group mt-2" >
-                                           
-                                           
-                                            <a href="javascript:;" id="submitLoanRequest" class="continue-button-2 hide" >Submit Loan Request</a>
+                                       
+                                     
+
+                                        <div id="loan-details-area" class="form-group ">
+                                            <a href="javascript:;" id="preview-loan-details" class="continue-button-2">Save & Preview</a>
                                             
                                         </div>
 

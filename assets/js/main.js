@@ -463,6 +463,8 @@ $(window).on('load', function(){
     $("#updateProfileForm").submit(function(e) {
         e.preventDefault();
     });
+
+    
 })
 
 //section to get all needed ids loaded by import
@@ -591,12 +593,13 @@ $(window).on('load', function(){
     }
 
     if($('#collateralType').length > 0) {
-        loadUserCollateralTypes();
-        //loadCollateralTypes();
+        //loadUserCollateralTypes();
+        loadCollateralTypes();
     }
 
     fetchLoanRequests();
     fetchProcessedLoanRequests();
+    fetchCompanyDetails();
         
     
     //load datepicker
@@ -641,6 +644,7 @@ function loadUserCollateralTypes(){
             displayToast('error',d.responseJSON.message, d.responseJSON.status)
         },
         success: function(d){
+            console.log
             let lists = d;
             colls = d;
             if(lists.length <1){
@@ -664,6 +668,42 @@ function loadUserCollateralTypes(){
             
         }
     })
+}
+
+function uploadPaymentProofFile(){
+    console.log("it has happened");
+    if(!$('#amount').val()){
+        displayToast('error', 'Please enter amount you repaid', 'Enter Repayment Amount');
+    }
+    else {
+        document.getElementById("selectfile").click();
+        document.getElementById("selectfile").onchange = function() {
+            files = document.getElementById("selectfile").files[0];
+            let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+            let fileType = file.type; 
+            if(validExtensions.includes(fileType)){ 
+                let fileReader = new FileReader();
+                let uploadedFilesPreview = $('#uploadedFilesPreview');
+                fileReader.onload = ()=>{
+                    let fileURL = fileReader.result; 
+                    let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`; 
+                    let output = `
+                        ${imgTag}
+                    `;
+                    
+                    uploadedFiles.push({
+                        "file": file,
+                    });
+
+                    uploadedFilesPreview.append(`${output}`);
+                    console.log(uploadedFiles);
+                }
+                fileReader.readAsDataURL(file);
+                
+            }
+        }
+        
+    }
 }
 
 
@@ -830,6 +870,22 @@ function fetchProcessedLoanRequests() {
             }
             
             
+        }
+    })
+}
+
+function fetchCompanyDetails(){
+    let api_endpoint = "/api/Company";
+    
+    $.ajax({
+        type:'get',
+        url: setup_url+api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            localStorage.setItem('companyDetails', JSON.stringify(d));
         }
     })
 }
@@ -1001,86 +1057,81 @@ $(document).ready(function() {
     var uploadedFiles = [];
 
     $('#upload-collateral-document').click(function(e){
-        if(!$('#estimatedValue').val()){
-            displayToast('error', 'Please enter collateral estimated value', 'Enter Estimate Value');
-        }
-        else {
-            document.getElementById("selectfile").click();
-            document.getElementById("selectfile").onchange = function() 
-            {
-                file = document.getElementById("selectfile").files[0];
-                let estimatedValue = $('#estimatedValue').val() ?? "None";
-                let collateralRefId = $('#collateralType :selected').val();
-                let otherdetails = $('#otherdetails').val() ?? 0;
+        
+        document.getElementById("selectfile").click();
+        document.getElementById("selectfile").onchange = function() 
+        {
+            file = document.getElementById("selectfile").files[0];
 
-                //check if uploaded file is valid
-                let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-                let fileType = file.type; 
-                if(validExtensions.includes(fileType)){ 
-                    let fileReader = new FileReader();
-                    let uploadedFilesPreview = $('#uploadedFilesPreview');
-                    fileReader.onload = ()=>{
-                        let fileURL = fileReader.result; 
-                        let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`; 
-                        let output = `
-                            ${imgTag}
-                        `;
-                      
-                        uploadedFiles.push({
-                            "file": file,
-                            "estimatedValue" : estimatedValue,
-                            "collateralRefId" : collateralRefId,
-                            "otherdetails" : otherdetails
-                        });
-
-                        uploadedFilesPreview.append(`${output}`);
-                        console.log(uploadedFiles);
-                        $('#estimatedValue').val('');
-                        $('#otherdetails').val('');
-                        
-                        
-                        $('#loan-details-area').removeClass('hide');
-                    }
-                    fileReader.readAsDataURL(file);
+            //check if uploaded file is valid
+            let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+            let fileType = file.type; 
+            if(validExtensions.includes(fileType)){ 
+                let fileReader = new FileReader();
+                let uploadedFilesPreview = $('#uploadedFilesPreview');
+                fileReader.onload = ()=>{
+                    let fileURL = fileReader.result; 
+                    let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`; 
+                    let output = `
+                        ${imgTag}
+                    `;
                     
+                    uploadedFiles.push({
+                        "file": file,
+                    });
+
+                    uploadedFilesPreview.append(`${output}`);
+                    console.log(uploadedFiles);
                 }
-                else {
-                    displayToast("error","The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
-                }
+                fileReader.readAsDataURL(file);
+                
+            }
+            else {
+                displayToast("error","The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
             }
         }
+        
     })
 
 
     $('#preview-loan-details').click(function(){
         
-        
-        let api_endpoint = "/api/Collateral/UploadFile";
-        let estimatedValue = $('#estimatedValue').val() ?? "None";
-        let collateralRefId = $('#collateralType :selected').val();
-        let otherdetails = $('#otherdetails').val() ?? 0;
-        formData.append("estimatedValue", estimatedValue);
-        formData.append("collateralRefId", collateralRefId);
-        formData.append("otherdetails", otherdetails);
-
-        
-
-        $(".preloader-2").show();
-        $.ajax({
-            url: loan_app_url+api_endpoint,
-            method: "POST",
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                //displayToast('success', 'Document was uploaded successfully', 'File upload successful');
-                fetchUploadedCollaterals();
-                // $('#upload-collateral-document').hide();
-                localStorage.setItem("uploadedCollaterals", JSON.stringify(uploadedFiles));
-                location.href = "/preview-loan-request";
+        if($('#estimatedValue').length < 1){
+            displayToast('error', 'You must enter estimated value of collateral', 'Enter Collateral Value');
+        }
+        else {
+            let api_endpoint = "/api/Collateral/UploadFile";
+            let estimatedValue = $('#estimatedValue').val();
+            let collateralRefId = $('#collateralType :selected').val();
+            let otherdetails = $('#otherdetails').val() ?? "None";
+            //console.log(uploadedFiles);
+            for (let i = 0; i < uploadedFiles.length; i++) {
+                console.log(uploadedFiles[i].file);
+                formData.append("file", uploadedFiles[i].file );
+                
             }
-        });
+            
+            formData.append("estimatedValue", estimatedValue);
+            formData.append("collateralRefId", collateralRefId);
+            formData.append("otherdetails", otherdetails);
+
+            
+
+            $(".preloader-2").show();
+            $.ajax({
+                url: loan_app_url+api_endpoint,
+                method: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    localStorage.setItem("uploadedCollaterals", JSON.stringify(uploadedFiles));
+                    location.href = "/preview-loan-request";
+                }
+            });
+        }
+        
 
         
     })
@@ -1138,7 +1189,7 @@ $(document).ready(function() {
     })
 
 
-    
+   
 
     function file_explorer() {
         document.getElementById("selectfile").click();
@@ -1264,6 +1315,7 @@ $('body').on('click','#submitLoanRequest',function(){
     });
 })
 
+
 //upload proof of payment
 $('body').on('click', '.uploadPaymentProof', function(){
 
@@ -1319,13 +1371,17 @@ $('body').on('click', '.uploadPaymentProof', function(){
             </div>
 
             <div class="form-group mt-3">
-                <div id="imgPreview"></div>
-                <a href="javascript:;" id="upload-payment-proof" 
-                    class="btn btn-success block" >Upload Payment Proof
+                <div id="uploadedFilesPreview" class="table table-striped table-hover"> 
+                </div>
+
+                <a href="javascript:;" 
+                    onclick="uploadPaymentProofFile"
+                    class="continue-button-5 mb-3"><i class="fa fa-upload"></i> 
+                    Upload Payment Proof Screenshot
                 </a>
                 
             </div>
-            <div id="uploadDocumentExtrafields" class="form-group mt-2 hide" >
+            <div id="uploadDocumentExtrafields" class="form-group mt-2" >
                 
                 <a href="javascript:;" id="submitPaymentProof" 
                 class="default-button block text-center" >Submit Form</a>
@@ -1334,8 +1390,65 @@ $('body').on('click', '.uploadPaymentProof', function(){
 
         </div>
     `; 
+  
     $('.modal-body').html(content);
     $('.modal-title').html('Upload Proof Of Payment');
+    var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
+    myModal.show({
+        keyboard: false,
+        backdrop:'static'
+    });
+})
+
+
+
+//pay loan
+$('body').on('click', '.makePayment', function(){
+    
+    companyDetails = localStorage.getItem('companyDetails');
+    companyDetails = JSON.parse(companyDetails);
+    let content = `
+        
+        <div class="px-4 py-2 signin-form">
+            <p>You can make your loan repayment by using any of the channels below:</p>
+            <div class="col-md-12 black-text mb-2">
+                <div class="nav-area">
+                    <nav>
+                        <div class="nav nav-pills" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-bankTransfer-tab" data-bs-toggle="tab" data-bs-target="#bankTransfer" type="button" role="tab" aria-controls="bankTransfer" aria-selected="true">Bank Transfer</button>
+                            <button class="nav-link" id="nav-onlinePayment-tab" data-bs-toggle="tab" data-bs-target="#onlinePayment" type="button" role="tab" aria-controls="onlinePayment" aria-selected="false">ATM Card/Online Payment</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="bankTransfer" role="tabpanel" aria-labelledby="nav-bankTransfer-tab" tabindex="0">
+                            <div class="px-2 py-3">May your payment using the details below and after payment, 
+                            click the  
+                            <a href="javascript:;" class="uploadPaymentProof">Upload Payment Proof</a> 
+                            button to upload proof of your payment.
+                            </div>
+
+                            <div class="px-2 py-3 payment-details-bank">
+                                <b>Bank: </b> ${companyDetails.bank}<br> 
+                                <b>Account Name:</b> ${companyDetails.name}<br>
+                                <b>Acount Number:</b> ${companyDetails.accountno}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="onlinePayment" role="tabpanel" aria-labelledby="nav-onlinePayment-tab" tabindex="0">
+                            <div class="px-2 py-3">
+                                Enter the amount that you would link to repay below and click the Repay Online Button
+                                <div class="mt-2">
+                                    <input type="text" class="form-control" placeholder="Enter repayment amount" />
+                                    <a href="javascript:;" class="default-button-green mt-3">Repay Online</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `; 
+    $('.modal-body').html(content);
+    $('.modal-title').html('Make Loan Repayment');
     var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
     myModal.show({
         keyboard: false,

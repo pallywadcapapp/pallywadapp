@@ -28,7 +28,7 @@ export default class extends DefaultView {
                                 <p class="current-loan-amount">Current Loan Amount</p>
                                 <div class="d-flex justify-content-between">
                                     <h3>${this.currency} <span class="loanAmount">0</span></h3>
-                                    <a href="javascript:;" class="default-button-green">Pay </a>
+                                    <a href="javascript:;" class="default-button-green makePayment">Pay </a>
                                 </div>
                                 <p class="about-title">APPROVED LOAN DETAILS</p>
                                 <p class="mt-3">
@@ -64,7 +64,7 @@ export default class extends DefaultView {
                                         
                                     </div>
                                     <div>
-                                        <a href="" class="default-button block text-center mt-4">Repay</a>
+                                        <a href="javascript:;"  class="makePayment default-button block text-center mt-4">Repay</a>
                                     </div>
 
                                 </div>
@@ -119,6 +119,7 @@ export default class extends DefaultView {
 
                                 <div class="proof-of-payment mt-2">
                                     <b>Proof of payment</b>
+                                    
                                     <a href="javascript:;" class="default-button uploadPaymentProof block text-center mt-1">
                                         <i class="fa fa-upload"></i> Upload
                                     </a>

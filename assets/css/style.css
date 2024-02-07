@@ -601,8 +601,8 @@ hr.footerline {
     --bs-nav-pills-border-radius: var(--bs-border-radius);
     --bs-nav-pills-link-active-color: #fff;
     --bs-nav-pills-link-active-bg: #24488F;
-    background: #fff;
-    padding: 10px;
+    background: #e8e8e8;
+    padding: 5px;
     border-radius: 5px;
 }
 
@@ -1494,6 +1494,18 @@ input[type="file"]{
     border:1px solid #ddd;
     border-radius: 5px;
     padding:10px;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
+}
+
+.nav-area {
+    box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 25px;
+}
+
+.payment-details-bank {
+    font-size: 20px;
+    line-height: 32px;
 }
