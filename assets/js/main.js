@@ -22,10 +22,21 @@
             $('body').addClass('loaded');
         });
     });
-
-    
     
 })(jQuery);
+
+    $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
+        console.log(event);
+        console.log(xhr);
+        var pathname = $(location).attr("pathname");
+        if(pathname != '/sign-in'){
+        if (xhr.status === 401) {
+            window.location.href = "/logout";
+        }
+        if (xhr.statusText === 'Unauthorized') {
+            window.location.href = "/logout";
+        }}
+    });
 
 
 /*-------------------------------------
@@ -50,19 +61,20 @@ $.ajaxSetup({
             xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
             xhr.setRequestHeader('Authorization', 'Bearer ' + auth);
         }
+    },
+    error: function (x, status, error) {
+        console.log(x);
+        if (x.status == 401) {
+            alert("Sorry, your session has expired. Please login again to continue");
+            window.location.href ="/Logout";
+        }
+        else {
+            alert("An error occurred: " + status + "nError: " + error);
+        }
     }
 });
 
-$(document).ajaxError(function (event, request, settings) {
-    console.log(event);
-    console.log(request);
-    if (request.status === 401) {
-        window.location.href = "/logout";
-    }
-    if (request.statusText === 'Unauthorized') {
-        window.location.href = "/logout";
-    }
-});
+
 
 /*-------------------------------------
 2. initialize onscroll animations
@@ -300,6 +312,7 @@ $('body').on('click','#login', function(e){
             "username": email,
             "password": password
         }
+        $('#main').pleaseWait();
 
         $.ajax({
             type:'post',
@@ -307,6 +320,7 @@ $('body').on('click','#login', function(e){
             headers: { 'Content-Type': 'application/json' },
             data: JSON.stringify(data),
             error: function(d){
+                $('#main').pleaseWait('stop');
                 displayToast('error',d.responseJSON.message, d.responseJSON.status)
             },
             success: function(d){
@@ -756,7 +770,12 @@ function fetchLoanRequests() {
         url: loan_app_url+api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            if(d.status == '401'){
+                displayToast('error',d.responseText, d.responseText)
+            }else{
+                displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            }
+           
         },
         success: function(d){
             let lists = d;
@@ -1301,6 +1320,9 @@ $('body').on('click', '#uploadPaymentProofFile', function(){
 $('body').on('click', '.uploadPaymentProof', function(){
 
     let processedLoans = JSON.parse(localStorage.getItem('processedLoans'));
+    if(processedLoans == null){
+        toastr.warning('No Loan Currently loaning')
+    }else{
     let option = '';
     for (let i = 0; i < processedLoans.length; i++) {
         option += `<option>${processedLoans[i].category}
@@ -1380,6 +1402,7 @@ $('body').on('click', '.uploadPaymentProof', function(){
         keyboard: false,
         backdrop:'static'
     });
+}
 })
 
 
