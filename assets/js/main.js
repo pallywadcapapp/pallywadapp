@@ -464,6 +464,11 @@ $(window).on('load', function(){
         e.preventDefault();
     });
 
+    if($('#loanRepaymentArea').length > 0){
+        loadPayments();
+        loadPaymentsHistory()
+    }
+
     
 })
 
@@ -671,6 +676,92 @@ function loadUserCollateralTypes(){
 }
 
 
+function loadPayments(){
+    let api_endpoint = "/api/Payments";
+    $.ajax({
+        type:'get',
+        url: loan_app_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            console.log(d)
+            let lists = d;
+            let content = '';
+            for (let i = 0; i < lists.length; i++) {
+                payment_status = (lists[i].status =="Pending") 
+                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>` 
+                    : `<span class="badge text-bg-success">${lists[i].status}</span>`;
+                content += `
+                <div class="row">
+                    <div class="col-md-8 repayment-item">
+                        <b>${lists[i].loanRefId} </b><br>
+                        <small class="grey-text">${formatDate3(lists[i].requestDate).date2}</small><br>
+                        <small class="grey-text"><b>Status:</b> ${payment_status} </small>
+                        
+                    </div>
+                    <div class="col-md-4 repayment-item">
+                        <small>Amount Repaid:</small><br>
+                        <div class="repayment-price">&#8358; ${number_format(lists[i].amount)}</div>
+                    </div>
+                </div>
+                `;
+                
+            }
+            
+
+            $('#repaymentItems').html(content);
+
+        }
+    })
+}
+
+function loadPaymentsHistory(){
+    let api_endpoint = "/api/Payments";
+    $.ajax({
+        type:'get',
+        url: loan_app_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            console.log(d)
+            let lists = d;
+            let content = '';
+            for (let i = 0; i < lists.length; i++) {
+                payment_status = (lists[i].status =="Pending") 
+                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>` 
+                    : `<span class="badge text-bg-success">${lists[i].status}</span>`;
+                content += `
+                <div class="row">
+                    <div class="col-md-5 repayment-item2">
+                        <div class="repayment-price">&#8358; ${number_format(lists[i].amount)}</div>
+                        <small class="grey-text">${lists[i].loanRefId}</small><br>
+                        
+                    </div>
+                    <div class="col-md-3 repayment-item2">
+                        <small class="black-text"><b>Status:</b>
+                        <br> ${payment_status} </small>
+                    </div>
+                    <div class="col-md-4 repayment-item2">
+                        <small>${formatDate3(lists[i].requestDate).time}</small><br>
+                        <small>${formatDate3(lists[i].requestDate).date2}</small>
+                        
+                    </div>
+                </div>
+                `;
+                
+            }
+            
+
+            $('#repaymentItems2').html(content);
+
+        }
+    })
+}
+
 
 $("body").on('change', '.singleCheck', function() {
     $(".singleCheck").prop('checked', false);
@@ -821,15 +912,23 @@ function fetchProcessedLoanRequests() {
                 let duration = lists[0].duration == 1 ? lists[0].duration + " Month" :  lists[0].duration + " Months";
                 let disbursementDate = lists[0].approvalDate;
                 disbursementDate = formatDate3(disbursementDate).date2;
+                repaymentStartDate = formatDate3(lists[0].approvalDate).date; 
+                console.log(repaymentStartDate);
+                loanCategory = lists[0].category;
+                //repaymentStartDate = new Date(repaymentStartDate.setMonth(repaymentStartDate.getMonth()+1));
                 let interestDisplay =  lists[0].loaninterest;
+
+                console.log(repaymentStartDate);
                 if(lists.length <1) {
                     $('.currentLoan').hide();
                 }
                 else {
                     $('.currentLoan').show();
                     $('.loanAmount').html(number_format(amount));
+                    $('.loanCategory').html(loanCategory);
                     $('.loanDuration').html(duration);
                     $('.disbursementDate').html(disbursementDate);
+                    $('.repaymentStartDate').html(repaymentStartDate);
                     $('.interestDisplay').html(interestDisplay);
                 }
             }
@@ -926,7 +1025,6 @@ function formatDate3(dateInput){
     let dayOutput = fmt.formatDate(dayDate, 'm/d/Y');
     let dayOutput2 = fmt.formatDate(dayDate, 'D, M d, Y');
     let timeOutput = fmt.formatDate(timeDate, 'g:i A' );
-
     
     return {
         "date":dayOutput,

@@ -1490,6 +1490,28 @@ input[type="file"]{
     line-height: 20px;
 }
 
+.repayment-item2 {
+    border-top: 1px solid #ddd;
+    font-size:18px;
+    line-height: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.repayment-item2 .repayment-price{
+    font-size: 27px;
+}
+
+.underline {
+    border-bottom: 1px solid #ddd;
+}
+
+.repayment-price {
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .imgTag2 {
     border:1px solid #ddd;
     border-radius: 5px;

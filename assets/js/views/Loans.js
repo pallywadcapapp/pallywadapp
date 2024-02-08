@@ -83,37 +83,22 @@ export default class extends DefaultView {
                                     
                                 </div>
 
-                                <div class="loan-repayment-area mt-2">
+                                <div id="loanRepaymentArea" class="loan-repayment-area mt-2">
                                     <p class="grey-text">Monthly repayment breakdown</p>
-                                    <div class="row ">
-                                        <div class="col-md-8 repayment-item">
-                                            <b>Term 1 </b><br>
-                                            <small class="grey-text">Tue Dec 28, 2023</small>
-                                        </div>
-                                        <div class="col-md-4">
-                                            ${this.currency}30,000 
-                                        </div>
+                                    <div id="repaymentItems">
+                                        <p class="placeholder-glow mb-2">
+                                            <span class="placeholder col-3"></span>
+                                            <span class="placeholder col-6"></span>
+                                            <span class="placeholder col-3"></span>
+                                        </p>
+                                        <p class="placeholder-glow">
+                                            <span class="placeholder col-3"></span>
+                                            <span class="placeholder col-6"></span>
+                                            <span class="placeholder col-3"></span>
+                                        </p>
                                     </div>
+                                    
 
-                                    <div class="row ">
-                                        <div class="col-md-8 repayment-item">
-                                            <b>Term 1 </b><br>
-                                            <small class="grey-text">Tue Dec 28, 2023</small>
-                                        </div>
-                                        <div class="col-md-4">
-                                            ${this.currency}30,000 
-                                        </div>
-                                    </div>
-
-                                    <div class="row ">
-                                        <div class="col-md-8 repayment-item">
-                                            <b>Term 1 </b><br>
-                                            <small class="grey-text">Tue Dec 28, 2023</small>
-                                        </div>
-                                        <div class="col-md-4">
-                                            ${this.currency}30,000 
-                                        </div>
-                                    </div>
                                 </div>
 
 
@@ -146,7 +131,7 @@ export default class extends DefaultView {
                                     </div>
                                     <div class="col-md-5">
                                         <div class="proof-of-payment">
-                                            Repayment Starts on <b>Thur, Feb 17 2024</b> with
+                                            Repayment Starts on <span id="repaymentStartDate"><b>Thur, Feb 17 2024</b></span> with
                                             Interest Rate of <b><span class="interestDisplay">0.9</span>%</b>
                                             <hr>
                                         </div>
