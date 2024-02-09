@@ -809,6 +809,25 @@ hr.footerline {
     color: #fff;
 }
 
+
+.continue-button-6 { 
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #24488F;
+    line-height: 22px;
+    border-radius: 3px;
+    transition: all 0.3s;
+    width: 100%;
+    display: block;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.continue-button-6:hover { 
+    background-color: #999;
+    color: #fff;
+}
+
 .continue-button-4 {
     background-color: #fff;
     color: #000;
@@ -1469,6 +1488,14 @@ input[type="file"]{
     border-top: 3px solid;
     opacity: .25;
 }
+
+.proof-of-payment-2 {
+    background-color: #f6dfd7;
+    padding: 15px 20px;
+    border-radius: 10px;
+    line-height: 22px;
+}
+
 .info-area .row {
     border-top:1px solid rgba(173, 173, 173, 0.5);
     --bs-gutter-x: 0rem;
@@ -1530,4 +1557,32 @@ input[type="file"]{
 .payment-details-bank {
     font-size: 20px;
     line-height: 32px;
+}
+
+.deeper-grey {
+    background-color:#e4e4e4;
+}
+
+#settingsArea .list-group-item {
+    border: none;
+    padding:0px;
+}
+
+#settingsArea .list-group-item img {
+    margin-right: 20px;
+    max-width: 19px;
+}
+
+.group-button {
+    color: #000;
+    padding: 10px 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.group-button:hover,
+.group-button:focus
+{
+   background-color: #24488F;
+   color:#fff;
 }

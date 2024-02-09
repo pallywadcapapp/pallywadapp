@@ -19,8 +19,8 @@ export default class extends DefaultView {
                                 <h3>Payment History</h3>
                             </div>
                             <div class="col-md-4 text-center ps-5">
-                            <a href="javascript:;" class="default-button mt-3 makePayment">
-                            <i class="fa fa-plus"></i> New Repayment</a>
+                                <a href="javascript:;" class="default-button mt-3 makePayment">
+                                <i class="fa fa-plus"></i> New Repayment</a>
                             </div>
                         </div>
                         <div class="row">

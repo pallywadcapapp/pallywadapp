@@ -53,15 +53,17 @@ $.ajaxSetup({
     }
 });
 
-$(document).ajaxError(function (event, request, settings) {
+$(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
     console.log(event);
-    console.log(request);
-    if (request.status === 401) {
+    console.log(xhr);
+    var pathname = $(location).attr("pathname");
+    if(pathname != '/sign-in'){
+    if (xhr.status === 401) {
         window.location.href = "/logout";
     }
-    if (request.statusText === 'Unauthorized') {
+    if (xhr.statusText === 'Unauthorized') {
         window.location.href = "/logout";
-    }
+    }}
 });
 
 /*-------------------------------------
@@ -388,7 +390,28 @@ function addLoan(email){
     })
 }
 
-
+function checkEligibility(){
+    console.log("check eligibility");
+    let api_endpoint = "/api/Profile/iseligible";
+    $.ajax({
+        type:'get',
+        url: api_url+api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function(d){
+            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function(d){
+            console.log(d);
+            if(d.message != true){
+                $('.notEligible').show();
+                $('.Eligible').hide();
+            }else{
+                $('.notEligible').hide();
+                $('.Eligible').show();
+            }
+        }
+    })
+}
 
 /*-------------------------------------
 7. update profile
@@ -467,6 +490,10 @@ $(window).on('load', function(){
     if($('#loanRepaymentArea').length > 0){
         loadPayments();
         loadPaymentsHistory()
+    }
+
+    if($('#dashboard').length > 0 ){
+        checkEligibility();
     }
 
     
@@ -847,7 +874,8 @@ function fetchLoanRequests() {
         url: loan_app_url+api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            //console.log(d);
+            //displayToast('error',d.responseJSON.message, d.responseJSON.status)
         },
         success: function(d){
             let lists = d;
@@ -913,12 +941,17 @@ function fetchProcessedLoanRequests() {
                 let disbursementDate = lists[0].approvalDate;
                 disbursementDate = formatDate3(disbursementDate).date2;
                 repaymentStartDate = formatDate3(lists[0].approvalDate).date; 
-                console.log(repaymentStartDate);
                 loanCategory = lists[0].category;
+                loanStatus = lists[0].status;
+                let loanStatusStyle = (lists[0].status =="Pending") 
+                ? "loan-status-pending"
+                : (lists[0].status =="Declined" ? "loan-status-declined" 
+                : (lists[0].status =="Awaiting Approval" ? "loan-status-awaiting" 
+                : (lists[0].status =="Approved" ? "loan-status-approved" 
+                : "loan-status-running") ));
                 //repaymentStartDate = new Date(repaymentStartDate.setMonth(repaymentStartDate.getMonth()+1));
                 let interestDisplay =  lists[0].loaninterest;
 
-                console.log(repaymentStartDate);
                 if(lists.length <1) {
                     $('.currentLoan').hide();
                 }
@@ -927,6 +960,8 @@ function fetchProcessedLoanRequests() {
                     $('.loanAmount').html(number_format(amount));
                     $('.loanCategory').html(loanCategory);
                     $('.loanDuration').html(duration);
+                    $('.loanStatus').html(loanStatus);
+                    $('.loanStatusStyle').html(`<span class="${loanStatusStyle}">${lists[0].status}</span>`);
                     $('.disbursementDate').html(disbursementDate);
                     $('.repaymentStartDate').html(repaymentStartDate);
                     $('.interestDisplay').html(interestDisplay);
@@ -1401,7 +1436,7 @@ $('body').on('click', '.uploadPaymentProof', function(){
     let processedLoans = JSON.parse(localStorage.getItem('processedLoans'));
     let option = '';
     for (let i = 0; i < processedLoans.length; i++) {
-        option += `<option>${processedLoans[i].category}
+        option += `<option value="${processedLoans[i].loanId}">${processedLoans[i].category}
          &#8358; ${number_format(processedLoans[i].amount)}</option>`;
     }
 

@@ -14,6 +14,8 @@ import LoanRequest from "./views/LoanRequest.js";
 import LoanRequest2 from "./views/LoanRequest2.js";
 import LoanRequestComplete from "./views/LoanRequestComplete.js";
 import PaymentHistory from "./views/PaymentHistory.js";
+import Help from "./views/Help.js";
+import Settings from "./views/Settings.js";
 
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
@@ -50,7 +52,9 @@ const router = async () => {
         {path:"/preview-loan-request" , view: PreviewLoanRequest },
         {path:"/sign-in" , view: Signin },
         {path:"/logout" , view: Logout },
-        {path:"/payment-history" , view: PaymentHistory }
+        {path:"/payment-history" , view: PaymentHistory },
+        {path:"/help" , view: Help },
+        {path:"/settings" , view: Settings }
     ]
 
     //check each route for a potential match and redirect
