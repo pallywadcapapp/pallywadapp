@@ -70,11 +70,13 @@ $('body').on('click', '#verifyPasswordCode', function (e) {
 $('body').on('click', '#resetPassword', function (e) {
     e.preventDefault();
     let confirmpassword = $('#confirmpassword').val();
-    let password = $('#password').val();
+    let oldPassword = $('#oldPassword').val();
+    let newPassword = $('#newPassword').val();
     username = localStorage.getItem('email');
-    api_endpoint = "/api/v1/auth/SetNewPassword";
+    api_endpoint = "/api/v1/auth/ChangPassword";
 
 
+    $('#chgPass').pleaseWait();
     //check if token is valid
     if (password != confirmpassword) {
         displayToast('error', "Password Mismatch", "Error");
@@ -82,7 +84,8 @@ $('body').on('click', '#resetPassword', function (e) {
         let data = {
             "confirmpassword": confirmpassword,
             "userid": username,
-            'newpassword': password
+            'newpassword': newPassword,
+            'oldPassword': oldPassword
         }
 
         $.ajax({
@@ -92,10 +95,13 @@ $('body').on('click', '#resetPassword', function (e) {
             data: JSON.stringify(data),
             error: function (d) {
                 displayToast('error', "Error Changing Password", "Error");
+                $('#chgPass').pleaseWait('stop');
             },
             success: function (d) {
                 console.log(d.status);
-                location.href = "/sign-in";
+                $('#chgPass').pleaseWait('stop');
+                displayToast('success', "Password Chaged successfully", "Success");
+                location.href = "/logout";
                 
 
             }
@@ -109,7 +115,7 @@ $('body').on('click', '#change-pass', function (e) {
     let password = $('#password').val();
     let oldPassword = $('#oldPassword').val();
     username = localStorage.getItem('email');
-    api_endpoint = "/api/v1/auth/SetNewPassword";
+    api_endpoint = "/api/v1/auth/ChangePassword";
 
 
     //check if token is valid

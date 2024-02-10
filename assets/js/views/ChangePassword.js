@@ -18,8 +18,8 @@ export default class extends DefaultView {
                     <div class="container">
                         <div class="row">
                             <div class="col-md-10 col-12 ms-auto me-auto mb-4">
-                                <div id="updateProfile" class="white-bg rounded div-shadow signin-form">
-                                    <form id="updateProfileForm" method="GET" >
+                                <div id="chgPass" class="white-bg rounded div-shadow signin-form">
+                                    <form id="changePasswordForm" method="GET" >
                                         <div class="text-center mt-3 px-8">
                                             <h3>Change Password</h3>
                                             <!--<p>Complete the form below to update your profile.</p>-->
