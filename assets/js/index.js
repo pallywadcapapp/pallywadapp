@@ -19,6 +19,7 @@ import Settings from "./views/Settings.js";
 import Forgotpassword from "./views/Forgotpassword.js";
 import PasswordCode from "./views/PasswordCode.js";
 import newPassWord from "./views/newPassWord.js";
+import ChangePassword from "./views/ChangePassword.js";
 
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
@@ -57,6 +58,7 @@ const router = async () => {
         {path:"/forgot-password" , view: Forgotpassword },
         {path:"/password-code" , view: PasswordCode },
         {path:"/new-passWord" , view: newPassWord },
+        {path:"/change-password" , view: ChangePassword },
         {path:"/logout" , view: Logout },
         {path:"/payment-history" , view: PaymentHistory },
         {path:"/help" , view: Help },
@@ -72,7 +74,6 @@ const router = async () => {
     });
 
     let match = potentialMatches.find(potentialMatch => potentialMatch.result !== null);
-    
     //if match is not found
     if(!match)
     {

@@ -102,3 +102,40 @@ $('body').on('click', '#resetPassword', function (e) {
         })
     }
 })
+
+$('body').on('click', '#change-pass', function (e) {
+    e.preventDefault();
+    let confirmpassword = $('#confirmpassword').val();
+    let password = $('#password').val();
+    let oldPassword = $('#oldPassword').val();
+    username = localStorage.getItem('email');
+    api_endpoint = "/api/v1/auth/SetNewPassword";
+
+
+    //check if token is valid
+    if (password != confirmpassword) {
+        displayToast('error', "Password Mismatch", "Error");
+    } else {
+        let data = {
+            "confirmpassword": confirmpassword,
+            "userid": username,
+            'newpassword': password
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: api_url + api_endpoint,
+            headers: { 'Content-Type': 'application/json' },
+            data: JSON.stringify(data),
+            error: function (d) {
+                displayToast('error', "Error Changing Password", "Error");
+            },
+            success: function (d) {
+                console.log(d.status);
+                location.href = "/sign-in";
+                
+
+            }
+        })
+    }
+})
