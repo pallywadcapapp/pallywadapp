@@ -9,7 +9,7 @@ export default class extends DefaultView {
 
     async getHtml() {
         return `
-        <div id="main" class="has-animation">
+        <div id="main" class="has-animation dashboard" onload="loadDashboard()">
             <dashboard-header></dashboard-header>
             <div class="dashboard-area">
                 <left-sidebar></left-sidebar>
@@ -72,7 +72,7 @@ export default class extends DefaultView {
                                     Amount Approved
                                     <h4>&#8358; <span class="loanAmount"></span></h4>
                                     Amount Paid so far
-                                    <h4>&#8358; 150,000</h4>
+                                    <h4>${this.currency} <span id="amtPaid">150,000</span></h4>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mt-4">

@@ -70,17 +70,59 @@ $('body').on('click', '#verifyPasswordCode', function (e) {
 $('body').on('click', '#resetPassword', function (e) {
     e.preventDefault();
     let confirmpassword = $('#confirmpassword').val();
-    let oldPassword = $('#oldPassword').val();
-    let newPassword = $('#newPassword').val();
+    let password = $('#password').val();
     username = localStorage.getItem('email');
     api_endpoint = "/api/v1/auth/ChangPassword";
 
 
-    $('#chgPass').pleaseWait();
+    
     //check if token is valid
     if (password != confirmpassword) {
         displayToast('error', "Password Mismatch", "Error");
     } else {
+        let data = {
+            "confirmpassword": confirmpassword,
+            "userid": username,
+            'newpassword': password
+        }
+
+
+        $.ajax({
+            type: 'POST',
+            url: api_url + api_endpoint,
+            headers: { 'Content-Type': 'application/json' },
+            data: JSON.stringify(data),
+            error: function (d) {
+                displayToast('error', "Error Changing Password", "Error");
+               
+            },
+            success: function (d) {
+                console.log(d.status);
+                location.href = "/sign-in";
+                
+
+            }
+        })
+    }
+})
+
+$('body').on('click', '#change-pass', function (e) {
+    e.preventDefault();
+    let confirmpassword = $('#confirmPassword').val();
+    let oldPassword = $('#oldPassword').val();
+    let newPassword = $('#newPassword').val();
+    username = localStorage.getItem('email');
+    api_endpoint = "/api/v1/auth/ChangePassword";
+    $('#chgPass').pleaseWait();
+
+    //check if token is valid
+    if (newPassword != confirmpassword) {
+        console.log(newPassword)
+        console.log(confirmpassword)
+        $('#chgPass').pleaseWait('stop');
+        displayToast('error', "Password Mismatch", "Error");
+    } else {
+        
         let data = {
             "confirmpassword": confirmpassword,
             "userid": username,
@@ -94,8 +136,8 @@ $('body').on('click', '#resetPassword', function (e) {
             headers: { 'Content-Type': 'application/json' },
             data: JSON.stringify(data),
             error: function (d) {
-                displayToast('error', "Error Changing Password", "Error");
                 $('#chgPass').pleaseWait('stop');
+                displayToast('error', d.responseJSON[0], "Error");
             },
             success: function (d) {
                 console.log(d.status);
@@ -103,45 +145,36 @@ $('body').on('click', '#resetPassword', function (e) {
                 displayToast('success', "Password Chaged successfully", "Success");
                 location.href = "/logout";
                 
-
-            }
-        })
-    }
-})
-
-$('body').on('click', '#change-pass', function (e) {
-    e.preventDefault();
-    let confirmpassword = $('#confirmpassword').val();
-    let password = $('#password').val();
-    let oldPassword = $('#oldPassword').val();
-    username = localStorage.getItem('email');
-    api_endpoint = "/api/v1/auth/ChangePassword";
-
-
-    //check if token is valid
-    if (password != confirmpassword) {
-        displayToast('error', "Password Mismatch", "Error");
-    } else {
-        let data = {
-            "confirmpassword": confirmpassword,
-            "userid": username,
-            'newpassword': password
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: api_url + api_endpoint,
-            headers: { 'Content-Type': 'application/json' },
-            data: JSON.stringify(data),
-            error: function (d) {
-                displayToast('error', "Error Changing Password", "Error");
-            },
-            success: function (d) {
-                console.log(d.status);
-                location.href = "/sign-in";
                 
 
             }
         })
     }
 })
+
+
+function showError(error, value, xhr) {
+    console.log(error);
+    try {
+        var appError = error.responseJSON.error_description;
+
+        if (appError == 'Password Must be changed before login') {
+            var username = $('#username').val();
+            localStorage.setItem("uemail", username)
+            window.location.href = 'changepassword';
+        } else {
+            $('#formarea').pleaseWait('stop');
+            toastr.error('unable to signin');
+            toastr.error(error.responseJSON.message)
+        }
+
+        if (error.responseJSON.message == 'Email confirmation required') {
+            var username = $('#username').val();
+            sendEmailValidation(username);
+        }
+    } catch {
+        $('#formarea').pleaseWait('stop');
+        toastr.error('unable to signin');
+    }
+
+}

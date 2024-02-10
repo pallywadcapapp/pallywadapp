@@ -58,11 +58,11 @@ $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
     console.log(xhr);
     var pathname = $(location).attr("pathname");
     console.log(pathname)
-    console.log( (pathname != '/sign-in' && pathname != '/forgot-password'
-    && pathname != '/password-code'));
+    console.log((pathname != '/sign-in' && pathname != '/forgot-password'
+        && pathname != '/password-code'));
     if (pathname != '/sign-in' && pathname != '/forgot-password'
-     && pathname != '/password-code' && pathname != '/new-passWord') {
-       
+        && pathname != '/password-code' && pathname != '/new-passWord') {
+
         if (xhr.status === 401) {
             window.location.href = "/sign-in";
         }
@@ -308,16 +308,18 @@ $('body').on('click', '#login', function (e) {
             "username": email,
             "password": password
         }
-
+        $('.signin-form').pleaseWait();
         $.ajax({
             type: 'post',
             url: api_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             data: JSON.stringify(data),
             error: function (d) {
+                $('.signin-form').pleaseWait('stop');
                 displayToast('error', d.responseJSON.message, d.responseJSON.status)
             },
             success: function (d) {
+                $('.signin-form').pleaseWait('stop');
                 if (d.token) {
                     fetchLoggedInUserDetails(email, d.token, d.expiration);
                 }
@@ -1241,6 +1243,7 @@ $(document).ready(function () {
     })
 
     $('body').on('click', '#submitPaymentProof', function (e) {
+        $('.modal-content').pleaseWait();
         let api_endpoint = "/api/Payments";
 
         let files = uploadedFilesHolder;
@@ -1253,6 +1256,11 @@ $(document).ready(function () {
         let channel = $('#channel').val();
         let otherdetails = $('#otherdetails').val();
 
+       
+        if (otherdetails == null || otherdetails == '') {
+            otherdetails = 'No details available';
+        }
+
         formData = new FormData();
         formData.append("file", file);
 
@@ -1261,19 +1269,34 @@ $(document).ready(function () {
         formData.append("channel", channel);
         formData.append("otherdetails", otherdetails);
 
-        $(".preloader-2").show();
-        $.ajax({
-            url: loan_app_url + api_endpoint,
-            method: "POST",
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data) {
-                displayToast('success', 'Payment Proof Document was uploaded successfully.', 'Upload successful');
-                hideModal();
-            }
-        });
+        if (amount == null || amount < 1 || amount == '') {
+            $('.modal-content').pleaseWait('stop');
+            displayToast('error', 'amount must be greater than 0', "Error");
+        } else if (files.length < 1) {
+            $('.modal-content').pleaseWait('stop');
+            displayToast('error', 'kindly upload a proof of payment', "Error");
+        } else {
+
+            //$(".preloader-2").show();
+            $.ajax({
+                url: loan_app_url + api_endpoint,
+                method: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                error: function (d) {
+                    $('.modal-content').pleaseWait('stop');
+                    console.log(d.responseJSON.errors);
+                    displayToast('error', d.responseJSON.errors.toString(), "Error");
+                },
+                success: function (data) {
+                    $('.modal-content').pleaseWait('stop');
+                    displayToast('success', 'Payment Proof Document was uploaded successfully.', 'Upload successful');
+                    hideModal();
+                }
+            });
+        }
 
     })
 
@@ -1437,6 +1460,9 @@ $('body').on('click', '#uploadPaymentProofFile', function () {
     }
 })
 
+
+var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'));
+
 //upload proof of payment
 $('body').on('click', '.uploadPaymentProof', function () {
 
@@ -1452,7 +1478,7 @@ $('body').on('click', '.uploadPaymentProof', function () {
         <div class="px-4 py-2 signin-form">
             <div class="col-md-12 black-text mb-2">
                 <b>Select Repayment Loan</b>
-                <select id="loanRefId" class="form-control">
+                <select id="loanRefId" class="form-select">
                     ${option}
                 </select>
             </div>
@@ -1515,7 +1541,6 @@ $('body').on('click', '.uploadPaymentProof', function () {
 
     $('.modal-body').html(content);
     $('.modal-title').html('Upload Proof Of Payment');
-    var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
     myModal.show({
         keyboard: false,
         backdrop: 'static'
@@ -1543,7 +1568,7 @@ $('body').on('click', '.makePayment', function () {
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="bankTransfer" role="tabpanel" aria-labelledby="nav-bankTransfer-tab" tabindex="0">
-                            <div class="px-2 py-3">May your payment using the details below and after payment, 
+                            <div class="px-2 py-3">Make your payment using the details below and after payment, 
                             click the  
                             <a href="javascript:;" class="uploadPaymentProof">Upload Payment Proof</a> 
                             button to upload proof of your payment.
@@ -1571,7 +1596,7 @@ $('body').on('click', '.makePayment', function () {
     `;
     $('.modal-body').html(content);
     $('.modal-title').html('Make Loan Repayment');
-    var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
+    //var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
     myModal.show({
         keyboard: false,
         backdrop: 'static'
