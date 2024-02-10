@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     "use strict";
 
     /*-------------------------------------
@@ -16,22 +16,22 @@
     /*-------------------------------------
     1. On Load
     -------------------------------------*/
-    $(window).on('load resize', function() {
+    $(window).on('load resize', function () {
 
-        $('body').imagesLoaded().done(function(instance) {
+        $('body').imagesLoaded().done(function (instance) {
             $('body').addClass('loaded');
         });
     });
 
-    
-    
+
+
 })(jQuery);
 
 
 /*-------------------------------------
 1. API URL
 -------------------------------------*/
-const api_url = 'https://auth.pallywad.com'; 
+const api_url = 'https://auth.pallywad.com';
 const loan_app_url = 'https://user.pallywad.com';
 const setup_url = 'https://setup.pallywad.com';
 var uploadedFilesHolder = [];
@@ -44,7 +44,7 @@ $.ajaxSetup({
             var expirydate = localStorage.getItem('expiry');
             xhr.setRequestHeader('Expiry', expirydate);
             xhr.setRequestHeader('Authorization', 'Bearer ' + auth);
-        } catch(ex){
+        } catch (ex) {
             var auth = '';
             localStorage.removeItem('token');
             xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
@@ -57,13 +57,19 @@ $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
     console.log(event);
     console.log(xhr);
     var pathname = $(location).attr("pathname");
-    if(pathname != '/sign-in'){
-    if (xhr.status === 401) {
-        window.location.href = "/logout";
+    console.log(pathname)
+    console.log( (pathname != '/sign-in' && pathname != '/forgot-password'
+    && pathname != '/password-code'));
+    if (pathname != '/sign-in' && pathname != '/forgot-password'
+     && pathname != '/password-code' && pathname != '/new-passWord') {
+       
+        if (xhr.status === 401) {
+            window.location.href = "/sign-in";
+        }
+        if (xhr.statusText === 'Unauthorized') {
+            window.location.href = "/logout";
+        }
     }
-    if (xhr.statusText === 'Unauthorized') {
-        window.location.href = "/logout";
-    }}
 });
 
 /*-------------------------------------
@@ -76,29 +82,29 @@ $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
 -------------------------------------*/
 
 //onboarding page 1
-$('body').on('click','#continue', function(e){
+$('body').on('click', '#continue', function (e) {
 
-    if($("#step-1").valid()){
+    if ($("#step-1").valid()) {
         e.preventDefault();
         let email = $('#email').val();
-        let password  = $('#password').val();
+        let password = $('#password').val();
         let api_endpoint = "/api/v1/Auth/newUser";
 
         //check email if available
-        let data =  {
+        let data = {
             "username": email
         }
 
         $.ajax({
-            type:'get',
-            url: api_url+api_endpoint,
+            type: 'get',
+            url: api_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             data: data,
-            error: function(d){
-                displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            error: function (d) {
+                displayToast('error', d.responseJSON.message, d.responseJSON.status)
             },
-            success: function(d){
-                if(d.status=="success"){
+            success: function (d) {
+                if (d.status == "success") {
                     localStorage.setItem("email", email);
                     localStorage.setItem("password", password);
                     localStorage.setItem("verificationPin", d.message)
@@ -107,16 +113,16 @@ $('body').on('click','#continue', function(e){
                 else {
                     displayToast('error', "Email is already registered to another user", "Error");
                 }
-                
+
             }
         })
 
-        
+
     }
 })
 
 //onboarding page 2
-$(document).ready(function(){
+$(document).ready(function () {
     $('.pin').segmentedInput({
         // options
         autoSubmit: false,
@@ -125,44 +131,44 @@ $(document).ready(function(){
 });
 
 //verify email
-$('body').on('click', '#verifyEmail', function(e){
+$('body').on('click', '#verifyEmail', function (e) {
     e.preventDefault();
     inputElements = $('.pin').map((i, e) => e.value).get();
     username = localStorage.getItem('email');
     token = localStorage.getItem('verificationPin');
     api_endpoint = "/api/v1/Auth/ValidateNewUser";
-    
+
 
     //check if token is valid
-    let data =  {
+    let data = {
         "token": token,
         "username": username
     }
 
     $.ajax({
-        type:'get',
-        url: api_url+api_endpoint,
+        type: 'get',
+        url: api_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         data: data,
-        error: function(d){
+        error: function (d) {
             displayToast('error', "Token not provided!", "Error");
         },
-        success: function(d){
-            if(d.status=="Ok"){
+        success: function (d) {
+            if (d.status == "Ok") {
                 location.href = "/onboarding-3";
             }
             else {
                 displayToast('error', "PIN Incorrect!", "Error");
             }
-            
+
         }
     })
 })
 
 //onboarding page 3
-$('body').on('click', '#submit-onboarding', function(e){
-    if($("#step-2").valid()){
-        e.preventDefault(); 
+$('body').on('click', '#submit-onboarding', function (e) {
+    if ($("#step-2").valid()) {
+        e.preventDefault();
         let api_endpoint = '/api/v1/Auth/register';
         let firstname = $('[name=firstname]').val();
         let lastname = $('[name=lastname]').val();
@@ -174,40 +180,40 @@ $('body').on('click', '#submit-onboarding', function(e){
         let ssn = "";
         let type = "";
 
-        let data =  {
+        let data = {
             "firstname": firstname,
-            "lastname" : lastname,
+            "lastname": lastname,
             "othernames": othernames,
             "phoneNo": phoneNo,
             "email": email,
-            "password" : password,
-            "confirmPassword" : confirmPassword,
+            "password": password,
+            "confirmPassword": confirmPassword,
             "ssn": ssn,
-            "type" : type
+            "type": type
         }
 
         $.ajax({
-            type:'post',
-            url: api_url+api_endpoint,
+            type: 'post',
+            url: api_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             data: JSON.stringify(data),
-            error: function(d){
+            error: function (d) {
                 displayToast('error', d.responseJSON.message, d.responseJSON.status);
             },
-            success: function(d){
-                if(d.status=='Success'){
+            success: function (d) {
+                if (d.status == 'Success') {
                     displayToast('success', "Your account was created successfully", "Signup Successful");
-                    
+
                     localStorage.removeItem("email");
                     localStorage.removeItem("password");
-                    setTimeout(function(){
+                    setTimeout(function () {
                         location.href = "/sign-in";
                     }, 5000);
                 }
                 else {
                     displayToast("error", d.message, d.status);
                 }
-                
+
             }
         })
     }
@@ -216,20 +222,20 @@ $('body').on('click', '#submit-onboarding', function(e){
 /*-------------------------------------
 4. Toggle password
 -------------------------------------*/
-$("body").on('click','.toggle-password',function () {
+$("body").on('click', '.toggle-password', function () {
     $(this).toggleClass("fa-eye-slash fa-eye");
     var input = $($(this).attr("toggle"));
     if (input.attr("type") == "password") {
-    input.attr("type", "text");
+        input.attr("type", "text");
     } else {
-    input.attr("type", "password");
+        input.attr("type", "password");
     }
 });
 
 /*-------------------------------------
 5. History navigation (goBack)
 -------------------------------------*/
-function goBack(step){
+function goBack(step) {
     console.log("gobackclicked");
     window.history.back(-step);
 }
@@ -237,7 +243,7 @@ function goBack(step){
 /*-------------------------------------
 6. General utilities
 -------------------------------------*/
-function displayToast(messageType, message, title){
+function displayToast(messageType, message, title) {
     switch (messageType) {
         case 'success':
             toastr.success(message, title, {
@@ -258,9 +264,9 @@ function displayToast(messageType, message, title){
                 hideMethod: "fadeOut",
                 tapToDismiss: !1,
             });
-            
+
             break;
-    
+
         default:
             toastr.error(message, title, {
                 timeOut: 5e3,
@@ -282,76 +288,76 @@ function displayToast(messageType, message, title){
             });
             break;
     }
-    
+
 }
 
 
 /*-------------------------------------
 7. Sign in user
 -------------------------------------*/
-$('body').on('click','#login', function(e){
+$('body').on('click', '#login', function (e) {
 
-    if($("#step-1").valid()){
+    if ($("#step-1").valid()) {
         e.preventDefault();
         let email = $('#email').val();
-        let password  = $('#password').val();
+        let password = $('#password').val();
         let api_endpoint = "/api/v1/Auth/login";
 
         //check if login credentials are valid
-        let data =  {
+        let data = {
             "username": email,
             "password": password
         }
 
         $.ajax({
-            type:'post',
-            url: api_url+api_endpoint,
+            type: 'post',
+            url: api_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             data: JSON.stringify(data),
-            error: function(d){
-                displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            error: function (d) {
+                displayToast('error', d.responseJSON.message, d.responseJSON.status)
             },
-            success: function(d){
-                if(d.token){
+            success: function (d) {
+                if (d.token) {
                     fetchLoggedInUserDetails(email, d.token, d.expiration);
                 }
                 else {
                     displayToast('error', "The email or password you entered is incorrect", "Login Failed");
                 }
-                
+
             }
         })
 
-        
+
     }
 })
 
-function fetchLoggedInUserDetails(email, token, expiration){
+function fetchLoggedInUserDetails(email, token, expiration) {
     let api_endpoint = "/api/Profile";
     data = {
         "username": email
     };
 
     $.ajax({
-        type:'get',
-        url: api_url+api_endpoint,
+        type: 'get',
+        url: api_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         data: data,
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
-            if(d.email){
+        success: function (d) {
+            if (d.email) {
                 localStorage.setItem("firstname", d.firstname);
                 localStorage.setItem("lastname", d.lastname);
-                
+
                 localStorage.setItem("email", email);
                 localStorage.setItem("token", token);
                 localStorage.setItem("tokenExpiration", expiration)
                 localStorage.setItem("isLoggedIn", "1");
 
                 location.href = "/dashboard";
-            } 
+            }
         }
     })
 }
@@ -363,49 +369,49 @@ function fetchLoggedInUserDetails(email, token, expiration){
 -------------------------------------*/
 
 //is eligible
-function addLoan(email){
+function addLoan(email) {
     let api_endpoint = "/api/Profile/iseligible";
     $.ajax({
-        type:'get',
-        url: api_url+api_endpoint,
+        type: 'get',
+        url: api_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
-            if(d.message == "upload all required documents profile"){
+        success: function (d) {
+            if (d.message == "upload all required documents profile") {
                 //redirect to document upload page
                 let message = `You need to update your profile in order to add a loan. 
                 <a href="upload-documents">Click here</a> to update now.`;
                 $('#stepsNotification').html(message).show();
-            }else if(d.message != true){
+            } else if (d.message != true) {
                 let message = `You need to update your profile in order to add a loan. 
                 <a href="update-profile">Click here</a> to update now.`;
                 $('#stepsNotification').html(message).show();
                 localStorage.setItem('gotoDocuments', 'true');
-            }else{
+            } else {
                 location.href = "loan-request";
             }
         }
     })
 }
 
-function checkEligibility(){
+function checkEligibility() {
     console.log("check eligibility");
     let api_endpoint = "/api/Profile/iseligible";
     $.ajax({
-        type:'get',
-        url: api_url+api_endpoint,
+        type: 'get',
+        url: api_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
             console.log(d);
-            if(d.message != true){
+            if (d.message != true) {
                 $('.notEligible').show();
                 $('.Eligible').hide();
-            }else{
+            } else {
                 $('.notEligible').hide();
                 $('.Eligible').show();
             }
@@ -416,16 +422,16 @@ function checkEligibility(){
 /*-------------------------------------
 7. update profile
 -------------------------------------*/
-$('body').on('click','#update-profile', function(e){
+$('body').on('click', '#update-profile', function (e) {
 
-    if($("#updateProfileForm").valid()){
+    if ($("#updateProfileForm").valid()) {
         e.preventDefault();
-        let dob  = $('[name=dob]').val();
-        let address  = $('[name=address]').val();
-        let phoneNumber  = $('[name=phoneNumber]').val();
-        let firstname  = $('[name=firstname]').val();
-        let lastname  = $('[name=lastname]').val();
-        let othernames  = $('[name=othernames]').val();
+        let dob = $('[name=dob]').val();
+        let address = $('[name=address]').val();
+        let phoneNumber = $('[name=phoneNumber]').val();
+        let firstname = $('[name=firstname]').val();
+        let lastname = $('[name=lastname]').val();
+        let othernames = $('[name=othernames]').val();
         let sex = $('[name=sex]').val();
         let employmentStatus = $('[name=employmentStatus]').val();
         let bvn = "string";
@@ -435,7 +441,7 @@ $('body').on('click','#update-profile', function(e){
         let api_endpoint = "/api/Profile";
 
         //check if login credentials are valid
-        let data =  {
+        let data = {
             dob,
             address,
             phoneNumber,
@@ -450,77 +456,77 @@ $('body').on('click','#update-profile', function(e){
         }
 
         $.ajax({
-            type:'put',
-            url: api_url+api_endpoint,
+            type: 'put',
+            url: api_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             data: JSON.stringify(data),
-            error: function(d){
-                
-                displayToast('error',d.responseJSON.message, d.responseJSON.title)
+            error: function (d) {
+
+                displayToast('error', d.responseJSON.message, d.responseJSON.title)
             },
-            success: function(d){
+            success: function (d) {
                 displayToast('success', "Your profile was updated successfully", "Profile update successful")
                 let redirect = localStorage.getItem('gotoDocuments');
-                if(redirect) {
+                if (redirect) {
                     localStorage.removeItem('gotoDocuments');
                     location.href = "/upload-documents";
                 }
             }
         })
 
-        
+
     }
 })
 
 
 
 // display datepicker in popup mode
-$(window).on('load', function(){
-    if($('#dob').length > 0){
+$(window).on('load', function () {
+    if ($('#dob').length > 0) {
         const dob = dobDatepicker('#dob', {
-            display_mode:  'popup',
-            enable_built_in_validation:  false,
+            display_mode: 'popup',
+            enable_built_in_validation: false,
         });
     }
-   
-    $("#updateProfileForm").submit(function(e) {
+
+    $("#updateProfileForm").submit(function (e) {
         e.preventDefault();
     });
 
-    if($('#loanRepaymentArea').length > 0){
+    if ($('#loanRepaymentArea').length > 0) {
         loadPayments();
         loadPaymentsHistory()
     }
 
-    if($('#dashboard').length > 0 ){
+    if ($('#dashboard').length > 0) {
         checkEligibility();
     }
 
-    
+
 })
 
 //section to get all needed ids loaded by import
-$(window).on('load', function(){
+$(window).on('load', function () {
 
     //prefill document types
-    if($("#kyc1-form").length > 0) {
+    if ($("#kyc1-form").length > 0) {
         fetchDocumentsList();
-        function fetchDocumentsList(){
+        function fetchDocumentsList() {
             let api_endpoint = "/api/Documents/all";
             $.ajax({
-                type:'get',
-                url: setup_url+api_endpoint,
+                type: 'get',
+                url: setup_url + api_endpoint,
                 headers: { 'Content-Type': 'application/json' },
-                error: function(d){
-                    displayToast('error',d.responseJSON.message, d.responseJSON.status)
+                error: function (d) {
+                    displayToast('error', d.responseJSON.message, d.responseJSON.status)
                 },
-                success: function(d){
+                success: function (d) {
                     let lists = d;
                     let documents = "";
                     let addressDocName = "";
                     let addressDocId = "";
                     for (let i = 0; i < lists.length; i++) {
-                        if(lists[i].type=="Identity"){
+                        if (lists[i].type == "Identity") {
                             documents += `
                                 <div class="form-check">
                                     <input class="form-check-input singleCheck" 
@@ -534,48 +540,48 @@ $(window).on('load', function(){
                                 </div>
                             `
                         }
-                        if(lists[i].type=="Address"){
-                            localStorage.setItem('addressDocName',lists[i].name);
-                            localStorage.setItem('addressDocId',lists[i].id);
+                        if (lists[i].type == "Address") {
+                            localStorage.setItem('addressDocName', lists[i].name);
+                            localStorage.setItem('addressDocId', lists[i].id);
                         }
-                       
+
                     }
                     $('#documentsList').html(documents);
-                    
+
                 }
             })
         }
     }
 
-    if($("#kyc2-form").length > 0) {
-        let document = localStorage.getItem('chosenDocumentName');  
+    if ($("#kyc2-form").length > 0) {
+        let document = localStorage.getItem('chosenDocumentName');
         $('#selected-document').html(document);
     }
 
-    if($("#kyc3-form").length > 0) {
-        let document = localStorage.getItem('addressDocName');  
+    if ($("#kyc3-form").length > 0) {
+        let document = localStorage.getItem('addressDocName');
         $('#selected-document').html(document);
     }
 
-    
+
     // Prefill profile 
-    if($("#updateProfile").length > 0) {
+    if ($("#updateProfile").length > 0) {
         let email = localStorage.getItem("email");
         preloadProfileDetails(email);
-        function preloadProfileDetails(email){
+        function preloadProfileDetails(email) {
             let api_endpoint = "/api/Profile";
             let data = {
                 username: email
             }
             $.ajax({
-                type:'get',
-                url: api_url+api_endpoint,
+                type: 'get',
+                url: api_url + api_endpoint,
                 headers: { 'Content-Type': 'application/json' },
                 data: data,
-                error: function(d){
-                    displayToast('error',d.responseJSON.message, d.responseJSON.status)
+                error: function (d) {
+                    displayToast('error', d.responseJSON.message, d.responseJSON.status)
                 },
-                success: function(d){
+                success: function (d) {
                     $('[name="firstname"]').val(d.firstname);
                     $('[name="lastname"]').val(d.lastname);
                     $('[name="othernames"]').val(d.othernames);
@@ -585,24 +591,24 @@ $(window).on('load', function(){
                     let newdate = formatDate3(d.dob);
                     finaldate = newdate.date;
                     $('[name="dob"]').val(finaldate);
-                    $('[name="sex"] option:contains("'+d.sex+'")').prop('selected', true);
-                    $('[name="employmentStatus"] option:contains("'+d.employmentStatus+'")').prop('selected', true);
-                    
+                    $('[name="sex"] option:contains("' + d.sex + '")').prop('selected', true);
+                    $('[name="employmentStatus"] option:contains("' + d.employmentStatus + '")').prop('selected', true);
+
                 }
             })
         }
     }
 
-    if($('#loanType').length > 0) {
+    if ($('#loanType').length > 0) {
         let api_endpoint = "/api/Loan";
         $.ajax({
-            type:'get',
-            url: setup_url+api_endpoint,
+            type: 'get',
+            url: setup_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
-            error: function(d){
-                displayToast('error',d.responseJSON.message, d.responseJSON.status)
+            error: function (d) {
+                displayToast('error', d.responseJSON.message, d.responseJSON.status)
             },
-            success: function(d){
+            success: function (d) {
 
                 let lists = d;
                 let documents = "";
@@ -624,7 +630,7 @@ $(window).on('load', function(){
         uploadedDocuments();
     }
 
-    if($('#collateralType').length > 0) {
+    if ($('#collateralType').length > 0) {
         //loadUserCollateralTypes();
         loadCollateralTypes();
     }
@@ -632,25 +638,25 @@ $(window).on('load', function(){
     fetchLoanRequests();
     fetchProcessedLoanRequests();
     fetchCompanyDetails();
-        
-    
+
+
     //load datepicker
     $('.mydatepicker, #dob').datepicker();
 
-    
+
 
 })
 
-function loadCollateralTypes(){
+function loadCollateralTypes() {
     let api_endpoint = "/api/Collateral/all";
     $.ajax({
-        type:'get',
+        type: 'get',
         url: setup_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
             let lists = d;
             let documents = "";
             for (let i = 0; i < lists.length; i++) {
@@ -661,64 +667,64 @@ function loadCollateralTypes(){
                 `;
             }
             $('#collateralType').html(documents);
-            
+
         }
     })
 }
 
-function loadUserCollateralTypes(){
+function loadUserCollateralTypes() {
     let api_endpoint = "/api/Collateral/all";
     $.ajax({
-        type:'get',
+        type: 'get',
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
             console.log
             let lists = d;
             colls = d;
-            if(lists.length <1){
+            if (lists.length < 1) {
                 $('.nc').show();
                 $('.oc').hide();
                 loadCollateralTypes();
-            }else{
+            } else {
                 $('.nc').hide();
                 $('.oc').show();
                 let documents = '<option value="0">- Select Collateral -</option>';
-            for (let i = 0; i < lists.length; i++) {
-                documents += `
+                for (let i = 0; i < lists.length; i++) {
+                    documents += `
                     <option value="${i}">
                         ${lists[i].name} - ${lists[i].otherdetails}
                     </option>
                 `;
+                }
+                $('#userCollateralType').html(documents);
             }
-            $('#userCollateralType').html(documents);
-            }
-            
-            
+
+
         }
     })
 }
 
 
-function loadPayments(){
+function loadPayments() {
     let api_endpoint = "/api/Payments";
     $.ajax({
-        type:'get',
+        type: 'get',
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
             console.log(d)
             let lists = d;
             let content = '';
             for (let i = 0; i < lists.length; i++) {
-                payment_status = (lists[i].status =="Pending") 
-                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>` 
+                payment_status = (lists[i].status == "Pending")
+                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
                     : `<span class="badge text-bg-success">${lists[i].status}</span>`;
                 content += `
                 <div class="row">
@@ -734,9 +740,9 @@ function loadPayments(){
                     </div>
                 </div>
                 `;
-                
+
             }
-            
+
 
             $('#repaymentItems').html(content);
 
@@ -744,22 +750,22 @@ function loadPayments(){
     })
 }
 
-function loadPaymentsHistory(){
+function loadPaymentsHistory() {
     let api_endpoint = "/api/Payments";
     $.ajax({
-        type:'get',
+        type: 'get',
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
             console.log(d)
             let lists = d;
             let content = '';
             for (let i = 0; i < lists.length; i++) {
-                payment_status = (lists[i].status =="Pending") 
-                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>` 
+                payment_status = (lists[i].status == "Pending")
+                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
                     : `<span class="badge text-bg-success">${lists[i].status}</span>`;
                 content += `
                 <div class="row">
@@ -779,9 +785,9 @@ function loadPaymentsHistory(){
                     </div>
                 </div>
                 `;
-                
+
             }
-            
+
 
             $('#repaymentItems2').html(content);
 
@@ -790,12 +796,12 @@ function loadPaymentsHistory(){
 }
 
 
-$("body").on('change', '.singleCheck', function() {
+$("body").on('change', '.singleCheck', function () {
     $(".singleCheck").prop('checked', false);
     $(this).prop('checked', true);
 });
 
-$("body").on('change', '#loanType', function(){
+$("body").on('change', '#loanType', function () {
     let description = $("#loanType :selected").attr("loanDescription");
     let category = $("#loanType :selected").attr("loanCategory");
     console.log(description, category);
@@ -812,13 +818,13 @@ $("body").on('change', '#loanType', function(){
 function uploadedDocuments() {
     let api_endpoint = "/api/Documents";
     $.ajax({
-        type:'get',
-        url: loan_app_url+api_endpoint,
+        type: 'get',
+        url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
 
             let lists = d;
             let documents = "";
@@ -837,7 +843,7 @@ function uploadedDocuments() {
                 </div>`;
             }
             $('#uploadedDocumentList').html(documents);
-            
+
         }
     })
 }
@@ -846,21 +852,21 @@ function uploadedDocuments() {
 function fetchUploadedCollaterals() {
     let api_endpoint = "/api/Collateral/all";
     $.ajax({
-        type:'get',
-        url: loan_app_url+api_endpoint,
+        type: 'get',
+        url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
-           
+        success: function (d) {
+
             let lists = d;
             let documents = [];
             for (let i = 0; i < lists.length; i++) {
-                documents.push(lists[i].colleteralId); 
+                documents.push(lists[i].colleteralId);
             }
             localStorage.setItem('collateralRefId', JSON.stringify(documents));
-            
+
         }
     })
 }
@@ -868,25 +874,25 @@ function fetchUploadedCollaterals() {
 function fetchLoanRequests() {
     let api_endpoint = "/api/LoanRequest";
     var fmt = new DateFormatter();
-    
+
     $.ajax({
-        type:'get',
-        url: loan_app_url+api_endpoint,
+        type: 'get',
+        url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
+        error: function (d) {
             //console.log(d);
             //displayToast('error',d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
             let lists = d;
             let display = "";
             for (let i = 0; i < lists.length; i++) {
-                let loanTypeStyle = (lists[i].status =="Pending") 
+                let loanTypeStyle = (lists[i].status == "Pending")
                     ? "loan-status-pending"
-                    : (lists[i].status =="Declined" ? "loan-status-declined" 
-                    : (lists[i].status =="Awaiting Approval" ? "loan-status-awaiting" 
-                    : (lists[i].status =="Approved" ? "loan-status-approved" 
-                    : "loan-status-running") ));
+                    : (lists[i].status == "Declined" ? "loan-status-declined"
+                        : (lists[i].status == "Awaiting Approval" ? "loan-status-awaiting"
+                            : (lists[i].status == "Approved" ? "loan-status-approved"
+                                : "loan-status-running")));
 
                 //Handle date and time formatting
                 let records = formatDate(lists[i]);
@@ -912,10 +918,10 @@ function fetchLoanRequests() {
                         </div>
                     </div>
                 `;
-                
+
             }
             $('#allLoanRequests').html(display);
-            
+
         }
     })
 }
@@ -923,36 +929,36 @@ function fetchLoanRequests() {
 function fetchProcessedLoanRequests() {
     let api_endpoint = "/api/LoanRequest/ProcessedLoanRequests";
     $.ajax({
-        type:'get',
-        url: loan_app_url+api_endpoint,
+        type: 'get',
+        url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
+        error: function (d) {
             displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
-           
-            if(d.length > 0){
+        success: function (d) {
+
+            if (d.length > 0) {
                 console.log(d);
                 let lists = d;
                 localStorage.setItem('processedLoans', JSON.stringify(d));
 
                 let amount = lists[0].amount;
-                let duration = lists[0].duration == 1 ? lists[0].duration + " Month" :  lists[0].duration + " Months";
+                let duration = lists[0].duration == 1 ? lists[0].duration + " Month" : lists[0].duration + " Months";
                 let disbursementDate = lists[0].approvalDate;
                 disbursementDate = formatDate3(disbursementDate).date2;
-                repaymentStartDate = formatDate3(lists[0].approvalDate).date; 
+                repaymentStartDate = formatDate3(lists[0].approvalDate).date;
                 loanCategory = lists[0].category;
                 loanStatus = lists[0].status;
-                let loanStatusStyle = (lists[0].status =="Pending") 
-                ? "loan-status-pending"
-                : (lists[0].status =="Declined" ? "loan-status-declined" 
-                : (lists[0].status =="Awaiting Approval" ? "loan-status-awaiting" 
-                : (lists[0].status =="Approved" ? "loan-status-approved" 
-                : "loan-status-running") ));
+                let loanStatusStyle = (lists[0].status == "Pending")
+                    ? "loan-status-pending"
+                    : (lists[0].status == "Declined" ? "loan-status-declined"
+                        : (lists[0].status == "Awaiting Approval" ? "loan-status-awaiting"
+                            : (lists[0].status == "Approved" ? "loan-status-approved"
+                                : "loan-status-running")));
                 //repaymentStartDate = new Date(repaymentStartDate.setMonth(repaymentStartDate.getMonth()+1));
-                let interestDisplay =  lists[0].loaninterest;
+                let interestDisplay = lists[0].loaninterest;
 
-                if(lists.length <1) {
+                if (lists.length < 1) {
                     $('.currentLoan').hide();
                 }
                 else {
@@ -960,6 +966,9 @@ function fetchProcessedLoanRequests() {
                     $('.loanAmount').html(number_format(amount));
                     $('.loanCategory').html(loanCategory);
                     $('.loanDuration').html(duration);
+                    var tempD = new Date(repaymentStartDate)
+                    var newDate = new Date(tempD.setMonth(tempD.getMonth() + parseInt(duration)));
+                    $('.duedate').html(newDate.toLocaleDateString());
                     $('.loanStatus').html(loanStatus);
                     $('.loanStatusStyle').html(`<span class="${loanStatusStyle}">${lists[0].status}</span>`);
                     $('.disbursementDate').html(disbursementDate);
@@ -967,29 +976,29 @@ function fetchProcessedLoanRequests() {
                     $('.interestDisplay').html(interestDisplay);
                 }
             }
-            
-            
+
+
         }
     })
 }
 
-function fetchCompanyDetails(){
+function fetchCompanyDetails() {
     let api_endpoint = "/api/Company";
-    
+
     $.ajax({
-        type:'get',
-        url: setup_url+api_endpoint,
+        type: 'get',
+        url: setup_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function(d){
-            displayToast('error',d.responseJSON.message, d.responseJSON.status)
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
-        success: function(d){
+        success: function (d) {
             localStorage.setItem('companyDetails', JSON.stringify(d));
         }
     })
 }
 
-function number_format (number, decimals, dec_point, thousands_sep) {
+function number_format(number, decimals, dec_point, thousands_sep) {
     // Strip all characters but numerical ones.
     number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
     var n = !isFinite(+number) ? 0 : +number,
@@ -1013,7 +1022,7 @@ function number_format (number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
-function formatDate(dateInput){
+function formatDate(dateInput) {
     //Handle date and time formatting from DB
     var fmt = new DateFormatter();
     let rawDate = dateInput.requestDate.split("T");
@@ -1022,34 +1031,34 @@ function formatDate(dateInput){
     let timeDate = fmt.parseDate(rawDate[1], 'H:i:s');
 
     let dayOutput = fmt.formatDate(dayDate, 'D, M d, Y');
-    let timeOutput = fmt.formatDate(timeDate, 'g:i A' );
+    let timeOutput = fmt.formatDate(timeDate, 'g:i A');
 
-    
+
     return {
-        "date":dayOutput,
-        "time":timeOutput
+        "date": dayOutput,
+        "time": timeOutput
     }
-        
+
 }
 
-function formatDate2(dateInput){
+function formatDate2(dateInput) {
     //Handle date and time formatting from DB
     var fmt = new DateFormatter();
-   
+
     //handle date formatting from input field
     let dayDate = fmt.parseDate(dateInput, 'm/d/Y');
     let dayOutput = fmt.formatDate(dayDate, 'Y-m-d');
     let dayOutput2 = fmt.formatDate(dayDate, 'm/d/Y');
 
-    
+
     return {
-        "date":dayOutput,
+        "date": dayOutput,
         "date2": dayOutput2
     }
-        
+
 }
 
-function formatDate3(dateInput){
+function formatDate3(dateInput) {
     //Handle date and time formatting from DB
     var fmt = new DateFormatter();
     let rawDate = dateInput.split("T");
@@ -1059,56 +1068,56 @@ function formatDate3(dateInput){
 
     let dayOutput = fmt.formatDate(dayDate, 'm/d/Y');
     let dayOutput2 = fmt.formatDate(dayDate, 'D, M d, Y');
-    let timeOutput = fmt.formatDate(timeDate, 'g:i A' );
-    
+    let timeOutput = fmt.formatDate(timeDate, 'g:i A');
+
     return {
-        "date":dayOutput,
-        "date2":dayOutput2,
-        "time":timeOutput
+        "date": dayOutput,
+        "date2": dayOutput2,
+        "time": timeOutput
     }
-        
+
 }
 
 
 //loan request page 1
-$('body').on('click', '#continue-loan-button-1', function(){
+$('body').on('click', '#continue-loan-button-1', function () {
     console.log("happening here");
-    if($('#uploadedDocumentList input:checked').length < 1){
-        displayToast('error','You must select at least one document', 'Select a Document')
+    if ($('#uploadedDocumentList input:checked').length < 1) {
+        displayToast('error', 'You must select at least one document', 'Select a Document')
     }
-    else if(!$('#loanAmountRequested').val()){
-        displayToast('error','You must enter loan amount', 'Enter loan amount')
+    else if (!$('#loanAmountRequested').val()) {
+        displayToast('error', 'You must enter loan amount', 'Enter loan amount')
     }
     else {
-        
+
         let loancode = $('#loanType :selected').val();
         let amount = $('#loanAmountRequested').val();
         let category = $('#category').val();
-        let documentIdRefs = []; 
+        let documentIdRefs = [];
         let proofDocuments = []
-        $("input:checkbox[name=verificationDocument]:checked").each(function() { 
-            documentIdRefs.push($(this).val()); 
-            proofDocuments.push($(this).attr("ValueName")); 
-        });  
-    
+        $("input:checkbox[name=verificationDocument]:checked").each(function () {
+            documentIdRefs.push($(this).val());
+            proofDocuments.push($(this).attr("ValueName"));
+        });
+
         localStorage.setItem("loancode", loancode);
         localStorage.setItem("amount", amount);
         localStorage.setItem("category", category);
         localStorage.setItem("documentIdRefs", JSON.stringify(documentIdRefs));
         window.location.replace("loan-request2");
-             
-        
-        
+
+
+
     }
 })
 
 /*
 kyc page 1
-*/ 
-$('body').on('click', '#continue-button-2', function(){
+*/
+$('body').on('click', '#continue-button-2', function () {
     console.log("happening here");
-    if($('#kyc1-form-step input:checked').length < 1){
-        displayToast('error','You must select at least one document', 'Select a Document')
+    if ($('#kyc1-form-step input:checked').length < 1) {
+        displayToast('error', 'You must select at least one document', 'Select a Document')
     }
     else {
         let doc = $('#kyc1-form-step input:checked').val();
@@ -1122,24 +1131,24 @@ $('body').on('click', '#continue-button-2', function(){
 
 /*
 document upload
-*/ 
-$(document).ready(function() {
+*/
+$(document).ready(function () {
     var formData = new FormData();
-    $("#ddArea").on("dragover", function() {
+    $("#ddArea").on("dragover", function () {
         $(this).addClass("drag_over");
         return false;
     });
 
-    $("#ddArea").on("dragleave", function() {
+    $("#ddArea").on("dragleave", function () {
         $(this).removeClass("drag_over");
         return false;
     });
 
-    $("#ddArea").on("click", function(e) {
+    $("#ddArea").on("click", function (e) {
         file_explorer();
     });
 
-    $("#ddArea").on("drop", function(e) {
+    $("#ddArea").on("drop", function (e) {
         e.preventDefault();
         $(this).removeClass("drag_over");
         var files = e.originalEvent.dataTransfer.files[0];
@@ -1148,51 +1157,50 @@ $(document).ready(function() {
         formData.append("file", files);
     });
 
-    $('#upload-from-gallery').click(function(e){
+    $('#upload-from-gallery').click(function (e) {
         file_explorer();
     })
 
     var uploadedFiles = [];
 
-    $('#upload-collateral-document').click(function(e){
-        
+    $('#upload-collateral-document').click(function (e) {
+
         document.getElementById("selectfile").click();
-        document.getElementById("selectfile").onchange = function() 
-        {
+        document.getElementById("selectfile").onchange = function () {
             file = document.getElementById("selectfile").files[0];
 
             //check if uploaded file is valid
             let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-            let fileType = file.type; 
-            if(validExtensions.includes(fileType)){ 
+            let fileType = file.type;
+            if (validExtensions.includes(fileType)) {
                 let fileReader = new FileReader();
                 let uploadedFilesPreview = $('#uploadedFilesPreview');
-                fileReader.onload = ()=>{
-                    let fileURL = fileReader.result; 
-                    let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`; 
+                fileReader.onload = () => {
+                    let fileURL = fileReader.result;
+                    let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`;
                     let output = `
                         ${imgTag}
                     `;
-                    
+
                     uploadedFiles.push('file', file);
 
                     uploadedFilesPreview.append(`${output}`);
                     console.log(uploadedFiles);
                 }
                 fileReader.readAsDataURL(file);
-                
+
             }
             else {
-                displayToast("error","The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+                displayToast("error", "The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
             }
         }
-        
+
     })
 
 
-    $('#preview-loan-details').click(function(){
-        
-        if($('#estimatedValue').length < 1){
+    $('#preview-loan-details').click(function () {
+
+        if ($('#estimatedValue').length < 1) {
             displayToast('error', 'You must enter estimated value of collateral', 'Enter Collateral Value');
         }
         else {
@@ -1203,43 +1211,43 @@ $(document).ready(function() {
             //console.log(uploadedFiles);
             for (let i = 0; i < uploadedFiles.length; i++) {
                 console.log(uploadedFiles[i].file);
-                formData.append("file", uploadedFiles[i].file );
-                
+                formData.append("file", uploadedFiles[i].file);
+
             }
-            
+
             formData.append("estimatedValue", estimatedValue);
             formData.append("collateralRefId", collateralRefId);
             formData.append("otherdetails", otherdetails);
 
-            
+
 
             $(".preloader-2").show();
             $.ajax({
-                url: loan_app_url+api_endpoint,
+                url: loan_app_url + api_endpoint,
                 method: "POST",
                 data: formData,
                 contentType: false,
                 cache: false,
                 processData: false,
-                success: function(data) {
+                success: function (data) {
                     localStorage.setItem("uploadedCollaterals", JSON.stringify(uploadedFiles));
                     location.href = "/preview-loan-request";
                 }
             });
         }
-        
 
-        
+
+
     })
 
-    $('body').on('click', '#submitPaymentProof',function(e){
+    $('body').on('click', '#submitPaymentProof', function (e) {
         let api_endpoint = "/api/Payments";
 
         let files = uploadedFilesHolder;
         for (let i = 0; i < files.length; i++) {
-            formData.append("file", files[i].file );
+            formData.append("file", files[i].file);
         }
-        
+
         let loanRefId = $('#loanRefId').val();
         let amount = $('#amount').val();
         let channel = $('#channel').val();
@@ -1247,7 +1255,7 @@ $(document).ready(function() {
 
         formData = new FormData();
         formData.append("file", file);
-        
+
         formData.append("loanRefId", loanRefId);
         formData.append("amount", amount);
         formData.append("channel", channel);
@@ -1255,58 +1263,58 @@ $(document).ready(function() {
 
         $(".preloader-2").show();
         $.ajax({
-            url: loan_app_url+api_endpoint,
+            url: loan_app_url + api_endpoint,
             method: "POST",
             data: formData,
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
                 displayToast('success', 'Payment Proof Document was uploaded successfully.', 'Upload successful');
                 hideModal();
             }
         });
-        
+
     })
 
 
-    function hideModal(){
+    function hideModal() {
         $('#pallywadModal').hide();
         $('.modal-backdrop').hide();
     }
 
     function file_explorer() {
         document.getElementById("selectfile").click();
-        document.getElementById("selectfile").onchange = function() {
-        files = document.getElementById("selectfile").files[0];
-        showFile(files);
-        formData.append("file", files);
-      };
+        document.getElementById("selectfile").onchange = function () {
+            files = document.getElementById("selectfile").files[0];
+            showFile(files);
+            formData.append("file", files);
+        };
     }
 
-    function showFile(file){
-        let fileType = file.type; 
-        let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; 
+    function showFile(file) {
+        let fileType = file.type;
+        let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
         let imgPreview = document.getElementById('imgPreview');
-            if(validExtensions.includes(fileType)){ 
-                let fileReader = new FileReader();
-                fileReader.onload = ()=>{
-                let fileURL = fileReader.result; 
-                let imgTag = `<img src="${fileURL}" class="imgTag" alt="">`; 
-                imgPreview.innerHTML = imgTag; 
+        if (validExtensions.includes(fileType)) {
+            let fileReader = new FileReader();
+            fileReader.onload = () => {
+                let fileURL = fileReader.result;
+                let imgTag = `<img src="${fileURL}" class="imgTag" alt="">`;
+                imgPreview.innerHTML = imgTag;
                 $('#upload-from-gallery').hide();
                 $('#uploadDocumentExtrafields').removeClass('hide');
             }
             fileReader.readAsDataURL(file);
-        }else {
-          displayToast("error","The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+        } else {
+            displayToast("error", "The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
         }
     }
-    
+
     /**
      Kyc page 2 
-    */ 
-    $('#uploadDocument').click(function(){
+    */
+    $('#uploadDocument').click(function () {
         let api_endpoint = "/api/Documents/UploadFile";
         let documentRefId = localStorage.getItem("chosenDocument");
         let documentNo = $('#documentNo').val() ?? 0;
@@ -1317,13 +1325,13 @@ $(document).ready(function() {
 
         $(".preloader-2").show();
         $.ajax({
-            url: loan_app_url+api_endpoint,
+            url: loan_app_url + api_endpoint,
             method: "POST",
             data: formData,
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
                 location.href = "/kyc-3";
             }
         });
@@ -1331,8 +1339,8 @@ $(document).ready(function() {
 
     /**
      Kyc page 3 
-    */ 
-     $('#uploadAddress').click(function(){
+    */
+    $('#uploadAddress').click(function () {
         console.log("upload address doc clicked");
         let api_endpoint = "/api/Documents/UploadFile";
         let documentRefId = localStorage.getItem("addressDocId");
@@ -1344,13 +1352,13 @@ $(document).ready(function() {
 
         $(".preloader-2").show();
         $.ajax({
-            url: loan_app_url+api_endpoint,
+            url: loan_app_url + api_endpoint,
             method: "POST",
             data: formData,
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
                 //console.log(data);
                 location.href = "/kyc-complete";
             }
@@ -1362,7 +1370,7 @@ $(document).ready(function() {
 
 
 //submit loan request
-$('body').on('click','#submitLoanRequest',function(){
+$('body').on('click', '#submitLoanRequest', function () {
     console.log("loan request submitted");
     let api_endpoint = "/api/LoanRequest";
     let documentIdRefs = JSON.parse(localStorage.getItem("documentIdRefs"));
@@ -1379,15 +1387,15 @@ $('body').on('click','#submitLoanRequest',function(){
         collateralRefId
     }
 
- 
+
 
     $(".preloader-2").show();
     $.ajax({
-        url: loan_app_url+api_endpoint,
+        url: loan_app_url + api_endpoint,
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         data: JSON.stringify(formData),
-        success: function(data) {
+        success: function (data) {
             //console.log(data);
             localStorage.removeItem("documentIdRefs");
             localStorage.removeItem("loancode");
@@ -1400,21 +1408,20 @@ $('body').on('click','#submitLoanRequest',function(){
 })
 
 
-$('body').on('click', '#uploadPaymentProofFile', function(){
+$('body').on('click', '#uploadPaymentProofFile', function () {
     document.getElementById("selectfile").click();
-    document.getElementById("selectfile").onchange = function() 
-        {
+    document.getElementById("selectfile").onchange = function () {
         file = document.getElementById("selectfile").files[0];
 
         //check if uploaded file is valid
         let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-        let fileType = file.type; 
-        if(validExtensions.includes(fileType)){ 
+        let fileType = file.type;
+        if (validExtensions.includes(fileType)) {
             let fileReader = new FileReader();
             let uploadedFilesPreview = $('#uploadedFilesPreview');
-            fileReader.onload = ()=>{
-                let fileURL = fileReader.result; 
-                let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`; 
+            fileReader.onload = () => {
+                let fileURL = fileReader.result;
+                let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`;
                 let output = `
                     ${imgTag}
                 `;
@@ -1422,16 +1429,16 @@ $('body').on('click', '#uploadPaymentProofFile', function(){
                 uploadedFilesPreview.append(`${output}`);
             }
             fileReader.readAsDataURL(file);
-            
+
         }
         else {
-            displayToast("error","The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+            displayToast("error", "The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
         }
     }
 })
 
 //upload proof of payment
-$('body').on('click', '.uploadPaymentProof', function(){
+$('body').on('click', '.uploadPaymentProof', function () {
 
     let processedLoans = JSON.parse(localStorage.getItem('processedLoans'));
     let option = '';
@@ -1504,22 +1511,22 @@ $('body').on('click', '.uploadPaymentProof', function(){
             </div>
 
         </div>
-    `; 
-  
+    `;
+
     $('.modal-body').html(content);
     $('.modal-title').html('Upload Proof Of Payment');
     var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
     myModal.show({
         keyboard: false,
-        backdrop:'static'
+        backdrop: 'static'
     });
 })
 
 
 
 //pay loan
-$('body').on('click', '.makePayment', function(){
-    
+$('body').on('click', '.makePayment', function () {
+
     companyDetails = localStorage.getItem('companyDetails');
     companyDetails = JSON.parse(companyDetails);
     let content = `
@@ -1561,12 +1568,12 @@ $('body').on('click', '.makePayment', function(){
                 </div>
             </div>
         </div>
-    `; 
+    `;
     $('.modal-body').html(content);
     $('.modal-title').html('Make Loan Repayment');
     var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
     myModal.show({
         keyboard: false,
-        backdrop:'static'
+        backdrop: 'static'
     });
 })

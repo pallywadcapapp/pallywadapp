@@ -78,7 +78,7 @@ export default class extends DefaultView {
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">Loan Due Date</div>
-                                        <div class="col-md-6">13/02/24</div>
+                                        <div class="col-md-6"><span class="duedate">13/02/24</span></div>
                                     </div>
                                     
                                 </div>

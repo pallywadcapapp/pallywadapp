@@ -1586,3 +1586,19 @@ input[type="file"]{
    background-color: #24488F;
    color:#fff;
 }
+
+
+
+@media (max-width: 767px) {
+    .left-sidebar{
+        margin-left: -75px;
+    }
+}
+@media (max-width: 480px) {
+    .left-sidebar {
+      z-index: 10;
+    }
+    .button-menu-mobile {
+      display: block;
+    }
+  }
