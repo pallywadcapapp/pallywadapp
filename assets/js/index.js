@@ -13,6 +13,13 @@ import Logout from "./views/Logout.js";
 import LoanRequest from "./views/LoanRequest.js";
 import LoanRequest2 from "./views/LoanRequest2.js";
 import LoanRequestComplete from "./views/LoanRequestComplete.js";
+import PaymentHistory from "./views/PaymentHistory.js";
+import Help from "./views/Help.js";
+import Settings from "./views/Settings.js";
+import Forgotpassword from "./views/Forgotpassword.js";
+import PasswordCode from "./views/PasswordCode.js";
+import newPassWord from "./views/newPassWord.js";
+import ChangePassword from "./views/ChangePassword.js";
 
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
@@ -48,7 +55,14 @@ const router = async () => {
         {path:"/loan-request-complete" , view: LoanRequestComplete },
         {path:"/preview-loan-request" , view: PreviewLoanRequest },
         {path:"/sign-in" , view: Signin },
-        {path:"/logout" , view: Logout }
+        {path:"/forgot-password" , view: Forgotpassword },
+        {path:"/password-code" , view: PasswordCode },
+        {path:"/new-passWord" , view: newPassWord },
+        {path:"/change-password" , view: ChangePassword },
+        {path:"/logout" , view: Logout },
+        {path:"/payment-history" , view: PaymentHistory },
+        {path:"/help" , view: Help },
+        {path:"/settings" , view: Settings }
     ]
 
     //check each route for a potential match and redirect
@@ -60,7 +74,6 @@ const router = async () => {
     });
 
     let match = potentialMatches.find(potentialMatch => potentialMatch.result !== null);
-    
     //if match is not found
     if(!match)
     {
