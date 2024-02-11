@@ -595,7 +595,13 @@ $(window).on('load', function () {
                     $('[name="dob"]').val(finaldate);
                     $('[name="sex"] option:contains("' + d.sex + '")').prop('selected', true);
                     $('[name="employmentStatus"] option:contains("' + d.employmentStatus + '")').prop('selected', true);
-
+                    $('.firstnameOutput').html(d.firstname);
+                    $('.lastnameOutput').html(d.lastname);
+                    $('.othernamesOutput').html(d.othernames);
+                    $('.dobOutput').html(newdate.date2);
+                    $('.emailOutput').html(d.email);
+                    $('.phoneOutput').html(d.phoneNumber);
+                    $('.addressOutput').html(d.address);
                 }
             })
         }

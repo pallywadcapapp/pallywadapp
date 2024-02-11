@@ -21,6 +21,7 @@ import PasswordCode from "./views/PasswordCode.js";
 import newPassWord from "./views/newPassWord.js";
 import ChangePassword from "./views/ChangePassword.js";
 
+import Profile from "./views/Profile.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -62,7 +63,8 @@ const router = async () => {
         {path:"/logout" , view: Logout },
         {path:"/payment-history" , view: PaymentHistory },
         {path:"/help" , view: Help },
-        {path:"/settings" , view: Settings }
+        {path:"/settings" , view: Settings },
+        {path:"/profile" , view: Profile }
     ]
 
     //check each route for a potential match and redirect
