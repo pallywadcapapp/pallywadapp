@@ -37,7 +37,7 @@ export default class extends DefaultViewNoAuth {
                                 
                                 <div class="form-group mt-2 px-7">
                                     <button id="login" class="continue-button">Sign In</button>
-                                    <div class="mt-3">Don't have an account?  <a href="/onboarding" data-link><b>Sign Up</b></span></a></div>
+                                    <div class="mt-3">Don't have an account?  <a href="https://pallywad.com/onboarding" data-link><b>Sign Up</b></span></a></div>
                                 </div>
                                
                             </form>

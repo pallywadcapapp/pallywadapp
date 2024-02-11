@@ -72,7 +72,7 @@ $('body').on('click', '#resetPassword', function (e) {
     let confirmpassword = $('#confirmpassword').val();
     let password = $('#password').val();
     username = localStorage.getItem('email');
-    api_endpoint = "/api/v1/auth/ChangPassword";
+    api_endpoint = "/api/v1/auth/ChangePassword";
 
 
     

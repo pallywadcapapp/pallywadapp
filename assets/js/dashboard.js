@@ -11,13 +11,13 @@ $(function(e){
 })
 
 function loadDashboard(loanId){
- api_endpoint = "/api/payment/TotalLoanPayment?loanId=" + loanId;
+ api_endpoint = "/api/Payments/TotalLoanPayment?loanId=" + loanId;
  $.ajax({
      type: 'GET',
-     url: api_url + api_endpoint,
+     url: loan_app_url + api_endpoint,
      headers: { 'Content-Type': 'application/json' },
      error: function (d) {
-         displayToast('error', "Token not provided!", "Error");
+         displayToast('error', "Unable to get payment total!", "Error");
      },
      success: function (d) {
         console.log(d)
