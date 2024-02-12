@@ -22,7 +22,7 @@ export default class extends DefaultView {
                                     <a href="/upload-documents" data-link><img src="assets/img/close-icon.png" /></a>
                                 </div>
                                 <div id="kyc2-form" class="white-bg rounded div-shadow upload-form ">
-                                    <form id="kyc1-form-step2" action="POST" >
+                                    <form id="kyc1-form-step2" class="kyc"  method="GET">
                                         <div class="text-center ">
                                             <h3>Upload <span id="selected-document"></span></h3>
                                            
@@ -44,7 +44,7 @@ export default class extends DefaultView {
                                         <div id="uploadDocumentExtrafields" class="form-group mt-2 hide" >
                                            
                                             <input type="text" id="documentNo" class="form-control mb-2" placeholder="Enter ${ localStorage.getItem('chosenDocumentName')} Number">
-                                            <input type="text" id="expiryDate" class="form-control mydatepicker mb-2" placeholder="Expiry Date">
+                                            <input type="date" id="expiryDate" class="form-control mb-2" placeholder="Expiry Date">
                                             
                                             <a href="javascript:;" id="uploadDocument" class="continue-button-2 hide" >Submit Document</a>
                                             

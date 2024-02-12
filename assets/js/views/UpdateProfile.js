@@ -28,11 +28,11 @@ export default class extends DefaultView {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Firstname <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="firstname" name="firstname">
+                                                    <input disabled type="text" class="form-control" id="firstname" name="firstname">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Lastname <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="lastname" name="lastname">
+                                                    <input disabled type="text" class="form-control" id="lastname" name="lastname">
                                                 </div>
                                             </div>
                                             
@@ -42,7 +42,7 @@ export default class extends DefaultView {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Othernames </label>
-                                                    <input type="text" class="form-control" id="othernames" name="othernames">
+                                                    <input disabled type="text" class="form-control" id="othernames" name="othernames">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Date of Birth <span class="text-danger">*</span></label>
@@ -72,7 +72,7 @@ export default class extends DefaultView {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Email </label>
-                                                    <input type="email" class="form-control" id="email" name="email">
+                                                    <input type="email" disabled class="form-control disabled" id="email" name="email">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Employment Status </label>
