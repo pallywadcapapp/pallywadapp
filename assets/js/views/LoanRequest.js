@@ -54,6 +54,8 @@ export default class extends DefaultView {
                                                     Description
                                                 </div>
                                                 <input type="hidden" id="category" />
+                                                <input type="hidden" id="collateralPercentage" />
+                                                <input type="hidden" id="pindex" />
                                             </div>
                                             <div class="form-group mt-3 mb-4">
                                                 <label><b>Loan Amount Requested</b></label><br>

@@ -632,13 +632,15 @@ $(window).on('load', function () {
                 displayToast('error', d.responseJSON.message, d.responseJSON.status)
             },
             success: function (d) {
-
+                localStorage.setItem('loanProducts', JSON.stringify(d))
                 let lists = d;
                 let documents = "";
                 for (let i = 0; i < lists.length; i++) {
                     documents += `
                         <option value="${lists[i].loancode}" 
                             loanCategory="${lists[i].category}"
+                            collateralPercentage="${lists[i].collateralPercentage}"
+                            pindex="${i}"
                             loanDescription="${lists[i].loandesc}">
                             ${lists[i].category}
                         </option>
@@ -646,6 +648,8 @@ $(window).on('load', function () {
                 }
                 $('#loanTypeDescription').html(`<b>Loan Type Description</b><br><br>${lists[0].loandesc}`);
                 $('#category').val(lists[0].category);
+                $('#collateralPercentage').val(lists[0].collateralPercentage);
+                $('#pindex').val(0);
                 $('#loanType').html(documents);
             }
         })
@@ -827,11 +831,17 @@ $("body").on('change', '.singleCheck', function () {
 $("body").on('change', '#loanType', function () {
     let description = $("#loanType :selected").attr("loanDescription");
     let category = $("#loanType :selected").attr("loanCategory");
+    let collateralPercentage = $("#loanType :selected").attr("collateralPercentage");
+    let pindex = $("#loanType :selected").attr("pindex");
     console.log(description, category);
     let descriptionBox = $('#loanTypeDescription');
     let categoryBox = $('#category');
+    let collateralPercentageyBox = $('#collateralPercentage');
+    let pindexBox = $('#pindex');
     descriptionBox.html(`<b>Loan Type Description:</b><br><br> ${description}`);
     categoryBox.val(category);
+    collateralPercentageyBox.val(collateralPercentage);
+    pindexBox.val(pindex);
 })
 
 /***
@@ -1014,7 +1024,7 @@ function fetchCompanyDetails() {
         url: setup_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
         success: function (d) {
             localStorage.setItem('companyDetails', JSON.stringify(d));
@@ -1117,16 +1127,19 @@ $('body').on('click', '#continue-loan-button-1', function () {
         let loancode = $('#loanType :selected').val();
         let amount = $('#loanAmountRequested').val();
         let category = $('#category').val();
+        let collateralPercentage = $('#collateralPercentage').val();
+        let pindex = $('#pindex').val();
         let documentIdRefs = [];
         let proofDocuments = []
         $("input:checkbox[name=verificationDocument]:checked").each(function () {
             documentIdRefs.push($(this).val());
             proofDocuments.push($(this).attr("ValueName"));
         });
-
         localStorage.setItem("loancode", loancode);
         localStorage.setItem("amount", amount);
         localStorage.setItem("category", category);
+        localStorage.setItem('collateralRate', collateralPercentage)
+        localStorage.setItem('selIndex', pindex)
         localStorage.setItem("documentIdRefs", JSON.stringify(documentIdRefs));
         window.location.replace("loan-request2");
 
@@ -1223,9 +1236,23 @@ $(document).ready(function () {
 
 
     $('#preview-loan-details').click(function () {
-
-        if ($('#estimatedValue').length < 1) {
+        $('#kyc2-form').pleaseWait();
+        var loanAmt = parseFloat(localStorage.getItem('amount'));
+        var collateralRate = parseFloat(localStorage.getItem('collateralRate'));
+        var estValue = parseFloat($('#estimatedValue').val()) * collateralRate / 100;
+        console.log($('#estimatedValue').length)
+        console.log(loanAmt)
+        console.log(estValue)
+        if ($('#estimatedValue').val() < 1) {
             displayToast('error', 'You must enter estimated value of collateral', 'Enter Collateral Value');
+            $('#kyc2-form').pleaseWait('stop');
+        }else if(loanAmt > estValue){
+            $('#kyc2-form').pleaseWait('stop');
+            displayToast('error', 'Your collateral value does not meet the laon type criteria', 'Collateral value requirement');
+            displayToast('error', 'Change the loan value or provide another collateral value entity', 'Enter Collateral Value');
+        } else if (uploadedFiles.length < 1) {
+            $('#kyc2-form').pleaseWait('stop');
+            displayToast('error', 'Kindly provide collateral documents', 'Collateral Documents');
         }
         else {
             let api_endpoint = "/api/Collateral/UploadFile";
@@ -1233,16 +1260,21 @@ $(document).ready(function () {
             let collateralRefId = $('#collateralType :selected').val();
             let otherdetails = $('#otherdetails').val() ?? "None";
             //console.log(uploadedFiles);
-            for (let i = 0; i < uploadedFiles.length; i++) {
-                console.log(uploadedFiles[i].file);
+            /*for (let i = 0; i < uploadedFiles.length - 1; i++) {
+                console.log(uploadedFiles);
                 formData.append("file", uploadedFiles[i].file);
 
-            }
+            }*/
 
             formData.append("estimatedValue", estimatedValue);
             formData.append("collateralRefId", collateralRefId);
             formData.append("otherdetails", otherdetails);
-
+            
+            var coll = [];
+            $.each($("#selectfile")[0].files, function(i, file) {
+                coll.push(file);
+                formData.append('file', file);
+            });
 
 
             $(".preloader-2").show();
@@ -1254,8 +1286,14 @@ $(document).ready(function () {
                 cache: false,
                 processData: false,
                 success: function (data) {
-                    localStorage.setItem("uploadedCollaterals", JSON.stringify(uploadedFiles));
+                    $('#kyc2-form').pleaseWait('stop');
+                    localStorage.setItem("uploadedCollaterals", JSON.stringify(coll));
+                    localStorage.setItem("tempCollateral", JSON.stringify(data));
                     location.href = "/preview-loan-request";
+                },
+                error: function(error){
+                    $('#kyc2-form').pleaseWait('stop');
+                    displayToast('error', 'Error uploading collateral documents', 'Collateral Document error');
                 }
             });
         }
@@ -1263,6 +1301,10 @@ $(document).ready(function () {
 
 
     })
+    var p = localStorage.getItem('pindex');
+    var jj = JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')];
+    console.log(jj)
+    console.log((JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest))
 
     $('body').on('click', '#submitPaymentProof', function (e) {
         $('.modal-content').pleaseWait();
@@ -1443,7 +1485,11 @@ $('body').on('click', '#submitLoanRequest', function () {
     let loancode = localStorage.getItem("loancode");
     let amount = localStorage.getItem("amount");
     let category = localStorage.getItem("category");
-    let collateralRefId = JSON.parse(localStorage.getItem("collateralRefId"));
+    let tempCollateral = JSON.parse(localStorage.getItem('tempCollateral'));
+    console.log(tempCollateral);
+    var collArray = [];
+    collArray.push(tempCollateral.id.toString())
+    let collateralRefId = collArray; //JSON.parse(localStorage.getItem("collateralRefId"));
 
     let formData = {
         documentIdRefs,
@@ -1468,6 +1514,7 @@ $('body').on('click', '#submitLoanRequest', function () {
             localStorage.removeItem("amount");
             localStorage.removeItem("category");
             localStorage.removeItem("collateralRefId");
+            localStorage.removeItem("tempCollateral");
             location.href = "/loan-request-complete";
         }
     });
@@ -1649,3 +1696,16 @@ $('body').on('click', '.makePayment', function () {
         backdrop: 'static'
     });
 })
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}

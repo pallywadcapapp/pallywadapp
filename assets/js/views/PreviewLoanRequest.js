@@ -25,9 +25,12 @@ export default class extends DefaultView {
                                     <h3>Preview Loan Request</h3>
                                     <p><b>Loan type:</b> ${localStorage.getItem('category')}</p>
                                     <p><b>Loan amount:</b> ${localStorage.getItem('amount')}</p>
-                                    <p><b>Proof Documents uploaded:</b> ${localStorage.getItem('proofDocuments')}</p>
-                                    <p><b>Uploaded Collateral Documents:</b> ${localStorage.getItem('uploadedCollaterals')}</p>
-                                    <a href="javascript:;" id="submitLoanRequest"">Submit Loan Request</a>
+                                    <p><b>Interest Rate:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest}%</p>
+                                    <p><b>Tenor:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].duration}months</p>
+                                    <p><b>Collateral Threshold:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].collateralPercentage}%</p>
+                                    <!--<p><b>Proof Documents uploaded:</b> ${localStorage.getItem('proofDocuments')}</p>
+                                    <p><b>Uploaded Collateral Documents:</b> ${localStorage.getItem('uploadedCollaterals')}</p>-->
+                                    <a class="btn continue-button" href="javascript:;" id="submitLoanRequest"">Submit Loan Request</a>
                                 </div>
                             </div>
                         </div>
