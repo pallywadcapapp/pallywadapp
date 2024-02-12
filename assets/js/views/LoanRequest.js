@@ -42,7 +42,7 @@ export default class extends DefaultView {
                                         <a href="/loan-request"><img src="assets/img/close-icon.png" /></a>
                                     </div>
                                     <div id="kyc3-form" class="white-bg rounded div-shadow upload-form ">
-                                        <form id="kyc3-form-step2" action="POST" >
+                                        <form id="kyc3-form-step2" >
                                             <div class="text-center ">
                                                 <h3>Select Loan Type</h3>
                                                 <select id="loanType" class="form-select" aria-label="Default select example">
@@ -53,6 +53,10 @@ export default class extends DefaultView {
                                                 <div id="loanTypeDescription" class="loan-description-box">
                                                     Description
                                                 </div>
+                                                <div class="form-group mt-3 mb-4">
+                                                <label><b>Minimum Interest Rate(%)</b></label><br>
+                                                <input id="interestrate" disabled type="number" />
+                                                </div>
                                                 <input type="hidden" id="category" />
                                                 <input type="hidden" id="collateralPercentage" />
                                                 <input type="hidden" id="pindex" />
@@ -60,6 +64,10 @@ export default class extends DefaultView {
                                             <div class="form-group mt-3 mb-4">
                                                 <label><b>Loan Amount Requested</b></label><br>
                                                 <input id="loanAmountRequested" type="number" placeholder="Enter the loan amount your are requesting" />
+                                            </div>
+                                            <div class="form-group mt-3 mb-4">
+                                                <label><b>Interest Amount (Monthly)</b></label><br>
+                                                <input id="interest" type="number" disabled/>
                                             </div>
                                             <label><b>Select Proof Document(s) Uploaded</b></label>
                                             <div id="uploadedDocumentList">

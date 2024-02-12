@@ -421,7 +421,7 @@ function checkEligibility() {
         url: api_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
         success: function (d) {
             if (d.message != true) {
@@ -521,6 +521,8 @@ $(window).on('load', function () {
 
 
 })
+
+
 
 //section to get all needed ids loaded by import
 $(window).on('load', function () {
@@ -651,6 +653,7 @@ $(window).on('load', function () {
                 $('#collateralPercentage').val(lists[0].collateralPercentage);
                 $('#pindex').val(0);
                 $('#loanType').html(documents);
+                $('#interestrate').val(lists[0].loaninterest);
             }
         })
 
@@ -842,7 +845,16 @@ $("body").on('change', '#loanType', function () {
     categoryBox.val(category);
     collateralPercentageyBox.val(collateralPercentage);
     pindexBox.val(pindex);
-})
+});
+
+$("body").on('change', '#loanAmountRequested', function () {
+//$('#loanAmountRequested').change(function (e) {
+    var amount = ($(this).val());
+    var intrate = parseFloat($('#interestrate').val());
+
+    var loanAmount = (amount * intrate) / 100;
+    $('#interest').val(loanAmount);
+});
 
 /***
 ** PRELOAD FUNCTIONS
@@ -871,7 +883,8 @@ function uploadedDocuments() {
                             value="${lists[i].id}">
                         <label class="form-check-label" for="flexCheckDefault">
                             <b>${lists[i].name}</b><br>
-                            ${lists[i].url}
+                            <img src="https://user.pallywad.com/api/documents/uploads?filename=${lists[i].url}" style="width:50px; height:50px;" alt="${lists[i].url}" />
+                            
                         </label>
                 </div>`;
             }
@@ -1138,8 +1151,9 @@ $('body').on('click', '#continue-loan-button-1', function () {
         localStorage.setItem("loancode", loancode);
         localStorage.setItem("amount", amount);
         localStorage.setItem("category", category);
-        localStorage.setItem('collateralRate', collateralPercentage)
+        localStorage.setItem('collateralRate', collateralPercentage);
         localStorage.setItem('selIndex', pindex)
+        localStorage.setItem('pindex', pindex)
         localStorage.setItem("documentIdRefs", JSON.stringify(documentIdRefs));
         window.location.replace("loan-request2");
 
