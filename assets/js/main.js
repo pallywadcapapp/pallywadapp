@@ -1362,7 +1362,6 @@ $(document).ready(function () {
     $('#uploadDocument').click(function () {
         //var formData = new FormData();
         console.log(formData.file)
-        var uplFile = [];
         let api_endpoint = "/api/Documents/UploadFile";
         let documentRefId = localStorage.getItem("chosenDocument");
         let documentNo = $('#documentNo').val() ?? 0;
@@ -1372,8 +1371,7 @@ $(document).ready(function () {
         formData.append("expiryDate", expiryDate);
 
         var files = document.getElementById("selectfile").files[0];
-        uplFile.push(files);
-            formData.append("file", uplFile);
+            formData.append("file", files);
 
         //$(".preloader-2").show();
         console.log(formData)
@@ -1401,7 +1399,6 @@ $(document).ready(function () {
     */
     $('#uploadAddress').click(function () {
         console.log("upload address doc clicked");
-        var uplFile = [];
         $('.kyc').pleaseWait();
         let api_endpoint = "/api/Documents/UploadFile";
         let documentRefId = localStorage.getItem("addressDocId");
@@ -1412,9 +1409,7 @@ $(document).ready(function () {
         formData.append("expiryDate", expiryDate);
 
         var files = document.getElementById("selectfile").files[0];
-        uplFile.push(files);
-            formData.append("file", uplFile);
-           //formData.append("file", files);
+            formData.append("file", files);
 
         $(".preloader-2").show();
         $.ajax({
