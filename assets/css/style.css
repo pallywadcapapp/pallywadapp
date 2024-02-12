@@ -1601,4 +1601,23 @@ input[type="file"]{
     .button-menu-mobile {
       display: block;
     }
-  }
+}
+
+.loan-detail-form {
+    line-height:22px;
+}
+
+.loan-detail-form h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 30px;
+}
+.loan-detail-form h4 {
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.loan-detail-form .underline {
+    border-bottom: 1px solid #ddd;
+}

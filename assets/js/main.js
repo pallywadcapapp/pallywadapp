@@ -909,6 +909,7 @@ function fetchLoanRequests() {
 
                 display += `
                 <div class="top-line py-2">
+                        <a href="javascript:;" class="showLoanDetail" loanId="${lists[i].loanId}">
                         <div class="row">
                             <div class="col-md-2">
                                 <span class="${loanTypeStyle}">${lists[i].status}</span>
@@ -924,6 +925,7 @@ function fetchLoanRequests() {
                                 </p>
                             </div>
                         </div>
+                        </a>
                     </div>
                 `;
 
@@ -1607,4 +1609,98 @@ $('body').on('click', '.makePayment', function () {
         keyboard: false,
         backdrop: 'static'
     });
+})
+
+
+//show loan details
+$('body').on('click', '.showLoanDetail', function () {
+
+    let api_endpoint = "/api/LoanRequest/loandetail";
+    let loanId = $(this).attr('loanId');
+    console.log(loanId);
+
+    data = {
+        'loadId': loanId
+    }
+
+    $.ajax({
+        type: 'get',
+        url: loan_app_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        data: data,
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function (d) {
+
+            let loanStatusStyle = (d.status == "Pending")
+                    ? "loan-status-pending"
+                    : (d.status == "Declined" ? "loan-status-declined"
+                        : (d.status == "Awaiting Approval" ? "loan-status-awaiting"
+                            : (d.status == "Approved" ? "loan-status-approved"
+                                : "loan-status-running")));
+            let requestDate = formatDate3(d.requestDate).date2;
+            let approvalDate = d.approvalDate ==null 
+                ? "Loan Not yet approved"
+                :  formatDate3(d.approvalDate).date2;
+            let loanDuration = d.duration ==1 
+                ? d.duration + " Month"
+                :  d.duration + " Months"; 
+                totalRepayment = parseFloat(d.amount) * ((100+d.loaninterest)/100);
+                console.log((100+d.loaninterest)/100);
+
+            let content = `
+            
+                <div class="px-4 py-2 loan-detail-form">
+                    <div class="row underline py-2">
+                        <div class="col-md-5"><span class="${loanStatusStyle}">${d.status}</span></div>
+                        <div class="col-md-7">
+                            <h3>&#8358;${number_format(d.amount)}</h3>
+                            ${d.category}
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-5">Request Date:</div>
+                        <div class="col-md-7">${requestDate}</div>
+                    </div>
+                    <div class="row mt-2 underline">
+                        <div class="col-md-5">Approval Date:</div>
+                        <div class="col-md-7 mb-2 ">${approvalDate}</div>
+                    </div>
+                
+
+                    <div class="row">
+                        <div class="col-md-12 mt-2 black-text">
+                            <h4>Loan term details</h4>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-5">Loan ID</div>
+                        <div class="col-md-7"><b>#${d.loanId}</b></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-5">Loan Duration</div>
+                        <div class="col-md-7">${loanDuration}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-5">Loan Interest Rate</div>
+                        <div class="col-md-7">${d.loaninterest}%</div>
+                    </div>
+
+                    <div class="row underline">
+                        <div class="col-md-5">Total Repayment Amt.</div>
+                        <div class="col-md-7 mb-2"><b>&#8358; ${number_format(totalRepayment)}</b></div>
+                    </div>
+        
+                </div>
+            `;
+        
+            $('.modal-body').html(content);
+            $('.modal-title').html('<b>Loan Details:</b> #'+d.loanId);
+            myModal.show({
+                keyboard: false,
+                backdrop: 'static'
+            });
+        }
+    })
 })
