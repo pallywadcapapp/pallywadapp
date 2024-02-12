@@ -23,8 +23,8 @@ export default class extends DefaultView {
                                         <div class="text-center ">
                                             <h3>Document Verification Complete</h3>
                                             <p>Your verification documents were uploaded successfully. 
-                                            We will verify these documents and enable the Loan 
-                                            Request section of your account within 24 hours.</p>
+                                            We will verify these documents<!-- and enable the Loan 
+                                            Request section of your account within 24 hours-->.</p>
                                         </div>
                                         <div class="text-center mt-2">
                                             <img src="assets/img/checked-1.png" class="kyc-complete" />

@@ -409,13 +409,12 @@ function checkEligibility() {
             displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
         success: function (d) {
-            console.log(d);
             if (d.message != true) {
                 $('.notEligible').show();
                 $('.Eligible').hide();
             } else {
-                $('.notEligible').hide();
-                $('.Eligible').show();
+                //$('.notEligible').hide();
+                //$('.Eligible').show();
             }
         }
     })
@@ -501,6 +500,7 @@ $(window).on('load', function () {
     }
 
     if ($('#dashboard').length > 0) {
+        $('.Eligible').hide();
         checkEligibility();
     }
 
@@ -946,6 +946,7 @@ function fetchProcessedLoanRequests() {
         success: function (d) {
 
             if (d.length > 0) {
+                $('.Eligible').show();
                 console.log(d);
                 let lists = d;
                 localStorage.setItem('processedLoans', JSON.stringify(d));
@@ -1317,7 +1318,7 @@ $(document).ready(function () {
         document.getElementById("selectfile").onchange = function () {
             files = document.getElementById("selectfile").files[0];
             showFile(files);
-            formData.append("file", files);
+            //formData.append("file", files);
         };
     }
 
@@ -1344,15 +1345,22 @@ $(document).ready(function () {
      Kyc page 2 
     */
     $('#uploadDocument').click(function () {
+        //var formData = new FormData();
+        console.log(formData.file)
         let api_endpoint = "/api/Documents/UploadFile";
         let documentRefId = localStorage.getItem("chosenDocument");
         let documentNo = $('#documentNo').val() ?? 0;
-        let expiryDate = $('#expiryDate').val() ?? 0;
+        let expiryDate = $('#expiryDate').val() ?? new Date();
         formData.append("documentRefId", documentRefId);
         formData.append("documentNo", documentNo);
         formData.append("expiryDate", expiryDate);
 
-        $(".preloader-2").show();
+        var files = document.getElementById("selectfile").files[0];
+            formData.append("file", files);
+
+        //$(".preloader-2").show();
+        console.log(formData)
+        $('.kyc').pleaseWait();
         $.ajax({
             url: loan_app_url + api_endpoint,
             method: "POST",
@@ -1361,7 +1369,12 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
+                $('.kyc').pleaseWait('stop');
                 location.href = "/kyc-3";
+            },
+            error: function(error){
+                $('.kyc').pleaseWait('stop');
+                displayToast("error", "Unable to upload document", "File Upload Error");
             }
         });
     })
@@ -1371,6 +1384,7 @@ $(document).ready(function () {
     */
     $('#uploadAddress').click(function () {
         console.log("upload address doc clicked");
+        $('.kyc').pleaseWait();
         let api_endpoint = "/api/Documents/UploadFile";
         let documentRefId = localStorage.getItem("addressDocId");
         let documentNo = 0;
@@ -1378,6 +1392,9 @@ $(document).ready(function () {
         formData.append("documentRefId", documentRefId);
         formData.append("documentNo", documentNo);
         formData.append("expiryDate", expiryDate);
+
+        var files = document.getElementById("selectfile").files[0];
+            formData.append("file", files);
 
         $(".preloader-2").show();
         $.ajax({
@@ -1388,8 +1405,13 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
+                $('.kyc').pleaseWait();
                 //console.log(data);
                 location.href = "/kyc-complete";
+            },
+            error: function(error){
+                $('.kyc').pleaseWait('stop');
+                displayToast("error", "Unable to upload document", "File Upload Error");
             }
         });
     })
