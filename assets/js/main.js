@@ -1,3 +1,4 @@
+var userLoanRequest = '';
 (function ($) {
     "use strict";
 
@@ -930,6 +931,7 @@ function fetchLoanRequests() {
             //displayToast('error',d.responseJSON.message, d.responseJSON.status)
         },
         success: function (d) {
+            userLoanRequest = d;
             let lists = d;
             let display = "";
             for (let i = 0; i < lists.length; i++) {
@@ -947,7 +949,7 @@ function fetchLoanRequests() {
 
                 display += `
                 <div class="top-line py-2">
-                        <div class="row">
+                        <div class="row loanView" id="lview${i}" onclick="lvClick('${i}')">
                             <div class="col-md-2">
                                 <span class="${loanTypeStyle}">${lists[i].status}</span>
                             </div>
