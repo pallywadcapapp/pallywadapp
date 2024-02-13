@@ -584,6 +584,7 @@ $(window).on('load', function () {
                     displayToast('error', d.responseJSON.message, d.responseJSON.status)
                 },
                 success: function (d) {
+                    console.log(d);
                     $('[name="firstname"]').val(d.firstname);
                     $('[name="lastname"]').val(d.lastname);
                     $('[name="othernames"]').val(d.othernames);
@@ -1704,3 +1705,47 @@ $('body').on('click', '.showLoanDetail', function () {
         }
     })
 })
+
+function uploadProfilePic(){
+    let api_endpoint = "/api/Profile/saveProfilePicture";
+    document.getElementById("selectfile").click();
+    document.getElementById("selectfile").onchange = function () {
+    files = document.getElementById("selectfile").files[0];
+    showFile2('userPicPlacholder');
+    let formData = new FormData();
+    formData.append("file", files);
+    $.ajax({
+        url: api_url + api_endpoint,
+        method: "PUT",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data) {
+            if(data.count){
+                displayToast('success', 'Profile picture updated successfully','Upload Successful');
+                
+            }
+        }
+    });
+        
+    };
+}
+
+function showFile2(outputTarget){
+    file = document.getElementById("selectfile").files[0];
+    outputTarget = document.getElementById(""+outputTarget+"");
+    let fileType = file.type;
+    let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+    if (validExtensions.includes(fileType)) {
+        let fileReader = new FileReader();
+        fileReader.onload = () => {
+            let fileURL = fileReader.result;
+            let imgTag = `<img src="${fileURL}" class="imgTag3" alt="">`;
+            outputTarget.innerHTML = imgTag;
+        }
+        fileReader.readAsDataURL(file);
+    } else {
+        displayToast("error", "The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+    }
+}

@@ -1547,6 +1547,13 @@ input[type="file"]{
     height: 80px;
 }
 
+.imgTag3 {
+
+    width: 114px;
+    height: 114px;
+    opacity:0.5
+}
+
 .nav-area {
     box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
     padding: 10px;
@@ -1588,6 +1595,11 @@ input[type="file"]{
 }
 
 
+.highlightText {
+    font-size:30px;
+    font-weight: 700;
+}
+
 
 @media (max-width: 767px) {
     .left-sidebar{
@@ -1620,4 +1632,40 @@ input[type="file"]{
 
 .loan-detail-form .underline {
     border-bottom: 1px solid #ddd;
+}
+
+.userPicArea {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
+.upload-profilepic-box {
+    background-color: #D9D9D9;
+    color: #000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 40px;
+    text-align:center;
+    line-height: 35px;
+}
+
+.upload-profilepic-box:hover {
+    background-color: #999;
+    color: #fff; 
+}
+
+.userpic {
+    height: 114px;
+    height: 114px;
+}
+
+.upload-profilepic-box img {
+    height: 17px;
 }

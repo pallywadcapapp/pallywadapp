@@ -25,35 +25,44 @@ export default class extends DefaultView {
                         
                             <div id="updateProfile" class="deeper-grey p-5 mt-3 rounded mb-5">
                                 <p class="about-title mb-3">Profile</p>
-                                <div class="card">
+                                <div class="card px-5 py-4">
                                     <div class="card-body">
                                         <div class="row mb-4">
-                                            <div class="text-center"><img src="assets/img/user-pic.png"></div>
-                                            <h4 class="text-center mt-2"><span class="firstnameOutput"></span></h4>
+                                            <div class="text-center">
+                                                <div  class="userPicArea">
+                                                    <input type="file" class="d-none" id="selectfile" />
+                                                    <div id="userPicPlacholder"><img src="assets/img/user-pic.png" class="userpic"></div>
+                                                    <a href="javascript:;" class="upload-profilepic-box" onclick="uploadProfilePic()">
+                                                        <img src="../assets/img/pic.png">
+                                                    </a>
+                                                </div>
+                                               
+                                            </div>
+                                            <h4 class="text-center mt-2 highlightText"><span class="firstnameOutput"></span></h4>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-4">Full Name</div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-4 grey-text">Full Name</div>
                                             <div class="col-md-8 text-end">
                                                 <span class="firstnameOutput"></span>
                                                 <span class="othernamesOutput"></span>
                                                 <span class="lastnameOutput"></span>
                                             </div>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-4">Mobile Number</div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-4 grey-text">Mobile Number</div>
                                             <div class="col-md-8 text-end"> <span class="phoneOutput"></span></div>
                                         </div>
                                        
-                                        <div class="row mb-2">
-                                            <div class="col-md-4">Date of Birth</div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-4 grey-text">Date of Birth</div>
                                             <div class="col-md-8 text-end"> <span class="dobOutput"></span></div>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-4">Email</div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-4 grey-text">Email</div>
                                             <div class="col-md-8 text-end"> <span class="emailOutput"></span></div>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-4">Address</div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-4 grey-text">Address</div>
                                             <div class="col-md-8 text-end">
                                                 <span class="addressOutput"></span>
                                             </div>
