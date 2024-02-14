@@ -5,7 +5,7 @@ var pathname = $(location).attr("pathname");
 $(function(e){
     if(pathname == '/dashboard'){
         var pl = JSON.parse(localStorage.getItem('processedLoans'));
-        
+        localStorage.setItem('pindex', 0)
         loadDashboard(pl[0].loanId);
     }
 })

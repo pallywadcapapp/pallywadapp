@@ -22,6 +22,7 @@ import newPassWord from "./views/newPassWord.js";
 import ChangePassword from "./views/ChangePassword.js";
 
 import Profile from "./views/Profile.js";
+import Loans2 from "./views/Loans2.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -45,6 +46,7 @@ const router = async () => {
         {path:"/dashboard", view: Dashboard},
         {path:"/404", view: NotFound},
         {path:"/loans" , view: Loans },
+        {path:"/loans2" , view: Loans2 },
         {path:"/update-profile" , view: UpdateProfile },
         {path:"/upload-documents" , view: UploadDocuments },
         {path:"/kyc-1" , view: Kyc1 },

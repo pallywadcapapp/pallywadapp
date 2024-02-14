@@ -527,7 +527,10 @@ $(window).on('load', function () {
 
 //section to get all needed ids loaded by import
 $(window).on('load', function () {
-
+    fetchLoanRequests();
+    fetchProcessedLoanRequests();
+    fetchCompanyDetails();
+    fetchLoanProductType();
     //prefill document types
     if ($("#kyc1-form").length > 0) {
         fetchDocumentsList();
@@ -666,9 +669,7 @@ $(window).on('load', function () {
         loadCollateralTypes();
     }
 
-    fetchLoanRequests();
-    fetchProcessedLoanRequests();
-    fetchCompanyDetails();
+    
 
 
     //load datepicker
@@ -1043,6 +1044,22 @@ function fetchCompanyDetails() {
         },
         success: function (d) {
             localStorage.setItem('companyDetails', JSON.stringify(d));
+        }
+    })
+}
+
+function fetchLoanProductType(){
+    let api_endpoint = "/api/Loan";
+
+    $.ajax({
+        type: 'get',
+        url: setup_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function (d) {
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function (d) {
+            localStorage.setItem('loanProducts', JSON.stringify(d));
         }
     })
 }
