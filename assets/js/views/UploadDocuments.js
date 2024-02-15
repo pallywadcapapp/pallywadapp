@@ -22,7 +22,7 @@ export default class extends DefaultView {
                                     <a href="/dashboard"><img src="assets/img/close-icon.png" /></a>
                                 </div>
                                 <div id="upload-forms" class="white-bg rounded div-shadow upload-form ">
-                                    <form id="step-2" action="POST" >
+                                    <form id="step-2">
                                         <div class="text-center ">
                                             <h3>Let's verify your identity</h3>
                                             <p class="grey-text">To get verified, you will need to:</p>

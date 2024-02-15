@@ -19,7 +19,7 @@ export default class extends DefaultView {
                             <div class="col-md-7 col-12 ms-auto me-auto relative">
                                 
                                 <div class="white-bg rounded div-shadow upload-form ">
-                                    <form  action="POST" >
+                                    <form>
                                         <div class="text-center ">
                                             <h3>Loan Request Complete</h3>
                                             <p>Your loan request was completed successfully. 

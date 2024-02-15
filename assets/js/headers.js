@@ -105,7 +105,7 @@ class DefaultFooter extends HTMLElement {
                             updates on our lending structure improvements
                         </p>
                         <div>
-                            <form action="" method="POST">
+                            <form>
                                 <textarea rows="3" class="footer-newsletter-form" placeholder="Enter your email address"></textarea>
                                 <a href="" class="default-button-green">Get Started</a>
                             </form>

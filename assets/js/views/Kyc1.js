@@ -22,7 +22,7 @@ export default class extends DefaultView {
                                     <a href="/upload-documents" data-link><img src="assets/img/close-icon.png" /></a>
                                 </div>
                                 <div id="kyc1-form" class="white-bg rounded div-shadow upload-form ">
-                                    <form id="kyc1-form-step" action="POST" >
+                                    <form id="kyc1-form-step">
                                         <div class="text-center ">
                                             <h3>Select Document</h3>
                                             <p>Select a verification document to upload
