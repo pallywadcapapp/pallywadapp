@@ -22,15 +22,31 @@ export default class extends DefaultView {
                                     <a href="/dashboard" data-link><img src="assets/img/close-icon.png" /></a>
                                 </div>
                                 <div id="kyc2-form" class="white-bg rounded div-shadow upload-form ">
-                                    <h3>Preview Loan Request</h3>
-                                    <p><b>Loan type:</b> ${localStorage.getItem('category')}</p>
-                                    <p><b>Loan amount:</b> ${localStorage.getItem('amount')}</p>
-                                    <p><b>Interest Rate:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest}%</p>
-                                    <p><b>Tenor:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].duration}months</p>
-                                    <p><b>Collateral Threshold:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].collateralPercentage}%</p>
-                                    <!--<p><b>Proof Documents uploaded:</b> ${localStorage.getItem('proofDocuments')}</p>
-                                    <p><b>Uploaded Collateral Documents:</b> ${localStorage.getItem('uploadedCollaterals')}</p>-->
-                                    <a class="btn continue-button" href="javascript:;" id="submitLoanRequest"">Submit Loan Request</a>
+                                    <h3 style="text-align: center;">Preview Loan Request</h3>
+                                    <p><b>Loan type:</b> <span style="float:right">${localStorage.getItem('category')}</span></p>
+                                    <p><b>Loan amount:</b> <span style="float:right">${number_format(localStorage.getItem('amount'))}</span></p>
+                                    <p><b>Interest Rate:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest}% -
+                                    ${parseInt(JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest) + 5}%  
+                                    <span> You will get your exact rae on loan approval</span>
+                                    </p>
+                                    <div class="grey-text form-control" style="border-width: medium;">
+                                    <span>Amount to be paid monthly as interest: </span>
+                                    <span style="float:right">
+                                    ${number_format(parseFloat(localStorage.getItem('amount')) * parseInt(JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest) / 100)}
+                                     - 
+                                    ${number_format(parseFloat(localStorage.getItem('amount')) * (parseInt(JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest) + 5) / 100)}
+                                    </span>
+                                    </div>
+                                    
+                                    <br />
+                                    <div>
+                                        (Interest amount is rate percentage of Loan balance per month. Interest amount reduces as loan is repaid)
+                                    </div>
+                                    <br />
+                                    <!--<p><b>Collateral Type:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].duration}months</p>
+                                    <p><b>Collateral Threshold:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].collateralPercentage}%</p>-->
+                                    
+                                    <a class="btn continue-button-2" href="javascript:;" id="submitLoanRequest"">Submit Loan Request</a>
                                 </div>
                             </div>
                         </div>

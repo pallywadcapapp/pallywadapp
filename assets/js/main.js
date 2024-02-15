@@ -528,9 +528,11 @@ $(window).on('load', function () {
 //section to get all needed ids loaded by import
 $(window).on('load', function () {
     fetchLoanRequests();
-    fetchProcessedLoanRequests();
+    //fetchProcessedLoanRequests();
     fetchCompanyDetails();
     fetchLoanProductType();
+    fetchNotifications();
+    setInterval(fetchNotifications, 900000); //every 15 minutes
     //prefill document types
     if ($("#kyc1-form").length > 0) {
         fetchDocumentsList();
@@ -975,62 +977,7 @@ function fetchLoanRequests() {
     })
 }
 
-function fetchProcessedLoanRequests() {
-    let api_endpoint = "/api/LoanRequest/ProcessedLoanRequests";
-    $.ajax({
-        type: 'get',
-        url: loan_app_url + api_endpoint,
-        headers: { 'Content-Type': 'application/json' },
-        error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
-        },
-        success: function (d) {
 
-            if (d.length > 0) {
-                $('.Eligible').show();
-                console.log(d);
-                let lists = d;
-                localStorage.setItem('processedLoans', JSON.stringify(d));
-
-                let amount = lists[0].amount;
-                let duration = lists[0].duration == 1 ? lists[0].duration + " Month" : lists[0].duration + " Months";
-                let disbursementDate = lists[0].approvalDate;
-                disbursementDate = formatDate3(disbursementDate).date2;
-                repaymentStartDate = formatDate3(lists[0].approvalDate).date;
-                loanCategory = lists[0].category;
-                loanStatus = lists[0].status;
-                let loanStatusStyle = (lists[0].status == "Pending")
-                    ? "loan-status-pending"
-                    : (lists[0].status == "Declined" ? "loan-status-declined"
-                        : (lists[0].status == "Awaiting Approval" ? "loan-status-awaiting"
-                            : (lists[0].status == "Approved" ? "loan-status-approved"
-                                : "loan-status-running")));
-                //repaymentStartDate = new Date(repaymentStartDate.setMonth(repaymentStartDate.getMonth()+1));
-                let interestDisplay = lists[0].loaninterest;
-
-                if (lists.length < 1) {
-                    $('.currentLoan').hide();
-                }
-                else {
-                    $('.currentLoan').show();
-                    $('.loanAmount').html(number_format(amount));
-                    $('.loanCategory').html(loanCategory);
-                    $('.loanDuration').html(duration);
-                    var tempD = new Date(repaymentStartDate)
-                    var newDate = new Date(tempD.setMonth(tempD.getMonth() + parseInt(duration)));
-                    $('.duedate').html(newDate.toLocaleDateString());
-                    $('.loanStatus').html(loanStatus);
-                    $('.loanStatusStyle').html(`<span class="${loanStatusStyle}">${lists[0].status}</span>`);
-                    $('.disbursementDate').html(disbursementDate);
-                    $('.repaymentStartDate').html(repaymentStartDate);
-                    $('.interestDisplay').html(interestDisplay);
-                }
-            }
-
-
-        }
-    })
-}
 
 function fetchCompanyDetails() {
     let api_endpoint = "/api/Company";
@@ -1060,6 +1007,32 @@ function fetchLoanProductType(){
         },
         success: function (d) {
             localStorage.setItem('loanProducts', JSON.stringify(d));
+        }
+    })
+}
+function fetchNotifications(){
+    let api_endpoint = "/api/notifications";
+    $.ajax({
+        type: 'get',
+        url: loan_app_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function (d) {
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            $('.icon-button__badge').html(0);
+        },
+        success: function (d) {
+            $('.icon-button__badge').html(d.length);
+            var display = '';
+            for (let i = 0; i < d.length; i++) {
+            display += `
+            <li><a href="javascript:void(0);" class="dropdown-item notify-item">
+    <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
+    <p class="notify-details"><b>${d[i].id}</b><small class="text-muted">${d[i].message}.</small></p>
+</a></li>
+            `;
+            }
+
+            $('#notbar').html(display)
         }
     })
 }
@@ -1281,7 +1254,7 @@ $(document).ready(function () {
             $('#kyc2-form').pleaseWait('stop');
         }else if(loanAmt > estValue){
             $('#kyc2-form').pleaseWait('stop');
-            displayToast('error', 'Your collateral value does not meet the laon type criteria', 'Collateral value requirement');
+            displayToast('error', 'Loan requested should not exceed '+ collateralRate + '% of the collateral value provided', 'Collateral value requirement');
             displayToast('error', 'Change the loan value or provide another collateral value entity', 'Enter Collateral Value');
         } else if (uploadedFiles.length < 1) {
             $('#kyc2-form').pleaseWait('stop');
@@ -1292,6 +1265,10 @@ $(document).ready(function () {
             let estimatedValue = $('#estimatedValue').val();
             let collateralRefId = $('#collateralType :selected').val();
             let otherdetails = $('#otherdetails').val() ?? "None";
+
+            if(otherdetails = '' || otherdetails == null){
+                otherdetails = 'NIL'
+            }
             //console.log(uploadedFiles);
             /*for (let i = 0; i < uploadedFiles.length - 1; i++) {
                 console.log(uploadedFiles);

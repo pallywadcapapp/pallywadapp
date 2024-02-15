@@ -49,7 +49,7 @@ export default class extends DefaultView {
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">Next Due Date</div>
-                                        <div class="col-md-6">13/02/24</div>
+                                        <div class="col-md-6 nextduedate" id="nextduedate">13/02/24</div>
                                     </div>
                                     
                                 </div>
@@ -63,7 +63,7 @@ export default class extends DefaultView {
                                         <div class="loanStatusStyle mt-2"></div>
                                         <hr>
                                         Next Due Date<br>
-                                        <b>Wed 10 Jan, 2024</b>
+                                        <b class="nextduedate">Wed 10 Jan, 2024</b>
                                     </div>
                                 
                                 </div>
@@ -81,7 +81,7 @@ export default class extends DefaultView {
                                             <span class="grey-text">Current Loan Balance:</span> 
                                             <p class="current-loan-amount mt-2"><span class="loanCategory">Current Loan Amount</span></p>
                                             <div class="d-flex justify-content-between">
-                                                <h3>${this.currency} <span class="loanAmount">0</span></h3>
+                                                <h3>${this.currency} <span class="loanBalance">0</span></h3>
                                                 <a href="javascript:;" class="default-button-green makePayment">Pay </a>
                                             </div>
                                             <hr>

@@ -26,20 +26,25 @@ export default class extends DefaultView {
                                         
 
                                         <div class="text-center">
-                                            <h3>Upload Collateral Document</h3>
+                                            <h3>Add Collateral Document</h3>
                                             <div class="text-center illustration-space-3">
                                             
                                                 <div id="uploadedFilesPreview" class="table table-striped table-hover"> 
                                                 </div>
                                             </div>
                                             <a href="javascript:;" id="upload-collateral-document" 
-                                                class="continue-button-5 mb-3"><i class="fa fa-upload"></i> Upload Collateral Document(s)</a>
+                                                class="continue-button-5 mb-3" style="color:#24488F !important"><i class="fa fa-upload"></i> Upload Collateral Document(s)</a>
                                                 <div class="text-start"><label >Type Of Collateral</label></div>
                                                 <select id="collateralType"></select>
                                             <div class="text-start mt-2"><label >Estimated Value</label></div>
-                                            <input type="number" id="estimatedValue" class="form-control mb-2 mt-2" placeholder="Enter estimated value of Collateral in Naira">
+                                            <div class="input-group">
+                                            <input type="number" id="estimatedValue" class="form-control" placeholder="Estimated value of Collateral in Naira" />
+                                            <div class="input-group-append" style="width:30%; align:justify">
+                                                <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>&#8358;</b></span>
+                                            </div>
+                                            </div>
                                             <div class="text-start mt-2"><label >Other Details</label></div>
-                                            <input type="text" id="otherdetails" class="form-control mb-2" placeholder="Other important details about Collateral">
+                                            <textarea type="text" id="otherdetails" class="form-control mb-2" placeholder="Other important details about Collateral"></textarea>
                                             
                                         </div>
                                        
