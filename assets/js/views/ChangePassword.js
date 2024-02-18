@@ -4,7 +4,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("Change Password  | Pallywad Capital ");
+        this.setTitle("Change Password  | PallyWad Capital ");
         
     }
 
@@ -50,7 +50,7 @@ export default class extends DefaultView {
                                         
                                         <hr class="mt-4 mb-4">
                                         <div class="privacy-area text-center">
-                                            <img src="../assets/img/shield-check.png" class="me-1" />Pallywad will not share your confidential data to a third party. Read our
+                                            <img src="../assets/img/shield-check.png" class="me-1" />PallyWad will not share your confidential data to a third party. Read our
                                             <a href="">Privacy Policy.</a>
                                         </div>
                                     </form>

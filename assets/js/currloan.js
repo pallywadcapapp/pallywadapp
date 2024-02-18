@@ -23,11 +23,14 @@ function setCurrentLoan(data){
         let amount = lists[0].loanamount;
         let repaymentStartDate = formatDate3(lists[0].repaymentDate).date2;
         let interestDisplay = lists[0].interestRate;
+        let interestamt = lists[0].interestamt;
 
        
             $('.loanAmount').html(number_format(amount));
             //var tempD = formatDate(repaymentStartDate).date;
             $('.duedate').html(repaymentStartDate);
+            $('.intrate').html(interestDisplay + '%');
+            $('.intamt').html(number_format(interestamt));
             $('#repaymentStartDate').html(repaymentStartDate);
             $('.interestDisplay').html(interestDisplay);
             $('.loanBalance').html(number_format(amount));
@@ -94,7 +97,8 @@ function processLoanDetails(d, pl){
             : (lists.status == "Declined" ? "loan-status-declined"
                 : (lists.status == "Awaiting Approval" ? "loan-status-awaiting"
                     : (lists.status == "Approved" ? "loan-status-approved"
-                        : "loan-status-running")));
+                    : (lists.status == "Collaterized" ? "loan-status-collaterized"
+                        : "loan-status-running"))));
         //repaymentStartDate = new Date(repaymentStartDate.setMonth(repaymentStartDate.getMonth()+1));
         let interestDisplay = lists.loaninterest;
         console.log(lists.length)

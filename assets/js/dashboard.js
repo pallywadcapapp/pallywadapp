@@ -21,7 +21,7 @@ function loadDashboard(loanId){
      },
      success: function (d) {
         console.log(d)
-        $('#amtPaid').html(d);
+        $('#amtPaid').html(number_format(d));
 
      }
  })

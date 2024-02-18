@@ -695,12 +695,15 @@ function loadCollateralTypes() {
             let documents = "";
             for (let i = 0; i < lists.length; i++) {
                 documents += `
-                    <option value="${lists[i].name}">
+                    <option value="${lists[i].name}"
+                    collateralDescription="${lists[i].description}">
                         ${lists[i].name}
                     </option>
                 `;
             }
+            localStorage.setItem('selCollateral', lists[0].name);
             $('#collateralType').html(documents);
+            $('#collateralTypeDescription').html(`<br>${lists[0].description}`);
 
         }
     })
@@ -845,10 +848,25 @@ $("body").on('change', '#loanType', function () {
     let categoryBox = $('#category');
     let collateralPercentageyBox = $('#collateralPercentage');
     let pindexBox = $('#pindex');
+
+    if(category == 'Business Loan'){
+        $('.busLoanView').show();
+    }else{
+        $('.busLoanView').hide();
+    }
+
     descriptionBox.html(`<b>Loan Type Description:</b><br><br> ${description}`);
     categoryBox.val(category);
     collateralPercentageyBox.val(collateralPercentage);
     pindexBox.val(pindex);
+});
+
+$('body').on('change', '',function(){
+    let collat = $("#collateralType :selected").attr("value");
+    let description = $("#collateralType :selected").attr("collateralDescription");
+    
+    $('#collateralTypeDescription').html(`<br>${description}`);
+    localStorage.setItem('selCollateral', collat);
 });
 
 $("body").on('change', '#loanAmountRequested', function () {
@@ -863,6 +881,7 @@ $("body").on('change', '#loanAmountRequested', function () {
 /***
 ** PRELOAD FUNCTIONS
 ***/
+
 
 function uploadedDocuments() {
     let api_endpoint = "/api/Documents";
@@ -882,7 +901,7 @@ function uploadedDocuments() {
                     <div class="form-check">
                         <input class="form-check-input" 
                             name="verificationDocument" required 
-                            type="checkbox" 
+                            type="checkbox" checked
                             valueName="${lists[i].name}"
                             value="${lists[i].id}">
                         <label class="form-check-label" for="flexCheckDefault">
@@ -1565,6 +1584,11 @@ var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'));
 
 //upload proof of payment
 $('body').on('click', '.uploadPaymentProof', function () {
+    let providedAmount = 0;
+    var repaymentamount = $('#repayment-amount').val();
+    if(repaymentamount > 0){
+        providedAmount = repaymentamount;
+    }
 
     let processedLoans = JSON.parse(localStorage.getItem('processedLoans'));
     if(processedLoans == null){
@@ -1593,6 +1617,7 @@ $('body').on('click', '.uploadPaymentProof', function () {
                         <b>Amount Paid (&#8358;)</b>
                         <input type="number" 
                         class="form-control" 
+                        value="${providedAmount}"
                         id="amount" 
                         placeholder="Amount you paid eg 30000">
                     </div>

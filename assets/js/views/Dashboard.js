@@ -4,7 +4,7 @@ export default class extends DefaultView {
 
     constructor(params) {
         super(params);
-        this.setTitle("Dashboard | Pallywad Capital ");
+        this.setTitle("Dashboard | PallyWad Capital ");
     }
 
     async getHtml() {
@@ -72,7 +72,7 @@ export default class extends DefaultView {
                                     Amount Approved
                                     <h4>&#8358; <span class="loanAmount"></span></h4>
                                     Amount Paid so far
-                                    <h4>${this.currency} <span id="amtPaid">150,000</span></h4>
+                                    <h4>${this.currency} <span id="amtPaid">0</span></h4>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mt-4">

@@ -3,7 +3,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("Loans | Pallywad Capital ");
+        this.setTitle("Loans | PallyWad Capital ");
     }
 
     async getHtml() {
@@ -14,6 +14,15 @@ export default class extends DefaultView {
                 <left-sidebar></left-sidebar>
                 <div class="right-pane">
                     <div class="container">
+                    <div style="border-radius:10px;border:solid; border-color:#F88559; background-color:#F6DFD7; margin:2%; color:#F88559;">
+                        <span style="margin-left:10px; font:font-family: Helvetica Neue;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 19px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                        ">Running</span>
+                    </div>
                         <div class="row">
                             
                             <div class="col-md-5 loan-display currentLoan">
@@ -56,7 +65,7 @@ export default class extends DefaultView {
                                         
                                     </div>
                                     <div>
-                                        <a href="javascript:;"  class="makePayment default-button block text-center mt-4">Repay</a>
+                                        <a href="javascript:;"  class="uploadPaymentProof default-button block text-center mt-4">Repay</a>
                                     </div>
 
                                 </div>
@@ -69,7 +78,15 @@ export default class extends DefaultView {
                                         <div class="col-md-6"><span class="loanDuration">1 Months<span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">Loan Due Date</div>
+                                        <div class="col-md-6">Current Rate</div>
+                                        <div class="col-md-6"><span class="intrate">1%<span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">Amount Due</div>
+                                        <div class="col-md-6">${this.currency}<span class="intamt">0<span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">Next Payment Date</div>
                                         <div class="col-md-6"><span class="duedate">13/02/24</span></div>
                                     </div>
                                     
@@ -116,6 +133,10 @@ export default class extends DefaultView {
                                                 <div class="row">
                                                     <div class="col-md-6">Disbursement Amount</div>
                                                     <div class="col-md-6">${this.currency}<span class="loanAmount">0</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">Disbursement Tenor</div>
+                                                    <div class="col-md-6"><span class="loanDuration">0</span></div>
                                                 </div>
                                                 
                                             </div>

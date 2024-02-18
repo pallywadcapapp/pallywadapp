@@ -3,7 +3,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("KYC: Select Country  | Pallywad Capital ");
+        this.setTitle("KYC: Select Country  | PallyWad Capital ");
     }
 
     async getHtml() {
@@ -42,10 +42,22 @@ export default class extends DefaultView {
                                             
                                         </div>
                                         <div id="uploadDocumentExtrafields" class="form-group mt-2 hide" >
-                                           
-                                            <input type="text" id="documentNo" class="form-control mb-2" placeholder="Enter ${ localStorage.getItem('chosenDocumentName')} Number">
-                                            <input type="date" id="expiryDate" class="form-control mb-2" placeholder="Expiry Date">
+                                        <div class="input-group">
+                                        <div class="input-group-append" style="width:30%; align:justify">
+                                            <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Document No.</b></span>
+                                        </div>
+                                        
+                                        <input type="text" id="documentNo" class="form-control mb-2" placeholder="Enter ${ localStorage.getItem('chosenDocumentName')} Number" />
+                                        </div>
                                             
+                                            
+                                            <div class="input-group">
+                                            <div class="input-group-append" style="width:30%; align:justify">
+                                                <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Expiry Date</b></span>
+                                            </div>
+                                            
+                                            <input type="date" id="expiryDate" class="form-control mb-2" placeholder="Expiry Date" />
+                                            </div>
                                             <a href="javascript:;" id="uploadDocument" class="continue-button-2 hide" >Submit Document</a>
                                             
                                         </div>

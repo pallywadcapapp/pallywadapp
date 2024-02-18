@@ -10,7 +10,7 @@ $('body').on('click', '.loanView', function () {
     $('.modal-body').html(content);
     $('.modal-title').html('Loan Details');
     //var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
-    if(userLoanRequest[lvClickId].status == 'Declined' || userLoanRequest[lvClickId].status == 'Approved'|| userLoanRequest[lvClickId].status == 'Pending')
+    if(userLoanRequest[lvClickId].status != 'Processed')
     myModal.show({
         keyboard: false,
         backdrop: 'static'
@@ -26,7 +26,8 @@ function loanRequestView(loanRequest){
     : (loanRequest.status == "Declined" ? "loan-status-declined"
         : (loanRequest.status == "Awaiting Approval" ? "loan-status-awaiting"
             : (loanRequest.status == "Approved" ? "loan-status-approved"
-                : "loan-status-running")));
+            : (lists.status == "Collaterized" ? "loan-status-collaterized"
+                : "loan-status-running"))));
     let content = '';
     if(loanRequest.status == 'Pending'){
         console.log(loanRequest)
@@ -99,8 +100,15 @@ function loanRequestView(loanRequest){
                                 </p>
                             </div>
                             <div class="col-md-12">
-                                <span>Reason for decline</span>
-                                <div class="grey-text form-control" style="border-width: medium; height:100px;">
+                                <span style="font-family: Helvetica Neue;
+                                font-size: 16px;
+                                font-weight: 400;
+                                line-height: 20px;
+                                letter-spacing: 0em;
+                                text-align: left;
+                                ">Reason for decline</span>
+                                <div class="grey-text form-control" style="border-color: #ADADAD; color: #ADADAD;
+                                border-width: medium; height:100px;">
                                 <span> ${loanRequest.reason} </span>
                                 </div>
                                 <br />
@@ -126,20 +134,48 @@ function loanRequestView(loanRequest){
         content = `
         
         <div class="px-4 py-2">
+        <div class="row"">
+                            <div class="col-md-5">
+                                <span class="${loanTypeStyle}">${loanRequest.status}</span>
+                            </div>
+                            <div class="col-md-7 loan-display">
+                                <h4>&#8358;${number_format(loanRequest.amount)}</h4>
+                                <p class="grey-text">Booast working capital</p>
+                            </div>
+                            <div class="col-md-12">
+                                <span><b>Pre approved Date and Time</b> </span>
+                                <p class="grey-text">
+                                ${timeOutput} - 
+                                ${dayOutput}
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <span style="font-family: Helvetica Neue;
+                                color: #737272;
+                                font-size: 16px;
+                                font-weight: 400;
+                                line-height: 20px;
+                                letter-spacing: 0em;
+                                text-align: left;
+                                ">Purpose of the Loan</span>
+                                <div class="grey-text form-control" style="border-color: #ADADAD; color: #ADADAD;
+                                border-width: medium; height:100px;">
+                                <span> ${loanRequest.purpose} </span>
+                                </div>
+                                <br />
+                                <span class="loan-status-running">${loanRequest.category}</span>
+                                <br />
+                                <p class="grey-text">
+                                    <span>Collateral: <b>${loanRequest.collateralId}</b></span>
+                                    <br/>
+                                    <span>Loan duration: <b>${loanRequest.duration} months</b></span>
+                                </p>
+                            </div>
+                        </div>
             
             <div class="col-md-12 black-text mb-2">
-                 <div class="px-2 py-3 payment-details-bank">
-                                <b>Request ID:</b> ${loanRequest.loanId}<br>
-                                <b>Loan Type: </b> ${loanRequest.category}<br> 
-                                <b>Amount (&#8358;): </b> ${moneyFormat(loanRequest.amount)}<br> 
-                                <b>Interest Rate (%): </b> ${loanRequest.loaninterest.toFixed(2)}<br> 
-                                <b>Tenor (Months):</b> ${loanRequest.duration}<br>
-                                <b>Loan Status:</b> ${loanRequest.status}<br>
-                                <b>Request Date:</b> ${new Date(loanRequest.requestDate).toLocaleDateString()}<br>
-                                <b>Approved Date:</b> ${dateFormatter(loanRequest.approvalDate)}
-                            </div>
+               
             </div>
-            <div><a class="btn continue-button-2"> View More </a></div>
         </div>
         `
     }

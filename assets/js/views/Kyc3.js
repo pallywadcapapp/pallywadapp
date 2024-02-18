@@ -3,7 +3,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("KYC: Upload Proof of Address   | Pallywad Capital ");
+        this.setTitle("KYC: Upload Proof of Address   | PallyWad Capital ");
     }
 
     async getHtml() {

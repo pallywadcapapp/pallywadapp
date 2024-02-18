@@ -3,7 +3,7 @@ import DefaultViewNoAuth from "./DefaultViewNoAuth.js";
 export default class extends DefaultViewNoAuth {
     constructor(params) {
         super(params);
-        this.setTitle("Forgot Password | Pallywad Capital ");
+        this.setTitle("Forgot Password | PallyWad Capital ");
     }
 
     async getHtml() {

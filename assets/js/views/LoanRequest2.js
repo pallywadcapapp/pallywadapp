@@ -3,7 +3,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("Loan Request  | Pallywad Capital ");
+        this.setTitle("Loan Request  | PallyWad Capital ");
     }
 
     async getHtml() {
@@ -36,6 +36,11 @@ export default class extends DefaultView {
                                                 class="continue-button-5 mb-3" style="color:#24488F !important"><i class="fa fa-upload"></i> Upload Collateral Document(s)</a>
                                                 <div class="text-start"><label >Type Of Collateral</label></div>
                                                 <select id="collateralType"></select>
+                                                <div class="text-left">
+                                                <div style="margin:3%" id="collateralTypeDescription" class="loan-description-box">
+                                                    Description
+                                                </div>
+                                                </div>
                                             <div class="text-start mt-2"><label >Estimated Value</label></div>
                                             <div class="input-group">
                                             <input type="number" id="estimatedValue" class="form-control" placeholder="Estimated value of Collateral in Naira" />
@@ -47,7 +52,18 @@ export default class extends DefaultView {
                                             <textarea type="text" id="otherdetails" class="form-control mb-2" placeholder="Other important details about Collateral"></textarea>
                                             
                                         </div>
-                                       
+                                        <div class="row" style="height:50px">
+                                            <div class="col-md-8" style="height:30px">
+                                                <span style="color: #ADADAD;"> Loan requested should not exceed ${localStorage.getItem('collateralRate')}% of collateral provided.
+                                            Minimum expected collateral value: .</span>
+                                            </div>
+                                            <div class="col-md-4" style="background-color: #F4F4F4; border-radius:5px; width:124px;; height:30px; margin:10px">
+                                                <span><b>${this.currency}
+                                                ${(parseFloat(localStorage.getItem('amount')) * 100 /parseFloat(localStorage.getItem('collateralRate'))).toFixed(2)}
+                                                </b></span>
+                                            </div> 
+                                        </div>
+                                        <br/>
                                      
 
                                         <div id="loan-details-area" class="form-group ">
@@ -59,7 +75,7 @@ export default class extends DefaultView {
                                         <input type="file" class="d-none" id="selectfile" />
                                         <div class="privacy-area text-center mt-3">
                                             By clicking the “start” button you agree to our
-                                            <a href="">User Terms and Conditions and</a> <a href="">our Privacy Notice.</a>
+                                            <a target="_blank" href="https://pallywad.com/terms">User Terms and Conditions and</a> <a target="_blank" href="https://pallywad.com/privacy">our Privacy Notice.</a>
                                         </div>
                                     </form>
                     

@@ -1299,7 +1299,8 @@ input[type="file"]{
 }
   
 .loanArea input[type=text],
-.loanArea input[type=number] {
+.loanArea input[type=number] ,
+.loanArea textarea {
     border: 1px solid #ADADAD;
     background-color: transparent;
     width: 100%;
@@ -1367,6 +1368,17 @@ input[type="file"]{
 
 .loan-status-awaiting { 
     background-color: #FFD600;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+.loan-status-collaterized { 
+    background-color: #F88559;
     display: block;
     color: #fff;
     font-weight: 700;
