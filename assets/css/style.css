@@ -1366,6 +1366,17 @@ input[type="file"]{
     border-radius: 5px;
 }
 
+.loan-status-pending:hover { 
+    background-color: #999;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
 .loan-status-awaiting { 
     background-color: #FFD600;
     display: block;
@@ -1388,8 +1399,31 @@ input[type="file"]{
     border-radius: 5px;
 }
 
+.loan-status-collaterized:hover { 
+    background-color: #999;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
 .loan-status-approved { 
     background-color: #33D290;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+.loan-status-approved:hover { 
+    /*background-color: #33C290;*/
+    background-color: #999;
     display: block;
     color: #fff;
     font-weight: 700;
@@ -1410,9 +1444,32 @@ input[type="file"]{
     border-radius: 5px;
 }
 
+.loan-status-declined:hover { 
+    background-color: #999;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
 
 .loan-status-running { 
     background-color: #24488F;
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+
+.loan-status-running:hover { 
+    background-color: #999;
     display: block;
     color: #fff;
     font-weight: 700;
@@ -1602,15 +1659,36 @@ input[type="file"]{
 
 
 @media (max-width: 767px) {
+    left-sidebar{
+        display: none;
+    }
     .left-sidebar{
         margin-left: -75px;
     }
+
+    
+.right-pane {
+    width: calc(100% - 30px);
+    padding-top: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
 }
 @media (max-width: 480px) {
+    left-sidebar{
+        display: none;
+    }
     .left-sidebar {
       z-index: 10;
     }
     .button-menu-mobile {
       display: block;
+    }
+
+    .right-pane {
+        width: calc(100% - 10px);
+        padding-top: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
     }
   }

@@ -174,7 +174,7 @@ class DashboardHeader extends HTMLElement {
                             </button>-->
                             <button type="button" class="icon-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="material-icons">notifications</span>
-                            <span class="icon-button__badge">2</span>
+                            <span class="icon-button__badge">0</span>
                           </button>
                                 <ul class="dropdown-menu" id="notbar">
                                     <li><a class="dropdown-item" href="/profile"><i class="fa fa-user-o"></i> Profile</a></li>

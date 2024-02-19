@@ -51,7 +51,7 @@ export default class extends DefaultView {
                                         </div>
                                             
                                             
-                                            <div class="input-group">
+                                            <div class="input-group expirySeg">
                                             <div class="input-group-append" style="width:30%; align:justify">
                                                 <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Expiry Date</b></span>
                                             </div>

@@ -82,6 +82,10 @@ export default class extends DefaultView {
                                                 <input id="interest" type="number" disabled/>
                                             </div>
                                             <div class="form-group mt-3 mb-4">
+                                                <label><b>Preferred Interest Rate (Monthly)</b></label><br>
+                                                <input id="preferredRate" type="number"/>
+                                            </div>
+                                            <div class="form-group mt-3 mb-4">
                                                 <label><b>Purpose for the Loan</b></label><br>
                                                 <textarea class="form-control" id="purpose"></textarea>
                                             </div>

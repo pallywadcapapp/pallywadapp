@@ -48,7 +48,7 @@ export default class extends DefaultView {
                                         <div class="col-md-6"><span class="loanDuration">1 Months<span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">Next Due Date</div>
+                                        <div class="col-md-6">Next Due </div>
                                         <div class="col-md-6 nextduedate" id="nextduedate">13/02/24</div>
                                     </div>
                                     
@@ -62,7 +62,7 @@ export default class extends DefaultView {
                                         <b>Loan Status</b>
                                         <div class="loanStatusStyle mt-2"></div>
                                         <hr>
-                                        Next Due Date<br>
+                                        Next Due <br>
                                         <b class="nextduedate">Wed 10 Jan, 2024</b>
                                     </div>
                                 

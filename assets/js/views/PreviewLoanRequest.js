@@ -25,11 +25,19 @@ export default class extends DefaultView {
                                     <h3 style="text-align: center;">Preview Loan Request</h3>
                                     <p><b>Loan type:</b> <span style="float:right">${localStorage.getItem('category')}</span></p>
                                     <p><b>Loan amount:</b> <span style="float:right">${number_format(localStorage.getItem('amount'))}</span></p>
-                                    <p><b>Interest Rate:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest}% -
+                                    <p><b>Collateral type:</b> <span style="float:right">${localStorage.getItem('selCollateral')}</span></p>
+                                    <p><b>Preferred Interest Rate:</b> <span style="float:right">${localStorage.getItem('preferredRate')}%</span></p>
+                                    <div class="grey-text form-control" style="border-width: medium;">
+                                    <span>purpose: </span>
+                                    <span style="float:right">
+                                    ${localStorage.getItem('purpose')}
+                                    </span>
+                                    </div>
+                                    <p hidden><b>Interest Rate:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest}% -
                                     ${parseInt(JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest) + 5}%  
                                     <span> You will get your exact rae on loan approval</span>
                                     </p>
-                                    <div class="grey-text form-control" style="border-width: medium;">
+                                    <div hidden class="grey-text form-control" style="border-width: medium;">
                                     <span>Amount to be paid monthly as interest: </span>
                                     <span style="float:right">
                                     ${number_format(parseFloat(localStorage.getItem('amount')) * parseInt(JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest) / 100)}

@@ -26,6 +26,16 @@ export default class extends DefaultView {
                                         </div>
                                         <div class="form-group mt-3">
                                             <div class="row">
+                                                <div class="small-12 medium-2 large-2 columns">
+                                                    <div class="text-center circle"><img class="profile-pic upload-buttons"
+                                                     src="assets/img/user-pic.png"></div>
+                                                </div>
+                                                <div class="p-image">
+                                                    <i class="fa fa-2x fa-camera upload-buttons"></i>
+                                                    <input class="file-upload" type="file" accept="image/*"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Firstname <span class="text-danger">*</span></label>
                                                     <input disabled type="text" class="form-control" id="firstname" name="firstname">

@@ -366,6 +366,7 @@ function fetchLoggedInUserDetails(email, token, expiration) {
         },
         success: function (d) {
             if (d.email) {
+                $('.profile-pic').attr('src',d.imgUrl)
                 localStorage.setItem("firstname", d.firstname);
                 localStorage.setItem("lastname", d.lastname);
 
@@ -442,8 +443,9 @@ function checkEligibility() {
 $('body').on('click', '#update-profile', function (e) {
 
     if ($("#updateProfileForm").valid()) {
+        $('#updateProfileForm').pleaseWait();
         e.preventDefault();
-        let dob = $('[name=dob]').val();
+        let dob = new Date($('[name=dob]').val());
         let address = $('[name=address]').val();
         let phoneNumber = $('[name=phoneNumber]').val();
         let firstname = $('[name=firstname]').val();
@@ -454,8 +456,12 @@ $('body').on('click', '#update-profile', function (e) {
         let bvn = "string";
         let memberid = "string";
         let email = localStorage.getItem("email");
+        let imgUrl = tempImgUrl;
 
         let api_endpoint = "/api/Profile";
+
+        var checkProf = localStorage.getItem('tempProfile');
+        
 
         //check if login credentials are valid
         let data = {
@@ -469,7 +475,8 @@ $('body').on('click', '#update-profile', function (e) {
             employmentStatus,
             bvn,
             email,
-            memberid
+            memberid,
+            imgUrl
         }
 
         $.ajax({
@@ -478,10 +485,15 @@ $('body').on('click', '#update-profile', function (e) {
             headers: { 'Content-Type': 'application/json' },
             data: JSON.stringify(data),
             error: function (d) {
-
+                $('#updateProfileForm').pleaseWait('stop');
                 displayToast('error', d.responseJSON.message, d.responseJSON.title)
             },
             success: function (d) {
+                if(checkProf){
+                    alert(checkProf)
+                    uploadProfilePicture();
+                }
+                
                 displayToast('success', "Your profile was updated successfully", "Profile update successful")
                 let redirect = localStorage.getItem('gotoDocuments');
                 if (redirect) {
@@ -523,7 +535,7 @@ $(window).on('load', function () {
 
 })
 
-
+var tempImgUrl = '';
 
 //section to get all needed ids loaded by import
 $(window).on('load', function () {
@@ -607,6 +619,8 @@ $(window).on('load', function () {
                     displayToast('error', d.responseJSON.message, d.responseJSON.status)
                 },
                 success: function (d) {
+                    tempImgUrl = d.imgUrl;
+                    $('.profile-pic').attr('src', api_url + '/api/profile/fileuploads?filepath='+ d.imgUrl)
                     $('[name="firstname"]').val(d.firstname);
                     $('[name="lastname"]').val(d.lastname);
                     $('[name="othernames"]').val(d.othernames);
@@ -615,7 +629,7 @@ $(window).on('load', function () {
                     $('[name="address"]').val(d.address);
                     let newdate = formatDate3(d.dob);
                     finaldate = newdate.date;
-                    $('[name="dob"]').val(finaldate);
+                    $('[name="dob"]').val(new Date(d.dob).toLocaleDateString());
                     $('[name="sex"] option:contains("' + d.sex + '")').prop('selected', true);
                     $('[name="employmentStatus"] option:contains("' + d.employmentStatus + '")').prop('selected', true);
                     $('.firstnameOutput').html(d.firstname);
@@ -1150,6 +1164,11 @@ $('body').on('click', '#continue-loan-button-1', function () {
 
         let loancode = $('#loanType :selected').val();
         let amount = $('#loanAmountRequested').val();
+        let purpose = $('#purpose').val();
+        let businessname = $('#businessname').val();
+        let preferredRate = $('#preferredRate').val();
+        let sector = $('#sector').val();
+        let age = $('#age').val();
         let category = $('#category').val();
         let collateralPercentage = $('#collateralPercentage').val();
         let pindex = $('#pindex').val();
@@ -1161,7 +1180,12 @@ $('body').on('click', '#continue-loan-button-1', function () {
         });
         localStorage.setItem("loancode", loancode);
         localStorage.setItem("amount", amount);
+        localStorage.setItem("purpose", purpose);
         localStorage.setItem("category", category);
+        localStorage.setItem("businessname", businessname);
+        localStorage.setItem("sector", sector);
+        localStorage.setItem("preferredRate", preferredRate);
+        localStorage.setItem("age", age);
         localStorage.setItem('collateralRate', collateralPercentage);
         localStorage.setItem('selIndex', pindex)
         localStorage.setItem('pindex', pindex)
@@ -1232,7 +1256,7 @@ $(document).ready(function () {
             file = document.getElementById("selectfile").files[0];
 
             //check if uploaded file is valid
-            let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+            let validExtensions = ["image/jpeg", "image/jpg", "image/png", "application/pdf"];
             let fileType = file.type;
             if (validExtensions.includes(fileType)) {
                 let fileReader = new FileReader();
@@ -1253,7 +1277,7 @@ $(document).ready(function () {
 
             }
             else {
-                displayToast("error", "The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+                displayToast("error", "The image to be uploaded must be either .png, .jpg, .jpeg or .pdf format", "Invalid Image File");
             }
         }
 
@@ -1410,20 +1434,34 @@ $(document).ready(function () {
 
     function showFile(file) {
         let fileType = file.type;
-        let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+        let validExtensions = ["image/jpeg", "image/jpg", "image/png", "application/pdf"];
         let imgPreview = document.getElementById('imgPreview');
         if (validExtensions.includes(fileType)) {
             let fileReader = new FileReader();
             fileReader.onload = () => {
-                let fileURL = fileReader.result;
-                let imgTag = `<img src="${fileURL}" class="imgTag" alt="">`;
-                imgPreview.innerHTML = imgTag;
-                $('#upload-from-gallery').hide();
-                $('#uploadDocumentExtrafields').removeClass('hide');
+                if(fileType == 'application/pdf'){
+                    console.log(fileReader)
+                    let fileURL = fileReader.result;
+                    let imgTag = `<img src="/assets/img/card-illustration.png" class="imgTag" alt="">`;
+                    imgPreview.innerHTML = imgTag;
+                    $('#upload-from-gallery').hide();
+                    $('#uploadDocumentExtrafields').removeClass('hide');
+                }else{
+                    let fileURL = fileReader.result;
+                    let imgTag = `<img src="${fileURL}" class="imgTag" alt="">`;
+                    imgPreview.innerHTML = imgTag;
+                    $('#upload-from-gallery').hide();
+                    $('#uploadDocumentExtrafields').removeClass('hide');
+                }
+                var doc = localStorage.getItem('chosenDocumentName');
+                if(doc == 'NIN' || doc == 'Voters Card'){
+                    
+                    $('.expirySeg').addClass('hide');
+                }
             }
             fileReader.readAsDataURL(file);
         } else {
-            displayToast("error", "The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+            displayToast("error", "The image to be uploaded must be either .png, .jpg, .jpeg or .pdf format", "Invalid Image File");
         }
     }
 
@@ -1514,6 +1552,12 @@ $('body').on('click', '#submitLoanRequest', function () {
     let loancode = localStorage.getItem("loancode");
     let amount = localStorage.getItem("amount");
     let category = localStorage.getItem("category");
+    let collateral = localStorage.getItem("selCollateral");
+    let preferredRate = localStorage.getItem("preferredRate");
+    let sector = localStorage.getItem("sector");
+    let age = localStorage.getItem("age");
+    let purpose = localStorage.getItem("purpose");
+    let businessname = localStorage.getItem("businessname");
     let tempCollateral = JSON.parse(localStorage.getItem('tempCollateral'));
     console.log(tempCollateral);
     var collArray = [];
@@ -1525,10 +1569,16 @@ $('body').on('click', '#submitLoanRequest', function () {
         loancode,
         amount,
         category,
-        collateralRefId
+        collateralRefId,
+        collateral,
+        age,
+        purpose,
+        businessname,
+        preferredRate,
+        sector
     }
 
-
+    $('#kyc2-form').pleaseWait();
 
     $(".preloader-2").show();
     $.ajax({
@@ -1537,6 +1587,8 @@ $('body').on('click', '#submitLoanRequest', function () {
         headers: { 'Content-Type': 'application/json' },
         data: JSON.stringify(formData),
         success: function (data) {
+            $('#kyc2-form').pleaseWait('stop');
+            displayToast("success", "loan request successful", "Loan Request Success");
             //console.log(data);
             localStorage.removeItem("documentIdRefs");
             localStorage.removeItem("loancode");
@@ -1544,7 +1596,18 @@ $('body').on('click', '#submitLoanRequest', function () {
             localStorage.removeItem("category");
             localStorage.removeItem("collateralRefId");
             localStorage.removeItem("tempCollateral");
+            localStorage.removeItem("sector");
+            localStorage.removeItem("preferredRate");
+            localStorage.removeItem("businessname");
+            localStorage.removeItem("purpose");
+            localStorage.removeItem("age");
+            localStorage.removeItem("collateral"); 
+            
             location.href = "/loan-request-complete";
+        },
+        error: function(e){
+            $('#kyc2-form').pleaseWait('stop');
+            displayToast("error", "Unable to process loan request", "Loan Request Error");
         }
     });
 })
@@ -1556,7 +1619,7 @@ $('body').on('click', '#uploadPaymentProofFile', function () {
         file = document.getElementById("selectfile").files[0];
 
         //check if uploaded file is valid
-        let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+        let validExtensions = ["image/jpeg", "image/jpg", "image/png", "application/pdf"];
         let fileType = file.type;
         if (validExtensions.includes(fileType)) {
             let fileReader = new FileReader();
@@ -1574,7 +1637,7 @@ $('body').on('click', '#uploadPaymentProofFile', function () {
 
         }
         else {
-            displayToast("error", "The image to be uploaded must be either .png, .jpg or .jpeg format", "Invalid Image File");
+            displayToast("error", "The image to be uploaded must be either .png, .jpg, .jpeg or .pdf format", "Invalid Image File");
         }
     }
 })

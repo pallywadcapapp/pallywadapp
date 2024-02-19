@@ -25,7 +25,7 @@ export default class extends DefaultView {
                                     <form id="kyc1-form-step2">
                                         
 
-                                        <div class="text-center">
+                                        <div class="row text-center">
                                             <h3>Add Collateral Document</h3>
                                             <div class="text-center illustration-space-3">
                                             
@@ -52,21 +52,21 @@ export default class extends DefaultView {
                                             <textarea type="text" id="otherdetails" class="form-control mb-2" placeholder="Other important details about Collateral"></textarea>
                                             
                                         </div>
-                                        <div class="row" style="height:50px">
-                                            <div class="col-md-8" style="height:30px">
+                                        <div class="row" style="min-height:50px">
+                                            <div class="col-md-8" style="min-height:30px">
                                                 <span style="color: #ADADAD;"> Loan requested should not exceed ${localStorage.getItem('collateralRate')}% of collateral provided.
                                             Minimum expected collateral value: .</span>
                                             </div>
-                                            <div class="col-md-4" style="background-color: #F4F4F4; border-radius:5px; width:124px;; height:30px; margin:10px">
+                                            <div class="col-md-4" style="background-color: #F4F4F4; border-radius:5px; width:124px;min-height:30px; margin:10px">
                                                 <span><b>${this.currency}
-                                                ${(parseFloat(localStorage.getItem('amount')) * 100 /parseFloat(localStorage.getItem('collateralRate'))).toFixed(2)}
+                                                ${number_format((parseFloat(localStorage.getItem('amount')) * 100 /parseFloat(localStorage.getItem('collateralRate'))).toFixed(2))}
                                                 </b></span>
                                             </div> 
                                         </div>
                                         <br/>
                                      
 
-                                        <div id="loan-details-area" class="form-group ">
+                                        <div id="loan-details-area" class="form-group" style="margin-top:20px;">
                                             <a href="javascript:;" id="preview-loan-details" class="continue-button-2">Save & Preview</a>
                                             
                                         </div>
