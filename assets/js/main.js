@@ -1324,9 +1324,13 @@ $(document).ready(function () {
             formData.append("otherdetails", otherdetails);
             
             var coll = [];
-            $.each($("#selectfile")[0].files, function(i, file) {
-                coll.push(file);
-                formData.append('file', file);
+            //$.each($("#selectfile")[0].files, function(i, file) {
+            $.each(uploadedFiles, function(i, file) {
+                if(file != 'file'){
+                    coll.push(file);
+                    formData.append('file', file);
+                }
+                
             });
 
 
@@ -1342,6 +1346,7 @@ $(document).ready(function () {
                     $('#kyc2-form').pleaseWait('stop');
                     localStorage.setItem("uploadedCollaterals", JSON.stringify(coll));
                     localStorage.setItem("tempCollateral", JSON.stringify(data));
+                    localStorage.setItem('estimatedCollateralValue', estimatedValue);
                     location.href = "/preview-loan-request";
                 },
                 error: function(error){
@@ -1554,6 +1559,7 @@ $('body').on('click', '#submitLoanRequest', function () {
     let category = localStorage.getItem("category");
     let collateral = localStorage.getItem("selCollateral");
     let preferredRate = localStorage.getItem("preferredRate");
+    let estimatedCollateralValue = localStorage.getItem("estimatedCollateralValue");
     let sector = localStorage.getItem("sector");
     let age = localStorage.getItem("age");
     let purpose = localStorage.getItem("purpose");
@@ -1575,7 +1581,8 @@ $('body').on('click', '#submitLoanRequest', function () {
         purpose,
         businessname,
         preferredRate,
-        sector
+        sector,
+        estimatedCollateralValue
     }
 
     $('#kyc2-form').pleaseWait();
