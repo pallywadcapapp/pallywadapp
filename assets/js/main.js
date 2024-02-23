@@ -430,8 +430,8 @@ function checkEligibility() {
                 $('.notEligible').show();
                 $('.Eligible').hide();
             } else {
-                //$('.notEligible').hide();
-                //$('.Eligible').show();
+                $('.notEligible').hide();
+                $('.Eligible').show();
             }
         }
     })
@@ -490,7 +490,6 @@ $('body').on('click', '#update-profile', function (e) {
             },
             success: function (d) {
                 if(checkProf){
-                    alert(checkProf)
                     uploadProfilePicture();
                 }
                 
@@ -605,43 +604,7 @@ $(window).on('load', function () {
     if ($("#updateProfile").length > 0) {
         let email = localStorage.getItem("email");
         preloadProfileDetails(email);
-        function preloadProfileDetails(email) {
-            let api_endpoint = "/api/Profile";
-            let data = {
-                username: email
-            }
-            $.ajax({
-                type: 'get',
-                url: api_url + api_endpoint,
-                headers: { 'Content-Type': 'application/json' },
-                data: data,
-                error: function (d) {
-                    displayToast('error', d.responseJSON.message, d.responseJSON.status)
-                },
-                success: function (d) {
-                    tempImgUrl = d.imgUrl;
-                    $('.profile-pic').attr('src', api_url + '/api/profile/fileuploads?filepath='+ d.imgUrl)
-                    $('[name="firstname"]').val(d.firstname);
-                    $('[name="lastname"]').val(d.lastname);
-                    $('[name="othernames"]').val(d.othernames);
-                    $('[name="email"]').val(d.email);
-                    $('[name="phoneNumber"]').val(d.phoneNumber);
-                    $('[name="address"]').val(d.address);
-                    let newdate = formatDate3(d.dob);
-                    finaldate = newdate.date;
-                    $('[name="dob"]').val(new Date(d.dob).toLocaleDateString());
-                    $('[name="sex"] option:contains("' + d.sex + '")').prop('selected', true);
-                    $('[name="employmentStatus"] option:contains("' + d.employmentStatus + '")').prop('selected', true);
-                    $('.firstnameOutput').html(d.firstname);
-                    $('.lastnameOutput').html(d.lastname);
-                    $('.othernamesOutput').html(d.othernames);
-                    $('.dobOutput').html(newdate.date2);
-                    $('.emailOutput').html(d.email);
-                    $('.phoneOutput').html(d.phoneNumber);
-                    $('.addressOutput').html(d.address);
-                }
-            })
-        }
+        
     }
 
     if ($('#loanType').length > 0) {

@@ -77,7 +77,6 @@ function fetchProcessedLoanRequests(loanId) {
 
 function processLoanDetails(d, pl){
     //if (d.length > 0) {
-        $('.Eligible').show();
         console.log(d);
         let lists = d;
         if(pl != null){
@@ -103,6 +102,7 @@ function processLoanDetails(d, pl){
         let interestDisplay = lists.loaninterest;
         console.log(lists.length)
        if(lists.status == "Processed"){
+        $('.Eligible').show();
         lists.status = 'Running'
        }
            // $('.currentLoan').show();

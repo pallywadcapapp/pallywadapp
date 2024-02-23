@@ -63,13 +63,13 @@ class DefaultFooter extends HTMLElement {
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-4 col-12">
                         <img src="assets/img/pallywad-logo-white.png" class="img-fluid" />
                         <p class="fueling-dreams">
                             Fueling Dreams, Powering Growth
                         </p>
                     </div>
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-8 col-12">
                         <div class="row">
                             <div class="col-md-4">
                                 <p class="footer-link-title">PAGES</p>
@@ -99,7 +99,7 @@ class DefaultFooter extends HTMLElement {
                         </div>
                         
                     </div>
-                    <div class="col-md-3 col-12">
+                    <!--<div class="col-md-3 col-12">
                         <p class="footer-link-title">NEWSLETTER</p>
                         <p class="footer-newsletter-desc">Subscribe to stay in touch, so as to get 
                             updates on our lending structure improvements
@@ -110,7 +110,7 @@ class DefaultFooter extends HTMLElement {
                                 <a href="" class="default-button-green">Get Started</a>
                             </form>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-md-12 mt-2">
                         <hr class="footerline">
                     </div>

@@ -1,6 +1,6 @@
 var profilefile = '';
 $(document).ready(function() {
-
+    let imgUrl = localStorage.getItem('profImgUrl');
     localStorage.removeItem('tempProfile')
     var readURL = function(input) {
         if (input.files && input.files[0]) {
@@ -24,8 +24,51 @@ $(document).ready(function() {
     $(".upload-buttons").on('click', function() {
        $(".file-upload").click();
     });
+
+    if(imgUrl == '' || imgUrl == null){
+        var email = localStorage.getItem('email');
+        preloadProfileDetails(email);
+    }
 });
 
+function preloadProfileDetails(email) {
+    let api_endpoint = "/api/Profile";
+    let data = {
+        username: email
+    }
+    $.ajax({
+        type: 'get',
+        url: api_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        data: data,
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function (d) {
+            tempImgUrl = d.imgUrl;
+            localStorage.setItem('profImgUrl', tempImgUrl);
+            $('.profile-pic').attr('src', api_url + '/api/profile/fileuploads?filepath='+ d.imgUrl)
+            $('[name="firstname"]').val(d.firstname);
+            $('[name="lastname"]').val(d.lastname);
+            $('[name="othernames"]').val(d.othernames);
+            $('[name="email"]').val(d.email);
+            $('[name="phoneNumber"]').val(d.phoneNumber);
+            $('[name="address"]').val(d.address);
+            let newdate = formatDate3(d.dob);
+            finaldate = newdate.date;
+            $('[name="dob"]').val(new Date(d.dob).toLocaleDateString());
+            $('[name="sex"] option:contains("' + d.sex + '")').prop('selected', true);
+            $('[name="employmentStatus"] option:contains("' + d.employmentStatus + '")').prop('selected', true);
+            $('.firstnameOutput').html(d.firstname);
+            $('.lastnameOutput').html(d.lastname);
+            $('.othernamesOutput').html(d.othernames);
+            $('.dobOutput').html(newdate.date2);
+            $('.emailOutput').html(d.email);
+            $('.phoneOutput').html(d.phoneNumber);
+            $('.addressOutput').html(d.address);
+        }
+    })
+}
 function uploadProfilePicture(){
     let api_endpoint = "/api/Profile/saveProfilePicture";
     var formData = new FormData();
