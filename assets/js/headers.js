@@ -184,7 +184,10 @@ class DashboardHeader extends HTMLElement {
                             
                             <div class="dropdown user-drop-down">
                                 <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="user-circle"><img src="assets/img/icon-set.png"></span> 
+                                    <span class="user-circle">
+                                    <!--<img src="assets/img/icon-set.png">-->
+                                    <img src="https://auth.pallywad.com/api/Profile/DashboardFileUploads?filepath=${localStorage.getItem('profImgUrl')}" />
+                                    </span> 
                                     <span class="user-name-label">${localStorage.getItem("firstname") + " " + localStorage.getItem("lastname")}</span>
                                 </button>
                                 <ul class="dropdown-menu">

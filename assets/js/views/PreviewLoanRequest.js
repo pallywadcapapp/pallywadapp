@@ -51,10 +51,23 @@ export default class extends DefaultView {
                                         (Interest amount is rate percentage of Loan balance per month. Interest amount reduces as loan is repaid)
                                     </div>
                                     <br />
+                                    <div>
+                                        <input type="checkbox" id="inputAck" onchange="certify()"  style="height:2.0rem; width:2.0rem"  /><span style="font-size: 12px; color:gray"> I <b>${localStorage.getItem('lastname')} ${localStorage.getItem('firstname')}</b>, hereby affirm my commitment to adhere to the terms 
+                                        and conditions of the loan agreement entered with PallyWad Capital Ltd, I acknowledge responsibility to fulfill all 
+                                        repayment obligations, utilize the loan proceeds for the intended purpose as specified in the agreement, and comply with 
+                                        all applicable laws and regulations. I understand that any failure to comply with the terms of the agreement may result 
+                                        in consequences outlined therein, including offset of collateral and legal action. I hereby pledge to act in accordance 
+                                        with the provisions of the loan agreement to the best of my ability. </span>
+                                    </div>
+                                    <br />
+                                    <div class="privacy-area ">
+                                    
+                                    <input type="checkbox" id="inputTerms" onchange="certify()"  style="height:1.7rem; width:1.7rem" /> Accept our <a href="terms" target="_blank"> Terms and Condition</a>
+                                    </div><br />
                                     <!--<p><b>Collateral Type:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].duration}months</p>
                                     <p><b>Collateral Threshold:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].collateralPercentage}%</p>-->
                                     
-                                    <a class="btn continue-button-2" href="javascript:;" id="submitLoanRequest"">Submit Loan Request</a>
+                                    <button type="button" class="btn continue-button-2" disabled id="submitLoanRequest"">Submit Loan Request</button>
                                 </div>
                             </div>
                         </div>

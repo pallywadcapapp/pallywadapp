@@ -53,6 +53,14 @@ export default class extends DefaultView {
                                             <div class="col-md-8 text-end"> <span class="emailOutput"></span></div>
                                         </div>
                                         <div class="row mb-2">
+                                            <div class="col-md-4">BVN</div>
+                                            <div class="col-md-8 text-end"> <span class="bvnOutput"></span></div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">NIN</div>
+                                            <div class="col-md-8 text-end"> <span class="ninOutput"></span></div>
+                                        </div>
+                                        <div class="row mb-2">
                                             <div class="col-md-4">Address</div>
                                             <div class="col-md-8 text-end">
                                                 <span class="addressOutput"></span>

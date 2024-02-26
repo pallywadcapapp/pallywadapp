@@ -446,14 +446,23 @@ $('body').on('click', '#update-profile', function (e) {
         $('#updateProfileForm').pleaseWait();
         e.preventDefault();
         let dob = new Date($('[name=dob]').val());
-        let address = $('[name=address]').val();
         let phoneNumber = $('[name=phoneNumber]').val();
         let firstname = $('[name=firstname]').val();
         let lastname = $('[name=lastname]').val();
         let othernames = $('[name=othernames]').val();
+
+        
+        let bvn = $('[name=bvn]').val();
+        let nin = $('[name=nin]').val();
+        let houseNo = $('[name=houseNo]').val();
+        let street = $('[name=street]').val();
+        let city = $('[name=city]').val();
+        let lga = $('[name=lga]').val();
+        let closest = $('[name=closest]').val();
+        let landmark = $('[name=landmark]').val();
+
         let sex = $('[name=sex]').val();
         let employmentStatus = $('[name=employmentStatus]').val();
-        let bvn = "string";
         let memberid = "string";
         let email = localStorage.getItem("email");
         let imgUrl = tempImgUrl;
@@ -462,6 +471,8 @@ $('body').on('click', '#update-profile', function (e) {
 
         var checkProf = localStorage.getItem('tempProfile');
         
+        
+        let address = houseNo + " "  + street + " " + city + " " + lga + ", " + closest + " " + landmark;
 
         //check if login credentials are valid
         let data = {
@@ -476,7 +487,8 @@ $('body').on('click', '#update-profile', function (e) {
             bvn,
             email,
             memberid,
-            imgUrl
+            imgUrl,
+            nin, houseNo, street, city, lga, closest, landmark
         }
 
         $.ajax({
@@ -491,6 +503,9 @@ $('body').on('click', '#update-profile', function (e) {
             success: function (d) {
                 if(checkProf){
                     uploadProfilePicture();
+                }else{
+                    
+                $('#updateProfileForm').pleaseWait('stop');
                 }
                 
                 displayToast('success', "Your profile was updated successfully", "Profile update successful")
@@ -503,6 +518,9 @@ $('body').on('click', '#update-profile', function (e) {
         })
 
 
+    }else{
+        $('#errorNotification').html('input field necessary');
+        $('#errorNotification').focus();
     }
 })
 

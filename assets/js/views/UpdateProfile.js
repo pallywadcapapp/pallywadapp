@@ -18,6 +18,7 @@ export default class extends DefaultView {
                     <div class="container">
                         <div class="row">
                             <div class="col-md-10 col-12 ms-auto me-auto mb-4">
+                            <div id="errorNotification" class="border border-danger hide p-2 mb-2 rounded"></div>
                                 <div id="updateProfile" class="white-bg rounded div-shadow signin-form">
                                     <form id="updateProfileForm" method="GET" >
                                         <div class="text-center mt-3 px-8">
@@ -95,8 +96,60 @@ export default class extends DefaultView {
                                                 </div>
                                             </div>
                                         </div>
-
+                                       
                                         <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>BVN  <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="bvn" name="bvn">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>National Identity No (NIN) <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="nin" name="nin">
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>House No  <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="houseNo" name="houseNo">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Street <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="street" name="street">
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>City  <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="city" name="city">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Local Government Area <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="lga" name="lga">
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Closest Bus-Stop</label>
+                                                    <input type="text" class="form-control" id="closest" name="closest">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Nearest LandMark</label>
+                                                    <input type="text" class="form-control" id="landmark" name="landmark">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="form-group mt-3">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label>Address </label>
@@ -104,7 +157,7 @@ export default class extends DefaultView {
                                                 </div>
                                                 
                                             </div>
-                                        </div>
+                                        </div>-->
 
                                         <div class="form-group mt-4">
                                             <button id="update-profile" class="continue-button">Update Profile</button>

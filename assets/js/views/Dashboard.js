@@ -28,7 +28,7 @@ export default class extends DefaultView {
                         <div class="card-body"><span>No Active Loan</span><br />
                             <span><b>${this.currency}0.00 </b></span><br />
 
-                            <a href="upload-documents" class="btn blue-button-white"> <i class="fa fa-lightbulb"></i> Complete Profile </a>
+                            <a href="update-profile" class="btn blue-button-white"> <i class="fa fa-lightbulb"></i> Complete Profile </a>
                         </div>
                         <div class="col-sm-6"></div>
                         </div>

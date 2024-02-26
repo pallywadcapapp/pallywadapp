@@ -230,3 +230,13 @@ function lvClick(id){
     lvClickId = id;
     
 }
+
+function certify() {
+    var ischecked = $('#inputTerms').is(':checked');
+    var ischecked2 = $('#inputAck').is(':checked');
+    if (ischecked && ischecked2) {
+        $('#submitLoanRequest').prop('disabled', false);
+    } else {
+        $('#submitLoanRequest').prop('disabled', true);
+    }
+}

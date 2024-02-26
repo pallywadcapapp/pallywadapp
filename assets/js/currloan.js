@@ -50,8 +50,11 @@ function fetchProcessedLoanRequests(loanId) {
                 displayToast('error', d.responseJSON.message, d.responseJSON.status)
             },
             success: function (d) {
-                processLoanDetails(d[0],d)
-                fetchCurrProcessedLoanRequests(d[0].loanId)
+                if(d.length > 0){
+                    processLoanDetails(d[0],d)
+                    fetchCurrProcessedLoanRequests(d[0].loanId)
+                }
+                
             }
         })
     }else{

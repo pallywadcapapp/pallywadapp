@@ -53,6 +53,14 @@ function preloadProfileDetails(email) {
             $('[name="othernames"]').val(d.othernames);
             $('[name="email"]').val(d.email);
             $('[name="phoneNumber"]').val(d.phoneNumber);
+            $('[name="bvn"]').val(d.bvn);
+            $('[name="nin"]').val(d.nin);
+            $('[name="city"]').val(d.city);
+            $('[name="lga"]').val(d.lga);
+            $('[name="closest"]').val(d.closest);
+            $('[name="houseNo"]').val(d.houseNo);
+            $('[name="landmark"]').val(d.landmark);
+            $('[name="street"]').val(d.street);
             $('[name="address"]').val(d.address);
             let newdate = formatDate3(d.dob);
             finaldate = newdate.date;
@@ -66,6 +74,8 @@ function preloadProfileDetails(email) {
             $('.emailOutput').html(d.email);
             $('.phoneOutput').html(d.phoneNumber);
             $('.addressOutput').html(d.address);
+            $('.bvnOutput').html(d.bvn);
+            $('.ninOutput').html(d.nin);
         }
     })
 }
