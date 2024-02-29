@@ -26,7 +26,7 @@ function loanRequestView(loanRequest){
     : (loanRequest.status == "Declined" ? "loan-status-declined"
         : (loanRequest.status == "Awaiting Approval" ? "loan-status-awaiting"
             : (loanRequest.status == "Approved" ? "loan-status-approved"
-            : (lists.status == "Collaterized" ? "loan-status-collaterized"
+            : (loanRequest.status == "Collaterized" ? "loan-status-collaterized"
                 : "loan-status-running"))));
     let content = '';
     if(loanRequest.status == 'Pending'){
