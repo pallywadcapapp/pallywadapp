@@ -11,7 +11,6 @@ function fetchCurrProcessedLoanRequests(loanId) {
 
             setCurrentLoan(data)
 
-
         }
     })
 }
@@ -78,6 +77,14 @@ function fetchProcessedLoanRequests(loanId) {
     //}
 }
 
+function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
+
 function processLoanDetails(d, pl){
     //if (d.length > 0) {
         console.log(d);
@@ -86,7 +93,9 @@ function processLoanDetails(d, pl){
             localStorage.setItem('processedLoans', JSON.stringify(pl));
         }
         
-
+        var today = new Date();
+        var apprDate = new Date(lists.approvalDate)
+        var loandiff = monthDiff(today, apprDate )
         let amount = lists.amount;
         let duration = lists.duration == 1 ? lists.duration + " Month" : lists.duration + " Months";
         let disbursementDate = lists.approvalDate;
@@ -109,9 +118,11 @@ function processLoanDetails(d, pl){
         lists.status = 'Running'
        }
            // $('.currentLoan').show();
-            //$('.loanAmount').html(number_format(amount));
+            $('.disbursedAmount').html(number_format(amount));
             $('.loanCategory').html(loanCategory);
             $('.loanDuration').html(duration);
+            $('.loanRunning').html(loandiff);
+            
             var tempD = new Date(repaymentStartDate)
             var newDate = new Date(tempD.setMonth(tempD.getMonth() + parseInt(duration)));
             $('.duedate').html(newDate.toLocaleDateString());
@@ -122,11 +133,54 @@ function processLoanDetails(d, pl){
             $('.interestDisplay').html(interestDisplay);
     }
 
+    function loadCurrPayments(loanId) {
+        let api_endpoint = "/api/Payments/ByLoanId?loanId=" + loanId;
+        $.ajax({
+            type: 'get',
+            url: loan_app_url + api_endpoint,
+            headers: { 'Content-Type': 'application/json' },
+            error: function (d) {
+                displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            },
+            success: function (d) {
+                console.log(d)
+                let lists = d;
+                let content = '';
+                for (let i = 0; i < lists.length; i++) {
+                    payment_status = (lists[i].status == "Pending")
+                        ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
+                        : `<span class="badge text-bg-success">${lists[i].status}</span>`;
+                    content += `
+                    <div class="row">
+                        <div class="col-md-8 repayment-item">
+                            <b>${lists[i].loanRefId} </b><br>
+                            <small class="grey-text">${formatDate3(lists[i].requestDate).date2}</small><br>
+                            <small class="grey-text"><b>Status:</b> ${payment_status} </small>
+                            
+                        </div>
+                        <div class="col-md-4 repayment-item">
+                            <small>Amount Repaid:</small><br>
+                            <div class="repayment-price">&#8358; ${number_format(lists[i].amount)}</div>
+                        </div>
+                    </div>
+                    `;
+    
+                }
+    
+    
+                $('#repaymentItems3').html(content);
+    
+            }
+        })
+    }
+    
+
 $(function(){
     let currLoan = localStorage.getItem('currLoan');
     console.log(currLoan)
     if(currLoan != ''){
         fetchCurrProcessedLoanRequests(currLoan);
+        loadCurrPayments(currLoan)
     }
     fetchProcessedLoanRequests(currLoan)
 })

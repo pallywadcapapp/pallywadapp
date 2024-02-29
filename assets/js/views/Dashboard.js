@@ -58,7 +58,7 @@ export default class extends DefaultView {
                                 <div class="loan-duration-area mt-2">
                                     <div class="row">
                                         <div class="col-md-6">Loan Duration</div>
-                                        <div class="col-md-6"><span class="loanDuration"> - <span></div>
+                                        <div class="col-md-6">Month <span class="loanRunning"> - <span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">Next Due </div>

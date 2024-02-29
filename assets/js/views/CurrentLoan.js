@@ -29,7 +29,7 @@ export default class extends DefaultView {
                                 <p class="current-loan-amount">Current Loan Amount</p>
                                 <div class="d-flex justify-content-between">
                                     <h3>${this.currency} <span class="loanAmount">0</span></h3>
-                                    <a href="javascript:;" class="default-button-green makePayment">Pay </a>
+                                    <!--<a href="javascript:;" class="default-button-green makePayment">Pay </a> -->
                                 </div>
                                 <p class="about-title">APPROVED LOAN DETAILS</p>
                                 <p class="mt-3">
@@ -75,7 +75,7 @@ export default class extends DefaultView {
                                 <div class="loan-duration-area mt-2">
                                     <div class="row">
                                         <div class="col-md-6">Loan Duration</div>
-                                        <div class="col-md-6"><span class="loanDuration">1 Months<span></div>
+                                        <div class="col-md-6">Month <span class="loanRunning"> 1 <span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">Current Rate</div>
@@ -94,7 +94,7 @@ export default class extends DefaultView {
 
                                 <div id="loanRepaymentArea" class="loan-repayment-area mt-2">
                                     <p class="grey-text">Monthly repayment breakdown</p>
-                                    <div id="repaymentItems">
+                                    <div id="repaymentItems3">
                                         <p class="placeholder-glow mb-2">
                                             <span class="placeholder col-3"></span>
                                             <span class="placeholder col-6"></span>
@@ -110,7 +110,7 @@ export default class extends DefaultView {
 
                                 </div>
 
-
+                                <!--
                                 <div class="proof-of-payment mt-2">
                                     <b>Proof of payment</b>
                                     
@@ -118,6 +118,7 @@ export default class extends DefaultView {
                                         <i class="fa fa-upload"></i> Upload
                                     </a>
                                 </div>
+                                -->
                             </div>
 
                             <div class="col-md-12 mt-3 currentLoan" >
@@ -132,7 +133,7 @@ export default class extends DefaultView {
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">Disbursement Amount</div>
-                                                    <div class="col-md-6">${this.currency}<span class="loanAmount">0</span></div>
+                                                    <div class="col-md-6">${this.currency}<span class="disbursedAmount">0</span></div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">Disbursement Tenor</div>
