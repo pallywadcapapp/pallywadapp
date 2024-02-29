@@ -29,12 +29,14 @@ export default class extends DefaultView {
                                             <div class="row">
                                                 <div class="small-12 medium-2 large-2 columns">
                                                     <div class="text-center circle"><img class="profile-pic upload-buttons"
-                                                     src="assets/img/user-pic.png"></div>
-                                                </div>
-                                                <div class="p-image">
+                                                     src="assets/img/user-pic.png">
+                                                     <div class="p-image">
                                                     <i class="fa fa-2x fa-camera upload-buttons"></i>
                                                     <input class="file-upload" type="file" accept="image/*"/>
                                                 </div>
+                                                     </div>
+                                                </div>
+                                                
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">

@@ -938,8 +938,9 @@ hr.footerline {
 .signin-form {
     font-size: 15px;
     line-height: 20px;
-    padding: 35px 60px;
+    padding: 0px 20px;
     color:#ADADAD;
+    margin-top: 5%;
 }
 
 .signin-form h3 {

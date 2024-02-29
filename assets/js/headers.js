@@ -219,6 +219,7 @@ class LeftSidebar extends HTMLElement {
                     <li><a href="/dashboard" ><img src="assets/img/overview.png" /> Overview</a></li>
                     <li><a href="/loans"><img src="assets/img/loans.png" /> Loans</a></li>
                     <li><a href="/payment-history"><img src="assets/img/payment-history.png" /> Payment History</a></li>
+                    <li><a href="/uploaded-documents"><img src="assets/img/payment-history.png" /> Uploaded Documents</a></li>
                 </ul>
 
 

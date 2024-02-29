@@ -29,7 +29,8 @@ body {
   position: absolute;
   color: #666666;
   top: 290px;
-  right: -900px;
+  margin-left:5%
+  /*right: -900px;%/
 }
 .p-image:hover {
   transition: all .3s cubic-bezier(.175, .885, .32, 1.275);

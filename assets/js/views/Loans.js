@@ -18,7 +18,7 @@ export default class extends DefaultView {
                             <div class="col-md-5 page-lead">
                                 <h3>Loans</h3>
                             </div>
-                            <div class="col-md-7 ps-5">
+                            <div class="col-md-7 ps-5 Eligible" >
                             <a href="javascript:;" class="add-loan-button mt-3" onclick="addLoan('${this.userEmail}');"><i class="fa fa-plus"></i> Request Loan</a>
                             </div>
                         </div>

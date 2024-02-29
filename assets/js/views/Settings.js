@@ -40,12 +40,12 @@ export default class extends DefaultView {
                                                 
                                             </a>
                                         </li>
-                                        <li class="list-group-item">
+                                        <!--<li class="list-group-item">
                                             <a href="upload-collateral" class="group-button d-flex justify-content-between align-items-center">
                                                 <span><img src="../assets/img/download.png" />Upload Collateral Documents</span>
                                                 
                                             </a>
-                                        </li>
+                                        </li>-->
                                     </ul>
                                 </div>
                             </div>

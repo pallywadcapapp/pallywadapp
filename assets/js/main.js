@@ -28,18 +28,20 @@ var userLoanRequest = '';
 
 })(jQuery);
 
-    $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
-        console.log(event);
-        console.log(xhr);
-        var pathname = $(location).attr("pathname");
-        if(pathname != '/sign-in'){
+$(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
+    console.log(event);
+    console.log(xhr);
+    var pathname = $(location).attr("pathname");
+    if (pathname != '/sign-in' && pathname != '/forgot-password'
+        && pathname != '/password-code' && pathname != '/new-passWord') {
         if (xhr.status === 401) {
             window.location.href = "/logout";
         }
         if (xhr.statusText === 'Unauthorized') {
             window.location.href = "/logout";
-        }}
-    });
+        }
+    }
+});
 
 
 /*-------------------------------------
@@ -71,7 +73,7 @@ $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
     console.log(event);
     console.log(xhr);
     var pathname = $(location).attr("pathname");
-    console.log(pathname)
+    console.log(pathname);
     console.log((pathname != '/sign-in' && pathname != '/forgot-password'
         && pathname != '/password-code'));
     if (pathname != '/sign-in' && pathname != '/forgot-password'
@@ -366,7 +368,7 @@ function fetchLoggedInUserDetails(email, token, expiration) {
         },
         success: function (d) {
             if (d.email) {
-                $('.profile-pic').attr('src',d.imgUrl)
+                $('.profile-pic').attr('src', d.imgUrl)
                 localStorage.setItem("firstname", d.firstname);
                 localStorage.setItem("lastname", d.lastname);
 
@@ -429,9 +431,11 @@ function checkEligibility() {
             if (d.message != true) {
                 $('.notEligible').show();
                 $('.Eligible').hide();
+                localStorage.setItem('iseligible', false);
             } else {
                 $('.notEligible').hide();
                 $('.Eligible').show();
+                localStorage.setItem('iseligible', true)
             }
         }
     })
@@ -451,7 +455,7 @@ $('body').on('click', '#update-profile', function (e) {
         let lastname = $('[name=lastname]').val();
         let othernames = $('[name=othernames]').val();
 
-        
+
         let bvn = $('[name=bvn]').val();
         let nin = $('[name=nin]').val();
         let houseNo = $('[name=houseNo]').val();
@@ -470,9 +474,9 @@ $('body').on('click', '#update-profile', function (e) {
         let api_endpoint = "/api/Profile";
 
         var checkProf = localStorage.getItem('tempProfile');
-        
-        
-        let address = houseNo + " "  + street + " " + city + " " + lga + ", " + closest + " " + landmark;
+
+
+        let address = houseNo + " " + street + " " + city + " " + lga + ", " + closest + " " + landmark;
 
         //check if login credentials are valid
         let data = {
@@ -501,13 +505,13 @@ $('body').on('click', '#update-profile', function (e) {
                 displayToast('error', d.responseJSON.message, d.responseJSON.title)
             },
             success: function (d) {
-                if(checkProf){
+                if (checkProf) {
                     uploadProfilePicture();
-                }else{
-                    
-                $('#updateProfileForm').pleaseWait('stop');
+                } else {
+
+                    $('#updateProfileForm').pleaseWait('stop');
                 }
-                
+
                 displayToast('success', "Your profile was updated successfully", "Profile update successful")
                 let redirect = localStorage.getItem('gotoDocuments');
                 if (redirect) {
@@ -518,7 +522,7 @@ $('body').on('click', '#update-profile', function (e) {
         })
 
 
-    }else{
+    } else {
         $('#errorNotification').html('input field necessary');
         $('#errorNotification').focus();
     }
@@ -547,7 +551,20 @@ $(window).on('load', function () {
     if ($('#dashboard').length > 0) {
         $('.Eligible').hide();
         checkEligibility();
+        
     }
+
+    if ($('#main').length > 0) {
+        var iselig = localStorage.getItem('iseligible');
+        if(iselig == "true"){
+            $('.Eligible').show();
+        }else{
+            $('.Eligible').hide();
+        }
+    }
+
+    
+   
 
 
 })
@@ -622,7 +639,7 @@ $(window).on('load', function () {
     if ($("#updateProfile").length > 0) {
         let email = localStorage.getItem("email");
         preloadProfileDetails(email);
-        
+
     }
 
     if ($('#loanType').length > 0) {
@@ -666,7 +683,7 @@ $(window).on('load', function () {
         loadCollateralTypes();
     }
 
-    
+
 
 
     //load datepicker
@@ -844,9 +861,9 @@ $("body").on('change', '#loanType', function () {
     let collateralPercentageyBox = $('#collateralPercentage');
     let pindexBox = $('#pindex');
 
-    if(category == 'Business Loan'){
+    if (category == 'Business Loan') {
         $('.busLoanView').show();
-    }else{
+    } else {
         $('.busLoanView').hide();
     }
 
@@ -856,16 +873,16 @@ $("body").on('change', '#loanType', function () {
     pindexBox.val(pindex);
 });
 
-$('body').on('change', '',function(){
+$('body').on('change', '', function () {
     let collat = $("#collateralType :selected").attr("value");
     let description = $("#collateralType :selected").attr("collateralDescription");
-    
+
     $('#collateralTypeDescription').html(`<br>${description}`);
     localStorage.setItem('selCollateral', collat);
 });
 
 $("body").on('change', '#loanAmountRequested', function () {
-//$('#loanAmountRequested').change(function (e) {
+    //$('#loanAmountRequested').change(function (e) {
     var amount = ($(this).val());
     var intrate = parseFloat($('#interestrate').val());
 
@@ -951,20 +968,26 @@ function fetchLoanRequests() {
             userLoanRequest = d;
             let lists = d;
             let display = "";
-            for (let i = 0; i < lists.length; i++) {
-                let loanTypeStyle = (lists[i].status == "Pending")
-                    ? "loan-status-pending"
-                    : (lists[i].status == "Declined" ? "loan-status-declined"
-                        : (lists[i].status == "Awaiting Approval" ? "loan-status-awaiting"
-                            : (lists[i].status == "Approved" ? "loan-status-approved"
-                                : "loan-status-running")));
-
-                //Handle date and time formatting
-                let records = formatDate(lists[i]);
-                timeOutput = records.time;
-                dayOutput = records.date;
-
+            console.log(lists.length)
+            if (lists.length < 1) {
                 display += `
+                <div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no running loan</h4></div>
+                `;
+            } else {
+                for (let i = 0; i < lists.length; i++) {
+                    let loanTypeStyle = (lists[i].status == "Pending")
+                        ? "loan-status-pending"
+                        : (lists[i].status == "Declined" ? "loan-status-declined"
+                            : (lists[i].status == "Awaiting Approval" ? "loan-status-awaiting"
+                                : (lists[i].status == "Approved" ? "loan-status-approved"
+                                    : "loan-status-running")));
+
+                    //Handle date and time formatting
+                    let records = formatDate(lists[i]);
+                    timeOutput = records.time;
+                    dayOutput = records.date;
+
+                    display += `
                 <div class="top-line py-2">
                         <div class="row loanView" id="lview${i}" onclick="lvClick('${i}')">
                             <div class="col-md-2">
@@ -984,7 +1007,9 @@ function fetchLoanRequests() {
                     </div>
                 `;
 
+                }
             }
+            console.log(display)
             $('#allLoanRequests').html(display);
 
         }
@@ -1009,7 +1034,7 @@ function fetchCompanyDetails() {
     })
 }
 
-function fetchLoanProductType(){
+function fetchLoanProductType() {
     let api_endpoint = "/api/Loan";
 
     $.ajax({
@@ -1024,7 +1049,7 @@ function fetchLoanProductType(){
         }
     })
 }
-function fetchNotifications(){
+function fetchNotifications() {
     let api_endpoint = "/api/notifications";
     $.ajax({
         type: 'get',
@@ -1038,10 +1063,10 @@ function fetchNotifications(){
             $('.icon-button__badge').html(d.length);
             var display = '';
             for (let i = 0; i < d.length; i++) {
-            display += `
+                display += `
             <li><a href="javascript:void(0);" class="dropdown-item notify-item">
     <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
-    <p class="notify-details"><b>${d[i].id}</b><small class="text-muted">${d[i].message}.</small></p>
+    <p class="notify-details"><b>${d[i].subject}</b><br/><small class="text-muted">${d[i].message}.</small></p>
 </a></li>
             `;
             }
@@ -1276,9 +1301,9 @@ $(document).ready(function () {
         if ($('#estimatedValue').val() < 1) {
             displayToast('error', 'You must enter estimated value of collateral', 'Enter Collateral Value');
             $('#kyc2-form').pleaseWait('stop');
-        }else if(loanAmt > estValue){
+        } else if (loanAmt > estValue) {
             $('#kyc2-form').pleaseWait('stop');
-            displayToast('error', 'Loan requested should not exceed '+ collateralRate + '% of the collateral value provided', 'Collateral value requirement');
+            displayToast('error', 'Loan requested should not exceed ' + collateralRate + '% of the collateral value provided', 'Collateral value requirement');
             displayToast('error', 'Change the loan value or provide another collateral value entity', 'Enter Collateral Value');
         } else if (uploadedFiles.length < 1) {
             $('#kyc2-form').pleaseWait('stop');
@@ -1290,7 +1315,7 @@ $(document).ready(function () {
             let collateralRefId = $('#collateralType :selected').val();
             let otherdetails = $('#otherdetails').val() ?? "None";
 
-            if(otherdetails = '' || otherdetails == null){
+            if (otherdetails = '' || otherdetails == null) {
                 otherdetails = 'NIL'
             }
             //console.log(uploadedFiles);
@@ -1303,15 +1328,15 @@ $(document).ready(function () {
             formData.append("estimatedValue", estimatedValue);
             formData.append("collateralRefId", collateralRefId);
             formData.append("otherdetails", otherdetails);
-            
+
             var coll = [];
             //$.each($("#selectfile")[0].files, function(i, file) {
-            $.each(uploadedFiles, function(i, file) {
-                if(file != 'file'){
+            $.each(uploadedFiles, function (i, file) {
+                if (file != 'file') {
                     coll.push(file);
                     formData.append('file', file);
                 }
-                
+
             });
 
 
@@ -1330,7 +1355,7 @@ $(document).ready(function () {
                     localStorage.setItem('estimatedCollateralValue', estimatedValue);
                     location.href = "/preview-loan-request";
                 },
-                error: function(error){
+                error: function (error) {
                     $('#kyc2-form').pleaseWait('stop');
                     displayToast('error', 'Error uploading collateral documents', 'Collateral Document error');
                 }
@@ -1359,7 +1384,7 @@ $(document).ready(function () {
         let channel = $('#channel').val();
         let otherdetails = $('#otherdetails').val();
 
-       
+
         if (otherdetails == null || otherdetails == '') {
             otherdetails = 'No details available';
         }
@@ -1425,14 +1450,14 @@ $(document).ready(function () {
         if (validExtensions.includes(fileType)) {
             let fileReader = new FileReader();
             fileReader.onload = () => {
-                if(fileType == 'application/pdf'){
+                if (fileType == 'application/pdf') {
                     console.log(fileReader)
                     let fileURL = fileReader.result;
                     let imgTag = `<img src="/assets/img/card-illustration.png" class="imgTag" alt="">`;
                     imgPreview.innerHTML = imgTag;
                     $('#upload-from-gallery').hide();
                     $('#uploadDocumentExtrafields').removeClass('hide');
-                }else{
+                } else {
                     let fileURL = fileReader.result;
                     let imgTag = `<img src="${fileURL}" class="imgTag" alt="">`;
                     imgPreview.innerHTML = imgTag;
@@ -1440,8 +1465,8 @@ $(document).ready(function () {
                     $('#uploadDocumentExtrafields').removeClass('hide');
                 }
                 var doc = localStorage.getItem('chosenDocumentName');
-                if(doc == 'NIN' || doc == 'Voters Card'){
-                    
+                if (doc == 'NIN' || doc == 'Voters Card') {
+
                     $('.expirySeg').addClass('hide');
                 }
             }
@@ -1466,7 +1491,7 @@ $(document).ready(function () {
         formData.append("expiryDate", expiryDate);
 
         var files = document.getElementById("selectfile").files[0];
-            formData.append("file", files);
+        formData.append("file", files);
 
         //$(".preloader-2").show();
         console.log(formData)
@@ -1482,7 +1507,7 @@ $(document).ready(function () {
                 $('.kyc').pleaseWait('stop');
                 location.href = "/kyc-3";
             },
-            error: function(error){
+            error: function (error) {
                 $('.kyc').pleaseWait('stop');
                 displayToast("error", "Unable to upload document", "File Upload Error");
             }
@@ -1504,7 +1529,7 @@ $(document).ready(function () {
         formData.append("expiryDate", expiryDate);
 
         var files = document.getElementById("selectfile").files[0];
-            formData.append("file", files);
+        formData.append("file", files);
 
         $(".preloader-2").show();
         $.ajax({
@@ -1519,7 +1544,7 @@ $(document).ready(function () {
                 //console.log(data);
                 location.href = "/kyc-complete";
             },
-            error: function(error){
+            error: function (error) {
                 $('.kyc').pleaseWait('stop');
                 displayToast("error", "Unable to upload document", "File Upload Error");
             }
@@ -1589,11 +1614,11 @@ $('body').on('click', '#submitLoanRequest', function () {
             localStorage.removeItem("businessname");
             localStorage.removeItem("purpose");
             localStorage.removeItem("age");
-            localStorage.removeItem("collateral"); 
-            
+            localStorage.removeItem("collateral");
+
             location.href = "/loan-request-complete";
         },
-        error: function(e){
+        error: function (e) {
             $('#kyc2-form').pleaseWait('stop');
             displayToast("error", "Unable to process loan request", "Loan Request Error");
         }
@@ -1637,21 +1662,21 @@ var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'));
 $('body').on('click', '.uploadPaymentProof', function () {
     let providedAmount = 0;
     var repaymentamount = $('#repayment-amount').val();
-    if(repaymentamount > 0){
+    if (repaymentamount > 0) {
         providedAmount = repaymentamount;
     }
 
     let processedLoans = JSON.parse(localStorage.getItem('processedLoans'));
-    if(processedLoans == null){
+    if (processedLoans == null) {
         toastr.warning('No Loan Currently loaning')
-    }else{
-    let option = '';
-    for (let i = 0; i < processedLoans.length; i++) {
-        option += `<option value="${processedLoans[i].loanId}">${processedLoans[i].category}
+    } else {
+        let option = '';
+        for (let i = 0; i < processedLoans.length; i++) {
+            option += `<option value="${processedLoans[i].loanId}">${processedLoans[i].category}
          &#8358; ${number_format(processedLoans[i].amount)}</option>`;
-    }
+        }
 
-    let content = `
+        let content = `
         
         <div class="px-4 py-2 signin-form">
             <div class="col-md-12 black-text mb-2">
@@ -1718,16 +1743,18 @@ $('body').on('click', '.uploadPaymentProof', function () {
         </div>
     `;
 
-    $('.modal-body').html(content);
-    $('.modal-title').html('Upload Proof Of Payment');
-    myModal.show({
-        keyboard: false,
-        backdrop: 'static'
-    });
-}
+        $('.modal-body').html(content);
+        $('.modal-title').html('Upload Proof Of Payment');
+        myModal.show({
+            keyboard: false,
+            backdrop: 'static'
+        });
+    }
 })
 
-
+$('body').on('click','.uploadedDocument', function(e){
+    window.location.href = 'upload-documents';
+});
 
 //pay loan
 $('body').on('click', '.makePayment', function () {
