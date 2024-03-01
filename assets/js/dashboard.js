@@ -3,7 +3,8 @@ var pathname = $(location).attr("pathname");
 
 
 $(function(e){
-    if(pathname == '/dashboard'){
+    if(pathname == '/dashboard' || pathname == '/'){
+        loadTotalLoanOverheads();
         var pl = JSON.parse(localStorage.getItem('processedLoans'));
         localStorage.setItem('pindex', 0)
         if(pl != null){
@@ -29,3 +30,21 @@ function loadDashboard(loanId){
      }
  })
 }
+
+function loadTotalLoanOverheads(){
+    api_endpoint = "/api/LoanRepayment/LoanOverheads";
+    $.ajax({
+        type: 'GET',
+        url: loan_app_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function (d) {
+            displayToast('error', "Unable to get total balance!", "Error");
+        },
+        success: function (d) {
+           console.log(d)
+           $('.totalLoanBalance').html(number_format(d));
+   
+        }
+    })
+   }
+

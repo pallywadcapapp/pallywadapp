@@ -95,7 +95,7 @@ function processLoanDetails(d, pl){
         
         var today = new Date();
         var apprDate = new Date(lists.approvalDate)
-        var loandiff = monthDiff(today, apprDate )
+        var loandiff = parseInt(monthDiff(today, apprDate )) + 1;
         let amount = lists.amount;
         let duration = lists.duration == 1 ? lists.duration + " Month" : lists.duration + " Months";
         let disbursementDate = lists.approvalDate;

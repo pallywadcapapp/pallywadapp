@@ -68,7 +68,7 @@ export default class extends DefaultView {
                                 </div>
                             </div>
 
-                            <div class="card mt-4">
+                            <!--<div class="card mt-4">
                                 <div class="card-body">
                                     <ul class="list-group">
                                         <li class="list-group-item ">
@@ -90,7 +90,7 @@ export default class extends DefaultView {
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
 
                         </div>

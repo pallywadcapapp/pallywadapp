@@ -87,7 +87,7 @@ export default class extends DefaultView {
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">Next Payment Date</div>
-                                        <div class="col-md-6"><span class="duedate">13/02/24</span></div>
+                                        <div class="col-md-6"><span class="nextduedate">13/02/24</span></div>
                                     </div>
                                     
                                 </div>
@@ -145,7 +145,7 @@ export default class extends DefaultView {
                                     </div>
                                     <div class="col-md-5">
                                         <div class="proof-of-payment">
-                                            Repayment Starts on <span><b id="repaymentStartDate">Thur, Feb 17 2024</b></span> with
+                                            Complele loan Repayment due on <span><b id="duedate">Thur, Feb 17 2024</b></span> with
                                             Interest Rate of <b><span class="interestDisplay">0.9</span>%</b>
                                             <hr>
                                         </div>

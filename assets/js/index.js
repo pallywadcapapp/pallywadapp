@@ -26,6 +26,7 @@ import Loans2 from "./views/Loans2.js";
 import CurrentLoan from "./views/CurrentLoan.js";
 import UploadedDocuments from "./views/UploadedDocuments.js";
 import PaymentSettings from "./views/PaymentSettings.js";
+import Dashboard2 from "./views/Dashboard2.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -45,8 +46,9 @@ const navigateTo = url => {
 
 const router = async () => {
     const routes = [
-        {path:"/", view: Dashboard},
-        {path:"/dashboard", view: Dashboard},
+        {path:"/", view: Dashboard2},
+        {path:"/dashboard2", view: Dashboard},
+        {path:"/dashboard", view: Dashboard2},
         {path:"/404", view: NotFound},
         {path:"/loans" , view: Loans },
         {path:"/loans2" , view: Loans2 },

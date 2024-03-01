@@ -760,17 +760,19 @@ function loadUserCollateralTypes() {
 
 function loadPayments() {
     let api_endpoint = "/api/Payments";
+    let content = '';
     $.ajax({
         type: 'get',
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
+            $('#repaymentItems').html('<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>');
             displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
         success: function (d) {
             console.log(d)
             let lists = d;
-            let content = '';
+            if(lists.length > 0){
             for (let i = 0; i < lists.length; i++) {
                 payment_status = (lists[i].status == "Pending")
                     ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
@@ -791,6 +793,9 @@ function loadPayments() {
                 `;
 
             }
+        }else{
+                content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>';
+            }
 
 
             $('#repaymentItems').html(content);
@@ -806,36 +811,42 @@ function loadPaymentsHistory() {
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            $('#repaymentItems2').html('<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>');
+            displayToast('error', d.responseJSON.message, d.responseJSON.status);
         },
         success: function (d) {
             console.log(d)
             let lists = d;
             let content = '';
-            for (let i = 0; i < lists.length; i++) {
-                payment_status = (lists[i].status == "Pending")
-                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
-                    : `<span class="badge text-bg-success">${lists[i].status}</span>`;
-                content += `
-                <div class="row">
-                    <div class="col-md-5 repayment-item2">
-                        <div class="repayment-price">&#8358; ${number_format(lists[i].amount)}</div>
-                        <small class="grey-text">${lists[i].loanRefId}</small><br>
-                        
+            if(lists.length > 0){
+                for (let i = 0; i < lists.length; i++) {
+                    payment_status = (lists[i].status == "Pending")
+                        ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
+                        : `<span class="badge text-bg-success">${lists[i].status}</span>`;
+                    content += `
+                    <div class="row">
+                        <div class="col-md-5 repayment-item2">
+                            <div class="repayment-price">&#8358; ${number_format(lists[i].amount)}</div>
+                            <small class="grey-text">${lists[i].loanRefId}</small><br>
+                            
+                        </div>
+                        <div class="col-md-3 repayment-item2">
+                            <small class="black-text"><b>Status:</b>
+                            <br> ${payment_status} </small>
+                        </div>
+                        <div class="col-md-4 repayment-item2">
+                            <small>${formatDate3(lists[i].requestDate).time}</small><br>
+                            <small>${formatDate3(lists[i].requestDate).date2}</small>
+                            
+                        </div>
                     </div>
-                    <div class="col-md-3 repayment-item2">
-                        <small class="black-text"><b>Status:</b>
-                        <br> ${payment_status} </small>
-                    </div>
-                    <div class="col-md-4 repayment-item2">
-                        <small>${formatDate3(lists[i].requestDate).time}</small><br>
-                        <small>${formatDate3(lists[i].requestDate).date2}</small>
-                        
-                    </div>
-                </div>
-                `;
-
+                    `;
+    
+                }
+            }else{
+               content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>';
             }
+            
 
 
             $('#repaymentItems2').html(content);
@@ -990,10 +1001,10 @@ function fetchLoanRequests() {
                     display += `
                 <div class="top-line py-2">
                         <div class="row loanView" id="lview${i}" onclick="lvClick('${i}')">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <span class="${loanTypeStyle}">${lists[i].status}</span>
                             </div>
-                            <div class="col-md-7 loan-display">
+                            <div class="col-md-6 loan-display">
                                 <h4>&#8358;${number_format(lists[i].amount)}</h4>
                                 <p class="grey-text">${lists[i].category}</p>
                             </div>
@@ -1064,9 +1075,9 @@ function fetchNotifications() {
             var display = '';
             for (let i = 0; i < d.length; i++) {
                 display += `
-            <li><a href="javascript:void(0);" class="dropdown-item notify-item">
+            <li onclick="loadNotification(${d[i].id})"><a href="javascript:void(0);" class="dropdown-item notify-item">
     <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
-    <p class="notify-details"><b>${d[i].subject}</b><br/><small class="text-muted">${d[i].message}.</small></p>
+    <p class="notify-details"><b>${d[i].subject}</b><br/><small class="text-muted">${d[i].message.slice(0,40)}.</small></p>
 </a></li>
             `;
             }
@@ -1074,6 +1085,11 @@ function fetchNotifications() {
             $('#notbar').html(display)
         }
     })
+}
+
+function loadNotification(id){
+    sessionStorage.setItem('notificationId', id);
+    window.location.href = '/notifications'
 }
 
 function number_format(number, decimals, dec_point, thousands_sep) {
