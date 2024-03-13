@@ -1,6 +1,6 @@
 const express = require("express");
-const https = require('https');
-const fs = require('fs');
+//const https = require('https');
+//const fs = require('fs');
 const path = require("path");
 
 const app = express();
@@ -20,8 +20,8 @@ app.get("/*", (req, res) => {
 });
 
 const port = 8000;
-//app.listen(process.env.PORT || 8000, () => console.log("Server is up and running..."));
+app.listen(process.env.PORT || port, () => console.log("Server is up and running..."));
 
-https.createServer(app).listen(port, () => {
+/*https.createServer(app).listen(port, () => {
     console.log('Server listening on port ' + port);
-  });
+  });*/
