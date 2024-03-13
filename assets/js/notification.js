@@ -10,7 +10,7 @@ function notifyMe() {
     }
   
     // Otherwise, we need to ask the user for permission
-    else if (Notification.permission == "denied") {
+    else if (Notification.permission !== "denied") {
       Notification.requestPermission().then(function (permission) {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
@@ -20,6 +20,7 @@ function notifyMe() {
     }
     console.log(Notification.permission);
   
+    
     // At last, if the user has denied notifications, and you 
     // want to be respectful there is no need to bother them any more.
   }
