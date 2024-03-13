@@ -24,7 +24,7 @@ export default class extends DefaultView {
                         <div class="row" style="margin-top:5px;">
                         
                         
-                        <div class="card bg-primary text-white col-sm-6" style="min-height:150px; background-color:24488F !important;">
+                        <div class="card bg-primary text-white col-sm-12" style="min-height:150px; background-color:24488F !important;">
                         <div class="card-body"><span>No Active Loan</span><br />
                             <span><b>${this.currency}0.00 </b></span><br />
 

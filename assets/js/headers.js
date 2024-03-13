@@ -54,9 +54,9 @@ class DefaultFooter extends HTMLElement {
                         <h4>Meet PallyWad Capital, A dynamic and forward-thinking lending institution</h4>
                     </div>
                     <div class="col-md-3 col-4 text-end">
-                        <p class="mt-2">
+                        <!--<p class="mt-2">
                             <a href="/onboarding" class="default-button-white">Get Started</a>
-                        </p>
+                        </p>-->
                     </div>
                     <div class="col-md-12 mt-2">
                         <hr class="footerline">
