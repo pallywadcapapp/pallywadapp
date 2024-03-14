@@ -27,6 +27,8 @@ import CurrentLoan from "./views/CurrentLoan.js";
 import UploadedDocuments from "./views/UploadedDocuments.js";
 import PaymentSettings from "./views/PaymentSettings.js";
 import Dashboard2 from "./views/Dashboard2.js";
+import UpdateBusiness from "./views/UpdateBusiness.js";
+import BusinessInformation from "./views/BusinessInformation.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -55,6 +57,7 @@ const router = async () => {
         {path:"/curr-loan" , view: CurrentLoan },
         {path:"/update-profile" , view: UpdateProfile },
         {path:"/upload-documents" , view: UploadDocuments },
+        {path:"/update-business" , view: UpdateBusiness },
         {path:"/kyc-1" , view: Kyc1 },
         {path:"/kyc-2" , view: Kyc2 },
         {path:"/kyc-3" , view: Kyc3 },
@@ -74,7 +77,8 @@ const router = async () => {
         {path:"/help" , view: Help },
         {path:"/settings" , view: Settings },
         {path:"/payment-settings" , view: PaymentSettings },
-        {path:"/profile" , view: Profile }
+        {path:"/profile" , view: Profile },
+        {path:"/business-information" , view: BusinessInformation }
     ]
 
     //check each route for a potential match and redirect

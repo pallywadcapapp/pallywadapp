@@ -41,8 +41,8 @@ export default class extends DefaultView {
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <a href="upload-collateral" class="group-button d-flex justify-content-between align-items-center">
-                                                <span><img src="../assets/img/download.png" />Update Business Details</span>
+                                            <a href="business-information" class="group-button d-flex justify-content-between align-items-center">
+                                                <span><img src="../assets/img/download.png" />Business Information</span>
                                                 
                                             </a>
                                         </li>

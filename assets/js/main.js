@@ -502,7 +502,11 @@ $('body').on('click', '#update-profile', function (e) {
             data: JSON.stringify(data),
             error: function (d) {
                 $('#updateProfileForm').pleaseWait('stop');
-                displayToast('error', d.responseJSON.message, d.responseJSON.title)
+                if(d.responseText == ""){
+                    displayToast('error', "Unable to Update Business Information Details", 'error')
+                }else{
+                    displayToast('error', d.responseText, 'error')
+                }
             },
             success: function (d) {
                 if (checkProf) {
@@ -1020,7 +1024,6 @@ function fetchLoanRequests() {
 
                 }
             }
-            console.log(display)
             $('#allLoanRequests').html(display);
 
         }

@@ -24,7 +24,7 @@ export default class extends DefaultView {
                             </div>
                         </div>
                         <div class="row">
-                        <p class="about-title mt-4">List of payments made</p>
+                        <p class="about-title mt-4">PAYMENT HISTORY</p>
                         <div id="loanRepaymentArea" class=" mt-2">
                             <div id="repaymentItems2">
                                 <p class="placeholder-glow mb-2">
