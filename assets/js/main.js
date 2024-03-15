@@ -31,6 +31,7 @@ var userLoanRequest = '';
 $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
     console.log(event);
     console.log(xhr);
+    console.log(ajaxOptions);
     var pathname = $(location).attr("pathname");
     if (pathname != '/sign-in' && pathname != '/forgot-password'
         && pathname != '/password-code' && pathname != '/new-passWord') {

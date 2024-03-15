@@ -28,7 +28,7 @@ function loadUserUploadedDocuments() {
                 content += `
                 <div class="row">
                     <div class="col-md-5 repayment-item2">
-                        <div class="repayment-price">&#8358; ${number_format(lists[i].amount)}</div>
+                        <div class="repayment-price"><img style="width:50px; height:50px" alt="${lists[i].name}" src="${lists[i].url}" /></div>
                         <small class="grey-text">${lists[i].loanRefId}</small><br>
                         
                     </div>
@@ -37,8 +37,8 @@ function loadUserUploadedDocuments() {
                         <br> ${payment_status} </small>
                     </div>
                     <div class="col-md-4 repayment-item2">
-                        <small>${formatDate3(lists[i].requestDate).time}</small><br>
-                        <small>${formatDate3(lists[i].requestDate).date2}</small>
+                        <small>${formatDate3(lists[i].expiryDate).time}</small><br>
+                        <small>${formatDate3(lists[i].expiryDate).date2}</small>
                         
                     </div>
                 </div>

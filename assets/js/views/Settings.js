@@ -46,6 +46,12 @@ export default class extends DefaultView {
                                                 
                                             </a>
                                         </li>
+                                        <li class="list-group-item">
+                                            <a href="uploaded-documents" class="group-button d-flex justify-content-between align-items-center">
+                                                <span><img src="../assets/img/download.png" />Uploaded Documents</span>
+                                                
+                                            </a>
+                                        </li>
                                         <!--<li class="list-group-item">
                                             <a href="upload-collateral" class="group-button d-flex justify-content-between align-items-center">
                                                 <span><img src="../assets/img/download.png" />Upload Collateral Documents</span>

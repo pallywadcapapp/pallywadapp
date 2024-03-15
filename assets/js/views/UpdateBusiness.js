@@ -51,7 +51,7 @@ export default class extends DefaultView {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Business Address <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="address" name="address" plcaeholder="Business Address" required />
+                                                    <textarea class="form-control" id="address" name="address" plcaeholder="Business Address" required ></textarea>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Landmark </label>

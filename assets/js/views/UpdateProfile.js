@@ -21,17 +21,18 @@ export default class extends DefaultView {
                             <div id="errorNotification" class="border border-danger hide p-2 mb-2 rounded"></div>
                                 <div id="updateProfile" class="white-bg rounded div-shadow signin-form">
                                     <form id="updateProfileForm" method="GET" >
-                                        <div class="text-center mt-3 px-8">
+                                        <div class="text-center ">
                                             <h3>Update Profile</h3>
                                             <p>Complete the form below to update your profile.</p>
                                         </div>
                                         <div class="form-group mt-3">
                                             <div class="row">
                                                 <div class="small-12 medium-2 large-2 columns">
-                                                    <div class="text-center circle"><img class="profile-pic upload-buttons"
-                                                     src="assets/img/user-pic.png">
+                                                <p class="text-center">Click on the image to upload profile picture.</p>
+                                                    <div class="text-center circle">
+                                                        <img class="profile-pic upload-buttons" src="assets/img/user-pic.png" />
                                                      <div class="p-image">
-                                                    <i class="fa fa-2x fa-camera upload-buttons"></i>
+                                                    <!--<i class="fa fa-2x fa-camera upload-buttons"></i>-->
                                                     <input class="file-upload" type="file" accept="image/*"/>
                                                 </div>
                                                      </div>
