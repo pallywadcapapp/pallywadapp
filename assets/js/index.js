@@ -29,6 +29,7 @@ import PaymentSettings from "./views/PaymentSettings.js";
 import Dashboard2 from "./views/Dashboard2.js";
 import UpdateBusiness from "./views/UpdateBusiness.js";
 import BusinessInformation from "./views/BusinessInformation.js";
+import Notifications from "./views/Notifications.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -75,6 +76,7 @@ const router = async () => {
         {path:"/payment-history" , view: PaymentHistory },
         {path:"/uploaded-documents" , view: UploadedDocuments },
         {path:"/help" , view: Help },
+        {path:"/notifications" , view: Notifications },
         {path:"/settings" , view: Settings },
         {path:"/payment-settings" , view: PaymentSettings },
         {path:"/profile" , view: Profile },

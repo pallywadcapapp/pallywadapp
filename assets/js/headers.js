@@ -166,13 +166,13 @@ class DashboardHeader extends HTMLElement {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 col-12 text-end">
-                            <div class="dropdown user-drop-down">
+                            <div class="dropdown user-drop-down notifiaction-dropdown">
                             <!--<button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             
                                 <img src="assets/img/alert-bell.png" class="notification-img me-2" />
                                 <span class="notification-circle" style="display:block !important;"></span>
                             </button>-->
-                            <button type="button" class="icon-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button type="button" class="icon-button dropdown-toggle notifiaction-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="material-icons">notifications</span>
                             <span class="icon-button__badge">0</span>
                           </button>

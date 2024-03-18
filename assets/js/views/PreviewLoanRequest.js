@@ -27,6 +27,7 @@ export default class extends DefaultView {
                                     <p><b>Loan amount:</b> <span style="float:right">${number_format(localStorage.getItem('amount'))}</span></p>
                                     <p><b>Collateral type:</b> <span style="float:right">${localStorage.getItem('selCollateral')}</span></p>
                                     <p><b>Preferred Interest Rate:</b> <span style="float:right">${localStorage.getItem('preferredRate')}%</span></p>
+                                    <p><b>Preferred Tenor:</b> <span style="float:right">${localStorage.getItem('preferredTenor')} Month(s)</span></p>
                                     <div class="grey-text form-control" style="border-width: medium;">
                                     <span>purpose: </span>
                                     <span style="float:right">
