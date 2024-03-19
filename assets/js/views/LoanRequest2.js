@@ -43,10 +43,34 @@ export default class extends DefaultView {
                                                 </div>
                                             <div class="text-start mt-2"><label >Estimated Value</label></div>
                                             <div class="input-group">
-                                            <input type="number" id="estimatedValue" class="form-control" placeholder="Estimated value of Collateral in Naira" />
-                                            <div class="input-group-append" style="width:30%; align:justify">
-                                                <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>&#8358;</b></span>
+                                                <input type="number" id="estimatedValue" class="form-control" placeholder="Estimated value of Collateral in Naira" />
+                                                <div class="input-group-append" style="width:30%; align:justify">
+                                                    <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>&#8358;</b></span>
+                                                </div>
                                             </div>
+                                            <div>
+                                                <div class="text-start mt-2"><label class="collat">Car</label> Details</div>
+                                                <div class="input-group">
+                                                    <div class="input-group-append" style="align:justify">
+                                                        <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b class="collatType">Make</b></span>
+                                                    </div>
+                                                    <input type="text" id="make" class="form-control" placeholder="car make" />
+                                                    
+                                                </div>
+                                                <div class="input-group car">
+                                                    <div class="input-group-append" style="align:justify">
+                                                        <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Model</b></span>
+                                                    </div>
+                                                    <input type="text" id="model" class="form-control" placeholder="car model" />
+                                                    
+                                                </div>
+                                                <div class="input-group car">
+                                                    <div class="input-group-append" style="align:justify">
+                                                        <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Year</b></span>
+                                                    </div>
+                                                    <input type="text" id="year" class="form-control" placeholder="car year" />
+                                                    
+                                                </div>
                                             </div>
                                             <div class="text-start mt-2"><label >Other Details</label></div>
                                             <textarea type="text" id="otherdetails" class="form-control mb-2" placeholder="Other important details about Collateral"></textarea>

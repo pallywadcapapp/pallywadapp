@@ -506,9 +506,9 @@ $('body').on('click', '#update-profile', function (e) {
             data: JSON.stringify(data),
             error: function (d) {
                 $('#updateProfileForm').pleaseWait('stop');
-                if(d.responseText == ""){
+                if (d.responseText == "") {
                     displayToast('error', "Unable to Update Business Information Details", 'error')
-                }else{
+                } else {
                     displayToast('error', d.responseText, 'error')
                 }
             },
@@ -559,20 +559,20 @@ $(window).on('load', function () {
     if ($('#dashboard').length > 0) {
         $('.Eligible').hide();
         checkEligibility();
-        
+
     }
 
     if ($('#main').length > 0) {
         var iselig = localStorage.getItem('iseligible');
-        if(iselig == "true"){
+        if (iselig == "true") {
             $('.Eligible').show();
-        }else{
+        } else {
             $('.Eligible').hide();
         }
     }
 
-    
-   
+
+
 
 
 })
@@ -724,6 +724,17 @@ function loadCollateralTypes() {
             localStorage.setItem('selCollateral', lists[0].name);
             $('#collateralType').html(documents);
             $('#collateralTypeDescription').html(`<br>${lists[0].description}`);
+            $('.collat').html(lists[0].name);
+            if (lists[0].name == 'Car') {
+                $('.car').show();
+                $('.collatType').html('Make');
+                $('#make').attr('placeholder', "Car Make");
+
+            } else {
+                $('.car').hide();
+                $('.collatType').html('Type');
+                $('#make').attr('placeholder', "Gold Type");
+            }
 
         }
     })
@@ -780,12 +791,12 @@ function loadPayments() {
         success: function (d) {
             console.log(d)
             let lists = d;
-            if(lists.length > 0){
-            for (let i = 0; i < lists.length; i++) {
-                payment_status = (lists[i].status == "Pending")
-                    ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
-                    : `<span class="badge text-bg-success">${lists[i].status}</span>`;
-                content += `
+            if (lists.length > 0) {
+                for (let i = 0; i < lists.length; i++) {
+                    payment_status = (lists[i].status == "Pending")
+                        ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
+                        : `<span class="badge text-bg-success">${lists[i].status}</span>`;
+                    content += `
                 <div class="row">
                     <div class="col-md-8 repayment-item">
                         <b>${lists[i].loanRefId} </b><br>
@@ -800,8 +811,8 @@ function loadPayments() {
                 </div>
                 `;
 
-            }
-        }else{
+                }
+            } else {
                 content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>';
             }
 
@@ -826,7 +837,7 @@ function loadPaymentsHistory() {
             console.log(d)
             let lists = d;
             let content = '';
-            if(lists.length > 0){
+            if (lists.length > 0) {
                 for (let i = 0; i < lists.length; i++) {
                     payment_status = (lists[i].status == "Pending")
                         ? `<span class="badge text-bg-warning">${lists[i].status}</span>`
@@ -849,12 +860,12 @@ function loadPaymentsHistory() {
                         </div>
                     </div>
                     `;
-    
+
                 }
-            }else{
-               content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>';
+            } else {
+                content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>';
             }
-            
+
 
 
             $('#repaymentItems2').html(content);
@@ -898,6 +909,17 @@ $('body').on('change', '', function () {
 
     $('#collateralTypeDescription').html(`<br>${description}`);
     localStorage.setItem('selCollateral', collat);
+    $('.collat').html(collat);
+    if (collat == 'Car') {
+        $('.car').show();
+        $('.collatType').html('Make');
+        $('#make').attr('placeholder', "Car Make");
+
+    } else {
+        $('.car').hide();
+        $('.collatType').html('Type');
+        $('#make').attr('placeholder', "Gold Type");
+    }
 });
 
 $("body").on('change', '#loanAmountRequested', function () {
@@ -1084,7 +1106,7 @@ function fetchNotifications() {
                 display += `
             <li onclick="loadNotification(${d[i].id})"><a href="javascript:void(0);" class="dropdown-item notify-item">
     <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
-    <p class="notify-details"><b>${d[i].subject}</b><br/><small class="text-muted">${d[i].message.slice(0,40)}.</small></p>
+    <p class="notify-details"><b>${d[i].subject}</b><br/><small class="text-muted">${d[i].message.slice(0, 40)}.</small></p>
 </a></li>
             `;
             }
@@ -1094,7 +1116,7 @@ function fetchNotifications() {
     })
 }
 
-function loadNotification(id){
+function loadNotification(id) {
     sessionStorage.setItem('notificationId', id);
     window.location.href = '/notifications'
 }
@@ -1189,7 +1211,7 @@ $('body').on('click', '#continue-loan-button-1', function () {
     else if (!$('#loanAmountRequested').val()) {
         displayToast('error', 'You must enter loan amount', 'Enter loan amount')
     }
-    else if ((parseInt($('#preferredTenor').val()) < 0) && (parseInt($('#preferredTenor').val()) > 10) ) {
+    else if ((parseInt($('#preferredTenor').val()) < 0) && (parseInt($('#preferredTenor').val()) > 10)) {
         displayToast('error', 'Tenor not within range', 'Invalid Tenor')
     }
     else {
@@ -1340,6 +1362,9 @@ $(document).ready(function () {
         else {
             let api_endpoint = "/api/Collateral/UploadFile";
             let estimatedValue = $('#estimatedValue').val();
+            let make = $('#make').val();
+            let model = $('#model').val();
+            let year = $('#year').val();
             let collateralRefId = $('#collateralType :selected').val();
             let otherdetails = $('#otherdetails').val() ?? "None";
 
@@ -1356,6 +1381,9 @@ $(document).ready(function () {
             formData.append("estimatedValue", estimatedValue);
             formData.append("collateralRefId", collateralRefId);
             formData.append("otherdetails", otherdetails);
+            formData.append("make", make);
+            formData.append("model", model);
+            formData.append("year", year);
 
             var coll = [];
             //$.each($("#selectfile")[0].files, function(i, file) {
@@ -1783,7 +1811,7 @@ $('body').on('click', '.uploadPaymentProof', function () {
     }
 })
 
-$('body').on('click','.uploadedDocument', function(e){
+$('body').on('click', '.uploadedDocument', function (e) {
     window.location.href = 'upload-documents';
 });
 
