@@ -37,6 +37,22 @@ export default class extends DefaultView {
                                             <div class="col-md-4">Business Type</div>
                                             <div class="col-md-8 text-end"> <span class="typeOutput"></span></div>
                                         </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">Business Sector</div>
+                                            <div class="col-md-8 text-end"> <span class="business_sectorOutput"></span></div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">Business Service/Product</div>
+                                            <div class="col-md-8 text-end"> <span class="business_serviceOutput"></span></div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">Business Phone No</div>
+                                            <div class="col-md-8 text-end"> <span class="business_phoneNoOutput"></span></div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">Business Email</div>
+                                            <div class="col-md-8 text-end"> <span class="business_emailOutput"></span></div>
+                                        </div>
                                        
                                         <div class="row mb-2">
                                             <div class="col-md-4">Business Address</div>
@@ -49,6 +65,10 @@ export default class extends DefaultView {
                                         <div class="row mb-2">
                                             <div class="col-md-4">CAC No</div>
                                             <div class="col-md-8 text-end"> <span class="cacOutput"></span></div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">Tax ID No</div>
+                                            <div class="col-md-8 text-end"> <span class="tinOutput"></span></div>
                                         </div>
                                     </div>
                                 </div>

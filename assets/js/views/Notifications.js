@@ -3,7 +3,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("Help & Support | PallyWad Capital ");
+        this.setTitle("Notifications | PallyWad Capital ");
     }
 
     async getHtml() {

@@ -785,7 +785,7 @@ function loadPayments() {
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            $('#repaymentItems').html('<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>');
+            $('#repaymentItems').html('<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">No payment made</h4></div>');
             displayToast('error', d.responseJSON.message, d.responseJSON.status)
         },
         success: function (d) {
@@ -813,7 +813,7 @@ function loadPayments() {
 
                 }
             } else {
-                content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>';
+                content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">No payment made</h4></div>';
             }
 
 
@@ -830,7 +830,7 @@ function loadPaymentsHistory() {
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            $('#repaymentItems2').html('<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>');
+            $('#repaymentItems2').html('<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">No payment made</h4></div>');
             displayToast('error', d.responseJSON.message, d.responseJSON.status);
         },
         success: function (d) {
@@ -863,7 +863,7 @@ function loadPaymentsHistory() {
 
                 }
             } else {
-                content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no payment made</h4></div>';
+                content = '<div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">No payment made</h4></div>';
             }
 
 
@@ -1012,7 +1012,7 @@ function fetchLoanRequests() {
             console.log(lists.length)
             if (lists.length < 1) {
                 display += `
-                <div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no running loan</h4></div>
+                <div class="top-line py-2" ><h4 style="color:#B7B7B7 !important;">You have no active loan</h4></div>
                 `;
             } else {
                 for (let i = 0; i < lists.length; i++) {

@@ -28,12 +28,12 @@ export default class extends DefaultView {
                             <div class="card">
                                 <div class="card-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item ">
+                                        <!--<li class="list-group-item ">
                                             <a href="upload-documents" class="group-button d-flex justify-content-between align-items-center">
                                                 <span><img src="../assets/img/update-kyc.png" />Upload Documents</span>
-                                                <!--<span class="badge bg-primary rounded-pill">1</span>-->
                                             </a>
-                                        </li>
+                                        </li>-->
+                                        <!--<span class="badge bg-primary rounded-pill">1</span>-->
                                         <li class="list-group-item">
                                             <a href="update-profile" class="group-button d-flex justify-content-between align-items-center">
                                                 <span><img src="../assets/img/profile-icon.png" />Update Profile</span>
@@ -48,7 +48,7 @@ export default class extends DefaultView {
                                         </li>
                                         <li class="list-group-item">
                                             <a href="uploaded-documents" class="group-button d-flex justify-content-between align-items-center">
-                                                <span><img src="../assets/img/download.png" />Uploaded Documents</span>
+                                                <span><img src="../assets/img/download.png" />Document Uploads</span>
                                                 
                                             </a>
                                         </li>

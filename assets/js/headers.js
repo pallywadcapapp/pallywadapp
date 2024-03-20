@@ -219,13 +219,13 @@ class LeftSidebar extends HTMLElement {
                     <li><a href="/dashboard" ><img src="assets/img/overview.png" /> Overview</a></li>
                     <li><a href="/loans"><img src="assets/img/loans.png" /> Loans</a></li>
                     <li><a href="/payment-history"><img src="assets/img/payment-history.png" /> Payment History</a></li>
-                    <li><a href="/uploaded-documents"><img src="assets/img/payment-history.png" /> Uploaded Documents</a></li>
-                    <li><a href="/uploaded-collaterals"><img src="assets/img/payment-history.png" /> Uploaded Collateral</a></li>
+                    <li><a href="/uploaded-documents"><img src="assets/img/payment-history.png" />Document Uploads</a></li>
+                    <li><a href="/uploaded-collaterals"><img src="assets/img/payment-history.png" /> Collateral Uploads</a></li>
                 </ul>
 
 
                 <ul class="sidebar-links place-at-botttom">
-                    <li><a href="/help" data-link><img src="assets/img/overview.png" /> Help & Support</a></li>
+                    <li><a href="/help" data-link><img src="assets/img/overview.png" /> FAQs</a></li>
                     <li><a href="/settings" data-link><img src="assets/img/loans.png" /> Setting</a></li>
                 </ul>
                 

@@ -16,11 +16,11 @@ export default class extends DefaultView {
                     <div class="container">
                         <div class="row d-flex align-items-center">
                             <div class="col-md-8 page-lead">
-                                <h3>Help & Support</h3>
+                                <h3>FAQs</h3>
                             </div>
                         </div>
                         <div class="row">
-                        <p class="about-title mt-4">Popular Help Resources</p>
+                        <p class="about-title mt-4"></p>
                         <div class=" p-2">
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 <div class="accordion-item">

@@ -28,7 +28,7 @@ export default class extends DefaultView {
                                             <p class="grey-text">To get verified, you will need to:</p>
                                         </div>
                                         <div class="text-center illustration-space">
-                                            <a href="/kyc-1">
+                                            <a href="/doc-upload">
                                                 <img src="assets/img/document-upload-illustration.png">
                                             </a>
                                             
@@ -36,7 +36,7 @@ export default class extends DefaultView {
                                         
                                         
                                         <div class="form-group mt-5">
-                                            <a href="/kyc-1" nav-link class="continue-button-2">Let's Start</a>
+                                            <a href="/doc-upload" nav-link class="continue-button-2">Let's Start</a>
                                         </div>
                                         <div class="privacy-area text-center mt-3">
                                             By clicking the “start” button you agree to our

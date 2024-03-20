@@ -41,10 +41,60 @@ export default class extends DefaultView {
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Business Type <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="type" name="type" plcaeholder="Business Type" required/>
+                                                    <select id="type" required name="type" class="form-control">
+                                                        <option value="">Select Business Type</option>
+                                                        <option>Partnership</option>
+                                                        <option>LLP</option>
+                                                        <option>Proprietorship</option>
+                                                        <option>Private Limited</option>
+                                                        <option>Public Ltd</option>
+                                                        <option>Others </option>
+                                                    </select>
+                                                    <!--<input type="text" class="form-control" id="type" name="type" plcaeholder="Business Type" required/>-->
                                                 </div>
                                             </div>
                                             
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Sector <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="sector" name="sector" plcaeholder="Industry/Sector" required/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Product/Services <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="services" name="services" plcaeholder="Product/Services" required/>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Business Phone Number <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="business_phoneNo" name="business_phoneNo" plcaeholder="Business Phone Number" required/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Business Email <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="business_email" name="business_email" plcaeholder="Business Email" required/>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                       
+                                        <div class="form-group mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>CAC Registration Number <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="cacno" name="cacno" plcaeholder="CAC Number" required />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Tax Identification Number <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="tin" name="tin" plcaeholder="Tax Identification Number" required />
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="form-group mt-3">
@@ -56,15 +106,6 @@ export default class extends DefaultView {
                                                 <div class="col-md-6">
                                                     <label>Landmark </label>
                                                     <input type="text" class="form-control" id="landmark" name="landmark"  placeholder="Landmark" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                       
-                                        <div class="form-group mt-3">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>CAC Registration Number </label>
-                                                    <input type="text" class="form-control" id="cacno" name="cacno" plcaeholder="CAC Number" />
                                                 </div>
                                             </div>
                                         </div>

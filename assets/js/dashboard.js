@@ -76,9 +76,11 @@ function loadReadLanding() {
     var title = '<i class="fa fa-warning" style="color:#eb3d5d; background-color:#fff2f5; border-radius: 60px; box-shadow: 0 0 2px #888;padding: 0.5em 0.6em;"></i>' +
         ' <b><span style="font-size:15px;"> PLEASE READ</span></b>';
     var body = `<ul>
-                <li>PallyWad Capital will only disburse your approved loan into the bank account provided</li>
-                <li>PallyWad Capital only accepts repayment into bank account in the loan approved document</li>
+                <li>PallyWad Capital will only disburse your approved loan into the bank account provided on your profile</li>
+                <li>PallyWad Capital only accepts loan repayment into our bank account sent via email from <a href="mailto:info@pallywad.com">info@pallywad.com</a>
+                </li>
                 <li>PallyWad Capital will never ask you to pay additional costs to receive a loan</li>
+                <li>PallyWad Capital accepts flexible payment terms </li>
     `;
     //$('.modal-body').html(body);
     $('#prembd').html(body);

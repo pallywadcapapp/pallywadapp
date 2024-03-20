@@ -17,6 +17,13 @@ $(document).ready(function() {
             let name = $('[name=name]').val();
             let cacno = $('[name=cacno]').val();
             let landmark = $('[name=landmark]').val();
+            
+            let tin = $('[name=tin]').val();
+            let business_email = $('[name=business_email]').val();
+            let sector = $('[name=sector]').val();
+            let services = $('[name=services]').val();
+            let business_phoneNo = $('[name=business_phoneNo]').val();
+    
     
             let email = localStorage.getItem("email");
     
@@ -31,7 +38,12 @@ $(document).ready(function() {
                 name,
                 cacno,
                 landmark,
-                memberId
+                memberId,
+                business_phoneNo,
+                tin,
+                business_email,
+                sector,
+                services
             }
     
            if(_businessInfo == '' || _businessInfo == null){
@@ -73,6 +85,9 @@ function preloadBusinessDetails(email) {
             $('[name="landmark"]').val(d.landmark);
             $('[name="cacno"]').val(d.cacno);
             
+            
+            $('[name="type"] option:contains("' + d.type + '")').prop('selected', true);
+
             /*$('[name="sex"] option:contains("' + d.sex + '")').prop('selected', true);
             $('[name="employmentStatus"] option:contains("' + d.employmentStatus + '")').prop('selected', true);*/
             $('.nameOutput').html(d.name);

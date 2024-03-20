@@ -58,7 +58,7 @@ export default class extends DefaultView {
                                             
                                             <input type="date" id="expiryDate" class="form-control mb-2" placeholder="Expiry Date" />
                                             </div>
-                                            <a href="javascript:;" id="uploadDocument" class="continue-button-2 hide" >Submit Document</a>
+                                            <a href="javascript:;" id="uploadDocumentTrans" class="continue-button-2 hide" >Submit Document</a>
                                             
                                         </div>
 

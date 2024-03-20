@@ -31,6 +31,9 @@ import UpdateBusiness from "./views/UpdateBusiness.js";
 import BusinessInformation from "./views/BusinessInformation.js";
 import Notifications from "./views/Notifications.js";
 import UploadedCollateral from "./views/UploadedCollateral.js";
+import DocUpload from "./views/DocUpload.js";
+import DocUploadTrans from "./views/DocUploadTrans.js";
+import UploadComplete from "./views/UploadComplete.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -60,6 +63,9 @@ const router = async () => {
         {path:"/update-profile" , view: UpdateProfile },
         {path:"/upload-documents" , view: UploadDocuments },
         {path:"/update-business" , view: UpdateBusiness },
+        {path:"/doc-upload" , view: DocUpload },
+        {path:"/doc-upload-trans" , view: DocUploadTrans },
+        {path:"/doc-upload-complete" , view: UploadComplete },
         {path:"/kyc-1" , view: Kyc1 },
         {path:"/kyc-2" , view: Kyc2 },
         {path:"/kyc-3" , view: Kyc3 },

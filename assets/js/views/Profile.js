@@ -27,7 +27,7 @@ export default class extends DefaultView {
                                 <p class="about-title mb-3">Profile</p>
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="row">
+                                        <div>
                                             <div class="text-center circle"><img class="profile-pic" src="assets/img/user-pic.png"></div>
                                             <h4 class="text-center mt-2"><span class="firstnameOutput"></span></h4>
                                         </div>
