@@ -51,7 +51,7 @@ class DefaultFooter extends HTMLElement {
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 col-8 pe-5">
-                        <h4>Meet PallyWad Capital, A dynamic and forward-thinking lending institution</h4>
+                        <h4>PallyWad Capital, a dynamic and forward-thinking financial institution</h4>
                     </div>
                     <div class="col-md-3 col-4 text-end">
                         <!--<p class="mt-2">
@@ -66,7 +66,7 @@ class DefaultFooter extends HTMLElement {
                     <div class="col-md-4 col-12">
                         <img src="assets/img/pallywad-logo-white.png" class="img-fluid" />
                         <p class="fueling-dreams">
-                            Fueling Dreams, Powering Growth
+                            Empowering your financial journey!
                         </p>
                     </div>
                     <div class="col-md-8 col-12">
@@ -220,7 +220,7 @@ class LeftSidebar extends HTMLElement {
                     <li><a href="/loans"><img src="assets/img/loans.png" /> Loans</a></li>
                     <li><a href="/payment-history"><img src="assets/img/payment-history.png" /> Payment History</a></li>
                     <li><a href="/uploaded-documents"><img src="assets/img/payment-history.png" /> Uploaded Documents</a></li>
-                    <li><a href="/uploaded-collaterals"><img src="assets/img/payment-history.png" /> Uploaded Collaterals</a></li>
+                    <li><a href="/uploaded-collaterals"><img src="assets/img/payment-history.png" /> Uploaded Collateral</a></li>
                 </ul>
 
 

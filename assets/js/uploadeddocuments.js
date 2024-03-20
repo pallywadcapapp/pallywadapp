@@ -35,7 +35,7 @@ function loadUserUploadedDocuments() {
                 <div class="row">
                     <div class="col-md-5 repayment-item2">
                         <div class="repayment-price">
-                            <img style="width:50px; height:50px" alt="${lists[i].name}" src="${loan_app_url + '/api/documents/fileuploads?filepath=' + lists[i].url}" />
+                            <img onclick="previewImage(this)" style="width:50px; height:50px" alt="${lists[i].name}" src="${loan_app_url + '/api/documents/fileuploads?filepath=' + lists[i].url}" />
                             ${lists[i].name}
                         </div>
                         <small class="grey-text">${lists[i].doctype}</small><br>
@@ -117,7 +117,7 @@ function paginateCollateral(items, itemsPerPage, paginationContainer, itemContai
             var content = `<div class="row">
     <div class="col-md-5 repayment-item2">
         <div class="repayment-price">
-            <img style="width:50px; height:50px" alt="${item.name}" src="${loan_app_url + '/api/documents/fileuploads?filepath=' + item.url}" />
+            <img onclick="previewImage(this)" style="width:50px; height:50px" alt="${item.name}" src="${loan_app_url + '/api/documents/fileuploads?filepath=' + item.url}" />
             ${item.name}
         </div>
         <small class="grey-text">&#8358;${number_format(item.estimatedValue)}</small><br />

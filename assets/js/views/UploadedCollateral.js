@@ -16,7 +16,7 @@ export default class extends DefaultView {
                     <div class="container">
                         <div class="row d-flex align-items-center">
                             <div class="col-md-8 page-lead">
-                                <h3>Uploaded Collaterals</h3>
+                                <h3>Uploaded Collateral</h3>
                             </div>
                             <div class="col-md-4 text-center ps-5">
                                 <a href="javascript:;" class="default-button mt-3 uploadedCollateral">
@@ -24,7 +24,7 @@ export default class extends DefaultView {
                             </div>
                         </div>
                         <div class="row">
-                        <p class="about-title mt-4">List of Documents Uploaded</p>
+                        <p class="about-title mt-4">List of Collateral Uploaded</p>
                         <div id="loanUploadedCollateralsArea" class=" mt-2">
                             <div id="userDocItems">
                                 <p class="placeholder-glow mb-2">

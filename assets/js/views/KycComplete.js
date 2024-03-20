@@ -21,7 +21,7 @@ export default class extends DefaultView {
                                 <div class="white-bg rounded div-shadow upload-form ">
                                     <form>
                                         <div class="text-center ">
-                                            <h3>Document Verification Complete</h3>
+                                            <h3>Documents Upload Complete</h3>
                                             <p>Your verification documents were uploaded successfully. 
                                             We will verify these documents<!-- and enable the Loan 
                                             Request section of your account within 24 hours-->.</p>

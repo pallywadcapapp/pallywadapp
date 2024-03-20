@@ -30,7 +30,7 @@ export default class extends DefaultView {
                                     <ul class="list-group">
                                         <li class="list-group-item ">
                                             <a href="upload-documents" class="group-button d-flex justify-content-between align-items-center">
-                                                <span><img src="../assets/img/update-kyc.png" />Update KYC Information</span>
+                                                <span><img src="../assets/img/update-kyc.png" />Upload Documents</span>
                                                 <!--<span class="badge bg-primary rounded-pill">1</span>-->
                                             </a>
                                         </li>
