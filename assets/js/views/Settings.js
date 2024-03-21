@@ -66,14 +66,14 @@ export default class extends DefaultView {
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item ">
-                                            <a href="change-password" class="group-button d-flex justify-content-between align-items-center">
-                                                <span><img src="../assets/img/change-password-icon.png" />Change Password</span>
-                                            </a>
-                                        </li>
                                         <li class="list-group-item">
                                             <a href="payment-settings" class="group-button d-flex justify-content-between align-items-center">
                                                 <span><img src="../assets/img/lock-icon-small.png" />Payment Settings</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item ">
+                                            <a href="change-password" class="group-button d-flex justify-content-between align-items-center">
+                                                <span><img src="../assets/img/change-password-icon.png" />Change Password</span>
                                             </a>
                                         </li>
                                     </ul>

@@ -18,7 +18,7 @@ export default class extends DefaultView {
                     <div class="container">
                         <div class="row d-flex align-items-center">
                             <div class="col-md-8 page-lead">
-                                <h3>Default Payment Setting</h3>
+                                <h3>Bank Account Details</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -49,11 +49,15 @@ export default class extends DefaultView {
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label>Bank</label>
-                                                    <input type="text" class="form-control" id="bankname" name="bankname">
+                                                    <input type="text" class="form-control" id="bankname" name="bankname" placeholder="Bank Name" required>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label>Account No</label>
-                                                    <input type="text" class="form-control" id="bankaccno" name="bankaccno">
+                                                    <label>Account Number</label>
+                                                    <input type="text" class="form-control" id="bankaccno" name="bankaccno" placeholder="Account Number" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label>Account Name</label>
+                                                    <input type="text" class="form-control" id="accountname" name="accountname" placeholder="Account Name" required>
                                                 </div>
                                             </div>
                                         </div>
