@@ -1211,7 +1211,7 @@ $('body').on('click', '#continue-loan-button-1', function () {
     else if (!$('#loanAmountRequested').val()) {
         displayToast('error', 'You must enter loan amount', 'Enter loan amount')
     }
-    else if ((parseInt($('#preferredTenor').val()) < 0) && (parseInt($('#preferredTenor').val()) > 10)) {
+    else if ((parseInt($('#preferredTenor').val()) < 0) || (parseInt($('#preferredTenor').val()) > 12)) {
         displayToast('error', 'Tenor not within range', 'Invalid Tenor')
     }
     else {

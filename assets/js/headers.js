@@ -219,8 +219,8 @@ class LeftSidebar extends HTMLElement {
                     <li><a href="/dashboard" ><img src="assets/img/overview.png" /> Overview</a></li>
                     <li><a href="/loans"><img src="assets/img/loans.png" /> Loans</a></li>
                     <li><a href="/payment-history"><img src="assets/img/payment-history.png" /> Payment History</a></li>
-                    <li><a href="/uploaded-documents"><img src="assets/img/payment-history.png" />Document Uploads</a></li>
-                    <li><a href="/uploaded-collaterals"><img src="assets/img/payment-history.png" /> Collateral Uploads</a></li>
+                    <li><a href="/uploaded-documents"><img src="assets/img/payment-history.png" />Document Upload</a></li>
+                    <li><a href="/uploaded-collaterals"><img src="assets/img/payment-history.png" /> Collateral Upload</a></li>
                 </ul>
 
 

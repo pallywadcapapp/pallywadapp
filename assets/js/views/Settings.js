@@ -48,7 +48,7 @@ export default class extends DefaultView {
                                         </li>
                                         <li class="list-group-item">
                                             <a href="uploaded-documents" class="group-button d-flex justify-content-between align-items-center">
-                                                <span><img src="../assets/img/download.png" />Document Uploads</span>
+                                                <span><img src="../assets/img/download.png" />Document Upload</span>
                                                 
                                             </a>
                                         </li>

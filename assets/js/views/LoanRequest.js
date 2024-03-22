@@ -86,7 +86,7 @@ export default class extends DefaultView {
                                                 <input id="preferredRate" type="number"/>
                                             </div>
                                             <div class="form-group mt-3 mb-4">
-                                                <label><b>Preferred Tenor (1 - 10 Months)</b></label><br>
+                                                <label><b>Preferred Tenor (1 - 12 Months)</b></label><br>
                                                 <input id="preferredTenor" type="number"/>
                                             </div>
                                             <div class="form-group mt-3 mb-4">
