@@ -39,7 +39,7 @@ function loanRequestView(loanRequest){
                             </div>
                             <div class="col-md-7 loan-display">
                                 <h4>&#8358;${number_format(loanRequest.amount)}</h4>
-                                <p class="grey-text">Booast working capital</p>
+                                <p class="grey-text"></p>
                             </div>
                             <div class="col-md-12">
                                 <span><b>Request Date and Time</b> </span>
@@ -49,13 +49,13 @@ function loanRequestView(loanRequest){
                                 </p>
                             </div>
                             <div class="col-md-12">
-                                <span><b>Loan Type:</b></span><span style="float:rigt">${loanRequest.category}</span>
+                                <span><b>Loan Type: </b></span><span style="float:rigt">${loanRequest.category}</span>
                             </span>
                             <div class="col-md-12">
-                                <span>Interest Rate 
+                                <!--<span>Interest Rate 
                                     <b>${ parseInt(loanRequest.loaninterest) }% - 
                                     ${ parseInt(loanRequest.loaninterest) + 5}% </b>
-                                </span>
+                                </span>-->
                                 <span style="float:right;">
                                     (you will get your exact rate on loan approval. Rate is dynamic)
                                 </span>
@@ -63,7 +63,7 @@ function loanRequestView(loanRequest){
                             </div>
                             <br />
                             <div class="col-md-12" style="border-width: medium;">
-                                <span> Amount to pay monthly as interest</span>
+                                <span>Possible amount to pay monthly as interest</span>
                                 <span style="float:right;">
                                     <b>&#8358;${number_format(parseFloat(loanRequest.amount) * parseInt(loanRequest.loaninterest) / 100)} - 
                                     &#8358;${number_format(parseFloat(loanRequest.amount) * (parseInt(loanRequest.loaninterest) + 5) / 100)} </b>
@@ -90,7 +90,7 @@ function loanRequestView(loanRequest){
                             </div>
                             <div class="col-md-7 loan-display">
                                 <h4>&#8358;${number_format(loanRequest.amount)}</h4>
-                                <p class="grey-text">Booast working capital</p>
+                                <p class="grey-text"></p>
                             </div>
                             <div class="col-md-12">
                                 <span><b>Request Date and Time</b> </span>
@@ -106,7 +106,7 @@ function loanRequestView(loanRequest){
                                 line-height: 20px;
                                 letter-spacing: 0em;
                                 text-align: left;
-                                ">Reason for decline</span>
+                                ">Reason for decline: </span>
                                 <div class="grey-text form-control" style="border-color: #ADADAD; color: #ADADAD;
                                 border-width: medium; height:100px;">
                                 <span> ${loanRequest.reason} </span>
@@ -140,7 +140,7 @@ function loanRequestView(loanRequest){
                             </div>
                             <div class="col-md-7 loan-display">
                                 <h4>&#8358;${number_format(loanRequest.amount)}</h4>
-                                <p class="grey-text">Booast working capital</p>
+                                <p class="grey-text"></p>
                             </div>
                             <div class="col-md-12">
                                 <span><b>Pre approved Date and Time</b> </span>
@@ -157,7 +157,7 @@ function loanRequestView(loanRequest){
                                 line-height: 20px;
                                 letter-spacing: 0em;
                                 text-align: left;
-                                ">Purpose of the Loan</span>
+                                ">Purpose of the Loan: </span>
                                 <div class="grey-text form-control" style="border-color: #ADADAD; color: #ADADAD;
                                 border-width: medium; height:100px;">
                                 <span> ${loanRequest.purpose} </span>
@@ -193,10 +193,10 @@ function loanRequestView(loanRequest){
                                 </div>
                                 <div class="col-md-7 loan-display">
                                     <h4>&#8358;${number_format(loanRequest.amount)}</h4>
-                                    <p class="grey-text">Booast working capital</p>
+                                    <p class="grey-text"></p>
                                 </div>
                                 <div class="col-md-12">
-                                    <span><b>Request Date and Time</b> </span>
+                                    <span><b>Request Date and Time: </b> </span>
                                     <p class="grey-text">
                                     ${timeOutput} - 
                                     ${dayOutput}

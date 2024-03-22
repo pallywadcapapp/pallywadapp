@@ -226,7 +226,7 @@ class LeftSidebar extends HTMLElement {
 
                 <ul class="sidebar-links place-at-botttom">
                     <li><a href="/help" data-link><img src="assets/img/overview.png" /> FAQs</a></li>
-                    <li><a href="/settings" data-link><img src="assets/img/loans.png" /> Setting</a></li>
+                    <li><a href="/settings" data-link><img src="assets/img/loans.png" /> Settings</a></li>
                 </ul>
                 
             </div>

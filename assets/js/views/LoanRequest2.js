@@ -26,7 +26,7 @@ export default class extends DefaultView {
                                         
 
                                         <div class="row text-center">
-                                            <h3>Add Collateral Document</h3>
+                                            <h3>Provide Collateral Details </h3>
                                             <div class="text-center illustration-space-3">
                                             
                                                 <div id="uploadedFilesPreview" class="table table-striped table-hover"> 
@@ -54,21 +54,21 @@ export default class extends DefaultView {
                                                     <div class="input-group-append" style="align:justify">
                                                         <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b class="collatType">Make</b></span>
                                                     </div>
-                                                    <input type="text" id="make" class="form-control" placeholder="car make" />
+                                                    <input type="text" id="make" class="form-control" placeholder="Car Make" />
                                                     
                                                 </div>
                                                 <div class="input-group car">
                                                     <div class="input-group-append" style="align:justify">
                                                         <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Model</b></span>
                                                     </div>
-                                                    <input type="text" id="model" class="form-control" placeholder="car model" />
+                                                    <input type="text" id="model" class="form-control" placeholder="Car Model" />
                                                     
                                                 </div>
                                                 <div class="input-group car">
                                                     <div class="input-group-append" style="align:justify">
                                                         <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Year</b></span>
                                                     </div>
-                                                    <input type="text" id="year" class="form-control" placeholder="car year" />
+                                                    <input type="text" id="year" class="form-control" placeholder="Car Year" />
                                                     
                                                 </div>
                                             </div>
@@ -79,7 +79,7 @@ export default class extends DefaultView {
                                         <div class="row" style="min-height:50px">
                                             <div class="col-md-8" style="min-height:30px">
                                                 <span style="color: #ADADAD;"> Loan requested should not exceed ${localStorage.getItem('collateralRate')}% of collateral provided.
-                                            Minimum expected collateral value: .</span>
+                                            Minimum expected collateral value: </span>
                                             </div>
                                             <div class="col-md-4" style="background-color: #F4F4F4; border-radius:5px; width:124px;min-height:30px; margin:10px">
                                                 <span><b>${this.currency}
@@ -99,7 +99,7 @@ export default class extends DefaultView {
                                         <input type="file" class="d-none" id="selectfile" />
                                         <div class="privacy-area text-center mt-3">
                                             By clicking the “start” button you agree to our
-                                            <a target="_blank" href="https://pallywad.com/terms">User Terms and Conditions and</a> <a target="_blank" href="https://pallywad.com/privacy">our Privacy Notice.</a>
+                                            <a target="_blank" href="https://pallywad.com/terms">Terms of service.</a> and <a target="_blank" href="https://pallywad.com/privacy">Privacy policy.</a>
                                         </div>
                                     </form>
                     

@@ -23,13 +23,14 @@ export default class extends DefaultView {
                                 </div>
                                 <div id="kyc2-form" class="white-bg rounded div-shadow upload-form ">
                                     <h3 style="text-align: center;">Preview Loan Request</h3>
-                                    <p><b>Loan type:</b> <span style="float:right">${localStorage.getItem('category')}</span></p>
-                                    <p><b>Loan amount:</b> <span style="float:right">${number_format(localStorage.getItem('amount'))}</span></p>
-                                    <p><b>Collateral type:</b> <span style="float:right">${localStorage.getItem('selCollateral')}</span></p>
+                                    <p><b>Loan Type:</b> <span style="float:right">${localStorage.getItem('category')}</span></p>
+                                    <p><b>Loan Amount:</b> <span style="float:right">${number_format(localStorage.getItem('amount'))}</span></p>
+                                    <p><b>Collateral Type:</b> <span style="float:right">${localStorage.getItem('selCollateral')}</span></p>
                                     <p><b>Preferred Interest Rate:</b> <span style="float:right">${localStorage.getItem('preferredRate')}%</span></p>
                                     <p><b>Preferred Tenor:</b> <span style="float:right">${localStorage.getItem('preferredTenor')} Month(s)</span></p>
+                                    <p><b>Repayment Plan:</b> <span style="float:right">${localStorage.getItem('repaymentPlan')} </span></p>
                                     <div class="grey-text form-control" style="border-width: medium;">
-                                    <span>purpose: </span>
+                                    <span>Purpose: </span>
                                     <span style="float:right">
                                     ${localStorage.getItem('purpose')}
                                     </span>
@@ -63,7 +64,7 @@ export default class extends DefaultView {
                                     <br />
                                     <div class="privacy-area ">
                                     
-                                    <input type="checkbox" id="inputTerms" onchange="certify()"  style="height:1.7rem; width:1.7rem" /> Accept our <a href="terms" target="_blank"> Terms and Condition</a>
+                                    <input type="checkbox" id="inputTerms" onchange="certify()"  style="height:1.7rem; width:1.7rem" /> Accept our <a href="terms" target="_blank"> Terms of Service and update link </a>
                                     </div><br />
                                     <!--<p><b>Collateral Type:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].duration}months</p>
                                     <p><b>Collateral Threshold:</b> ${JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].collateralPercentage}%</p>-->

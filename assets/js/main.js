@@ -721,7 +721,7 @@ function loadCollateralTypes() {
                     </option>
                 `;
             }
-            localStorage.setItem('selCollateral', lists[0].name);
+            //localStorage.setItem('selCollateral', lists[0].name);
             $('#collateralType').html(documents);
             $('#collateralTypeDescription').html(`<br>${lists[0].description}`);
             $('.collat').html(lists[0].name);
@@ -903,7 +903,7 @@ $("body").on('change', '#loanType', function () {
     pindexBox.val(pindex);
 });
 
-$('body').on('change', '', function () {
+$('body').on('change', '#collateralType', function () {
     let collat = $("#collateralType :selected").attr("value");
     let description = $("#collateralType :selected").attr("collateralDescription");
 
@@ -1217,6 +1217,7 @@ $('body').on('click', '#continue-loan-button-1', function () {
     else {
 
         let loancode = $('#loanType :selected').val();
+        let repaymentPlan = $('#repaymentPlan :selected').val();
         let amount = $('#loanAmountRequested').val();
         let purpose = $('#purpose').val();
         let businessname = $('#businessname').val();
@@ -1234,6 +1235,7 @@ $('body').on('click', '#continue-loan-button-1', function () {
             proofDocuments.push($(this).attr("ValueName"));
         });
         localStorage.setItem("loancode", loancode);
+        localStorage.setItem("repaymentPlan", repaymentPlan);
         localStorage.setItem("amount", amount);
         localStorage.setItem("purpose", purpose);
         localStorage.setItem("category", category);
@@ -1622,6 +1624,7 @@ $('body').on('click', '#submitLoanRequest', function () {
     let collateral = localStorage.getItem("selCollateral");
     let preferredRate = localStorage.getItem("preferredRate");
     let preferredTenor = localStorage.getItem("preferredTenor");
+    let repaymentPlan = localStorage.getItem('repaymentPlan');
     let estimatedCollateralValue = localStorage.getItem("estimatedCollateralValue");
     let sector = localStorage.getItem("sector");
     let age = localStorage.getItem("age");
@@ -1646,7 +1649,8 @@ $('body').on('click', '#submitLoanRequest', function () {
         preferredRate,
         preferredTenor,
         sector,
-        estimatedCollateralValue
+        estimatedCollateralValue,
+        repaymentPlan
     }
 
     $('#kyc2-form').pleaseWait();

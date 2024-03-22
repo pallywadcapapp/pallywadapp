@@ -23,7 +23,7 @@ export default class extends DefaultView {
                                         <div class="text-center ">
                                             <h3>Loan Request Complete</h3>
                                             <p>Your loan request was completed successfully. 
-                                            We will look through your request and give you a feedback on your loan within 24 hours.</p>
+                                            We will review and revert within 24 hours.</p>
                                         </div>
                                         <div class="text-center mt-2">
                                             <img src="assets/img/checked-1.png" class="kyc-complete" />

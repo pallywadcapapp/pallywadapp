@@ -19,12 +19,12 @@ export default class extends DefaultView {
                             <div class="container-fluid">
                                 <div class="row ">
                                     <div class="col-md-12 col-12 pe-5 ps-8 text-center">
-                                        <p class="about-title">REQUEST LOAN</p>
+                                        <p class="about-title">LOAN REQUEST</p>
                                         <h3 class="mt-3 translate-bottom-50 transition-100 transition-delay-600">
-                                            Explore our comprehensive selection of loans
+                                            Seamless loan application process.
                                         </h3>
                                         <p class="sub-title translate-bottom-50 transition-100 transition-delay-800">
-                                            Our simplified application process involves easy-to-follow steps.
+                                            Fully online experience. 
                                         </p>
                                     </div>
                                     
@@ -70,7 +70,7 @@ export default class extends DefaultView {
                                                 <input id="sector" type="text" placeholder="Enter the industry sector" />
                                             </div>
                                             <div class="form-group mt-3 mb-4 busLoanView">
-                                                <label><b>How long in business</b></label><br>
+                                                <label><b>How long in business (Months)</b></label><br>
                                                 <input id="age" type="number" placeholder="Enter how long you've been in business" />
                                             </div>
                                             <div class="form-group mt-3 mb-4">
@@ -90,8 +90,16 @@ export default class extends DefaultView {
                                                 <input id="preferredTenor" type="number"/>
                                             </div>
                                             <div class="form-group mt-3 mb-4">
-                                                <label><b>Purpose for the Loan</b></label><br>
+                                                <label><b>Purpose of the Loan</b></label><br>
                                                 <textarea class="form-control" id="purpose"></textarea>
+                                            </div>
+                                            <div class="form-group mt-3 mb-4">
+                                                <label><b>Repayment Plan</b></label><br>
+                                                <select id="repaymentPlan" class="form-select" aria-label="Default select example">
+                                                    <option selected>Select Repayment Plan</option>
+                                                    <option>Reducing Balance </option>
+                                                    <option>Lumpsum at end of tenure</option>
+                                                </select>
                                             </div>
                                             <div class="form-group mt-3 mb-4" hidden>
                                             <label><b>Select Proof Document(s) Uploaded</b></label>
@@ -112,7 +120,7 @@ export default class extends DefaultView {
 
                                             <div class="privacy-area text-center mt-3">
                                                 By clicking the “start” button you agree to our
-                                                <a href="">User Terms and Conditions and</a> <a href="">our Privacy Notice.</a>
+                                                <a target="_blank" href="https://pallywad.com/terms">Terms of service.</a> and <a target="_blank" href="https://pallywad.com/privacy">Privacy policy.</a>
                                             </div>
                                         </form>
                         
