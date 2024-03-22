@@ -84,6 +84,11 @@ function preloadBusinessDetails(email) {
             $('[name="address"]').val(d.address);
             $('[name="landmark"]').val(d.landmark);
             $('[name="cacno"]').val(d.cacno);
+            $('[name="business_phoneNo"]').val(d.business_phoneNo);
+            $('[name="tin"]').val(d.tin);
+            $('[name="business_email"]').val(d.business_email);
+            $('[name="sector"]').val(d.sector);
+            $('[name="services"]').val(d.services);
             
             
             $('[name="type"] option:contains("' + d.type + '")').prop('selected', true);
@@ -95,6 +100,11 @@ function preloadBusinessDetails(email) {
             $('.businessAddressOutput').html(d.address);
             $('.landmarkOutput').html(d.landmark);
             $('.cacOutput').html(d.cacno);
+            $('.business_phoneNoOutput').html(d.business_phoneNo);
+            $('.tinOutput').html(d.tin);
+            $('.business_emailOutput').html(d.business_email);
+            $('.business_sectorOutput').html(d.sector);
+            $('.business_serviceOutput').html(d.services);
         }
     })
 }
@@ -121,7 +131,7 @@ function saveBusiness(data, api_endpoint){
         },
         success: function (d) {
             $('#updateBusinessForm').pleaseWait('stop');
-            displayToast('success', "Your profile was updated successfully", "Profile update successful")
+            displayToast('success', "Your business profile was updated successfully", "Business Profile Update")
             
         }
     })
@@ -141,9 +151,8 @@ function updateBusiness(data, api_endpoint){
                 displayToast('error', d.responseText, 'error')
             }
         },
-        success: function (d) {
-            
-
+        success: function (d) {            
+            $('#updateBusinessForm').pleaseWait('stop');
             displayToast('success', "Your profile was updated successfully", "Profile update successful")
             
         }

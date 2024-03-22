@@ -63,15 +63,15 @@ class DefaultFooter extends HTMLElement {
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-5 col-12">
                         <img src="assets/img/pallywad-logo-white.png" class="img-fluid" />
                         <p class="fueling-dreams">
                             Empowering your financial journey!
                         </p>
                     </div>
-                    <div class="col-md-8 col-12">
+                    <div class="col-md-7 col-12">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <p class="footer-link-title">PAGES</p>
                                 <ul class="footer-link">
                                     <li><a href="">Home</a></li>
@@ -81,19 +81,19 @@ class DefaultFooter extends HTMLElement {
                                 </ul>
                             </div>
 
-                            <div class="col-md-4">
+                            <!--<div class="col-md-4">
                                 <p class="footer-link-title">ACCOUNT</p>
                                 <ul class="footer-link">
                                     <li><a href="">Log in</a></li>
                                     <li><a href="">Sign up</a></li>
                                 </ul>
-                            </div>
+                            </div>-->
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <p class="footer-link-title">COMPANY</p>
                                 <ul class="footer-link">
-                                    <li><a href="">Terms of service</a></li>
-                                    <li><a href="">Privacy policy</a></li>
+                                    <li><a href="">Terms of Service</a></li>
+                                    <li><a href="">Privacy Policy</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -118,14 +118,14 @@ class DefaultFooter extends HTMLElement {
                         &copy; 2024 PallyWad Capital. All rights reserved.
                     </div>
                     <div class="col-md-3">
-                        <ul class="footer-social-links">
-                            <li class="translate-top-50 transition-100 transition-delay-100"><a href="#" title="linkedin"><i class="fab fa-instagram"></i></a></li>
-                            <li class="translate-top-50 transition-100 transition-delay-200"><a href="#" title="twitter"><i class="fab fa-x-twitter"></i></a></li>
-                            <li class="translate-top-50 transition-100 transition-delay-300"><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                            <li class="translate-top-50 transition-100 transition-delay-400"><a href="#" title="Facebook"><i class="fab fa-linkedin"></i></a></li>
-                            <li class="translate-top-50 transition-100 transition-delay-500"><a href="#" title="google"><i class="fab fa-youtube"></i></a></li>
-                            
-                        </ul>
+                    <ul class="footer-social-links">
+                        <li class="translate-top-50 transition-100 transition-delay-400"><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                        <li class="translate-top-50 transition-100 transition-delay-200"><a href="#" title="Twitter"><i class="fab fa-x-twitter"></i></a></li>
+                        <li class="translate-top-50 transition-100 transition-delay-100"><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                        <li class="translate-top-50 transition-100 transition-delay-300"><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="translate-top-50 transition-100 transition-delay-500"><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                        
+                    </ul>
                     </div>
                 </div>
             </div>

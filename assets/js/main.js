@@ -1809,7 +1809,7 @@ $('body').on('click', '.uploadPaymentProof', function () {
             backdrop: 'static'
         });
     }
-})
+});
 
 $('body').on('click', '.uploadedDocument', function (e) {
     window.location.href = 'upload-documents';
@@ -1867,7 +1867,7 @@ $('body').on('click', '.makePayment', function () {
         keyboard: false,
         backdrop: 'static'
     });
-})
+});
 
 function getBase64Image(img) {
     var canvas = document.createElement("canvas");

@@ -1,4 +1,5 @@
 var modal = document.getElementById("previewImageModal");
+var onboardmodal = document.getElementById("onboard-modal");
 function previewImage(id) {
     var img = document.getElementById("myImg");
     var modalImg = document.getElementById("img01");
@@ -23,7 +24,7 @@ function closeModal(){
 $(function(e){   
     var span = document.getElementsByClassName("close")[0]; 
 span.onclick = function () {
-    alert('pp')
     modal.style.display = "none";
+    onboardmodal.style.display = "none";
 }
 })
