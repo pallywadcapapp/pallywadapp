@@ -49,7 +49,12 @@ function loanRequestView(loanRequest){
                                 </p>
                             </div>
                             <div class="col-md-12">
-                                <span><b>Loan Type: </b></span><span style="float:rigt">${loanRequest.category}</span>
+                                <span><b>Loan Type: </b></span><span style="float:rigt">${loanRequest.category}</span><br/>
+                                <span><b>Collateral: </b>${loanRequest.collateral}</span><br/>
+                                <span><b>Collateral Value: </b>${loanRequest.estimatedCollateralValue}</span><br/>
+                                <span><b>Preferred Tenor: </b>${loanRequest.preferredTenor}</span><br/>
+                                <span><b>Preferred Rate: </b>${loanRequest.preferredRate}%</span><br/>
+                                <span><b>Repayment Plan: </b>${loanRequest.repaymentPlan}</span><br/>
                             </span>
                             <div class="col-md-12">
                                 <!--<span>Interest Rate 
@@ -166,7 +171,7 @@ function loanRequestView(loanRequest){
                                 <span class="loan-status-running">${loanRequest.category}</span>
                                 <br />
                                 <p class="grey-text">
-                                    <span>Collateral: <b>${loanRequest.collateralId}</b></span>
+                                    <span>Collateral: <b>${loanRequest.collateral}</b></span>
                                     <br/>
                                     <span>Loan duration: <b>${loanRequest.duration} months</b></span>
                                 </p>
@@ -210,7 +215,8 @@ function loanRequestView(loanRequest){
                                     <span class="loan-status-running">${loanRequest.category}</span>
                                     <br />
                                     <p class="grey-text">
-                                        <span>Collateral: <b>${loanRequest.collateralId}</b></span>
+                                        <span>Collateral: <b>${loanRequest.collateral}</b></span><br/>
+                                        <span><b>Repayment Plan: </b>${loanRequest.repaymentPlan}</span><br/>
                                         <span style="float:right">Loan duration: <b>${loanRequest.duration} months</b></span>
                                     </p>
                                 </div>

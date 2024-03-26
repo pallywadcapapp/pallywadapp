@@ -3,7 +3,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("Uploaded Documents | PallyWad Capital ");
+        this.setTitle("Document Upload | PallyWad Capital ");
     }
 
     async getHtml() {
@@ -16,7 +16,7 @@ export default class extends DefaultView {
                     <div class="container">
                         <div class="row d-flex align-items-center">
                             <div class="col-md-8 page-lead">
-                                <h3>Uploaded Documents</h3>
+                                <h3>Document Upload</h3>
                             </div>
                             <div class="col-md-4 text-center ps-5">
                                 <a href="javascript:;" class="default-button mt-3 uploadedDocument">
@@ -24,7 +24,29 @@ export default class extends DefaultView {
                             </div>
                         </div>
                         <div class="row">
-                        <p class="about-title mt-4">List of Documents Uploaded</p>
+                        <div class="col-md-12 loan-description-box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h5><b>Personal Loan</b></h5>
+                                    <ul>
+                                        <li>Government Approved ID (Minimum of 2, NIN slip + either of valid International Passport or Driver’s License)</li>
+                                        <li>Recent Passport Photo</li>
+                                        <li>Utility Bill (For proof of address, not older than 3 months) </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h5><b>Business Loan</b></h5>
+                                    <ul>
+                                        <li>Government Approved ID (Minimum of 2, NIN slip + either of valid International Passport or Driver’s License)</li>
+                                        <li>Recent Passport Photo</li>
+                                        <li>Utility Bill (For proof of address, not older than 3 months) </li>
+                                        <li>CAC Documentation </li>
+                                        <li>Bank Statement of 12 months </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="about-title mt-4"></p>
                         <div id="loanUploadedDocumentsArea" class=" mt-2">
                             <div id="userDocItems">
                                 <p class="placeholder-glow mb-2">

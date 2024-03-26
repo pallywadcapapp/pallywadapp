@@ -115,7 +115,7 @@ export default class extends DefaultView {
 
                                            
                                             <div class="form-group mt-5">
-                                                <a href="javascript:;" id="continue-loan-button-1" class="continue-button-2" >Let's Start</a>
+                                                <a href="javascript:;" id="continue-loan-button-1" class="continue-button-2" >Continue</a>
                                             </div>
 
                                             <div class="privacy-area text-center mt-3">
