@@ -11,6 +11,12 @@ $(window).on('load', function () {
         loadUserUploadedCollaterals()
     }
 
+    if ($('#collateralPreviewArea').length > 0) {
+        var collId= qs['collateralId'];
+        var modal = document.getElementById("myModal");
+                singleLoanUserCollaterals(collId);
+    }
+
 });
 
 
@@ -117,16 +123,18 @@ function paginateCollateral(items, itemsPerPage, paginationContainer, itemContai
             var content = `<div class="row">
     <div class="col-md-5 repayment-item2">
         <div class="repayment-price">
-            <img onclick="previewImage(this)" style="width:50px; height:50px" alt="${item.name}" src="${loan_app_url + '/api/documents/fileuploads?filepath=' + item.url}" />
+            <!--<img onclick="previewImage(this)" style="width:50px; height:50px" alt="${item.name}" src="${loan_app_url + '/api/documents/fileuploads?filepath=' + item.url}" />-->
             ${item.name}
         </div>
         <small class="grey-text">&#8358;${number_format(item.estimatedValue)}</small><br />
-        <small class="grey-text">${item.otherdetails}</small><br />
+        <!--<small class="grey-text">${item.otherdetails}</small><br />-->
         
     </div>
     <div class="col-md-3 repayment-item2">
-        <small class="black-text"><b>Status:</b>
-        <br> ${verificationStatus} </small>
+        <!--<small class="black-text"><b>Status:</b>-->
+        <br> 
+        <a class="btn btn-primary" href="collateral-preview?collateralId=${item.id}">Preview Image</a>
+         </small>
     </div>
     <div class="col-md-4 repayment-item2">
         <small>${formatDate3(item.created_date).time}</small><br>
@@ -233,6 +241,37 @@ function paginate(items, itemsPerPage, paginationContainer, itemContainer) {
     }
     showItems(currentPage);
     setupPagination();
+}
+
+function singleLoanUserCollaterals(coll) {
+    var collPrevElements = '<div class="row">';
+    var $collElement = document.getElementById('collPrev');
+    var size = coll.length;
+    if (coll == null) {
+        collPrevElements = '<h6>No User Collateral Uploaded</h6>'
+        $collElement.innerHTML = collPrevElements + '</div>';
+    } else {
+        //$.each(coll, function (e) {
+        var ecoll = coll;
+        var url = '@Html.Raw(Url.Action("images", "assets"))';
+        $.get(admin_app_url + '/api/collateral/Files?id=' + ecoll, function (data) {
+            $.each(data, function (e) {
+                console.log(data[e])
+                if (data[e].fileurl.indexOf('.pdf') == -1) {
+                    collPrevElements += '<div class="col-sm-3 card"><img onclick="previewImage(this)" class="myImg" style="width:150px;height:150px;" src="' + loan_app_url +
+                        '/api/documents/fileuploads?filepath=' + data[e].fileurl + '" /></div>';
+                } else {
+                    collPrevElements += '<div class="col-sm-3 card"><img onclick="previewImage(this)" class="myImg" style="width:150px;height:150px;" src="' +
+                        url + '/pdf.png" ' + 'alt=' + loan_app_url +
+                        '/api/documents/fileuploads?filepath=' + data[e].fileurl + '" /></div>';
+                }
+
+                $collElement.innerHTML = collPrevElements + '</div>';
+            });
+        })
+
+        // });
+    }
 }
 
 

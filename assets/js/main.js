@@ -50,6 +50,7 @@ $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
 -------------------------------------*/
 const api_url = 'https://auth.pallywad.com';
 const loan_app_url = 'https://user.pallywad.com';
+const admin_app_url = 'https://adminapi.pallywad.com';
 const setup_url = 'https://setup.pallywad.com';
 var uploadedFilesHolder = [];
 var colls = '';

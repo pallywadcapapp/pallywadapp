@@ -34,6 +34,7 @@ import UploadedCollateral from "./views/UploadedCollateral.js";
 import DocUpload from "./views/DocUpload.js";
 import DocUploadTrans from "./views/DocUploadTrans.js";
 import UploadComplete from "./views/UploadComplete.js";
+import CollateralPreview from "./views/CollateralPreview.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -88,7 +89,8 @@ const router = async () => {
         {path:"/settings" , view: Settings },
         {path:"/payment-settings" , view: PaymentSettings },
         {path:"/profile" , view: Profile },
-        {path:"/business-information" , view: BusinessInformation }
+        {path:"/business-information" , view: BusinessInformation },
+        {path:"/collateral-preview" , view: CollateralPreview }
     ]
 
     //check each route for a potential match and redirect
