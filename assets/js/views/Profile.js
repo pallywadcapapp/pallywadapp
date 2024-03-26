@@ -24,7 +24,7 @@ export default class extends DefaultView {
                         <div class="row">
                         
                             <div id="updateProfile" class="deeper-grey p-5 mt-3 rounded mb-5">
-                                <p class="about-title mb-3">Profile</p>
+                                <p class="about-title mb-3"> </p>
                                 <div class="card">
                                     <div class="card-body">
                                         <div>
@@ -38,6 +38,10 @@ export default class extends DefaultView {
                                                 <span class="othernamesOutput"></span>
                                                 <span class="lastnameOutput"></span>
                                             </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">Gender</div>
+                                            <div class="col-md-8 text-end"> <span class="genderOutput"></span></div>
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-md-4">Mobile Number</div>

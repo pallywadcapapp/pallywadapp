@@ -30,7 +30,7 @@ export default class extends DefaultView {
                                     </button>
                                     </h2>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body"> Go to <code> <a href="https://www.pallywad.com" data-link target="_blank">www.pallywad.com</a></code> and sign-up to start your loan application. See requirements for a loan before you start.</div>
+                                    <div class="accordion-body"> Go to <code> <a href="https://pallywad.com" target="_blank">pallywad.com</a></code> and sign-up to start your loan application. See requirements for a loan before you start.</div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
@@ -40,7 +40,7 @@ export default class extends DefaultView {
                                     </button>
                                     </h2>
                                     <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">See Personal & Business Loan Requirements: <code> <a href="https://www.pallywad.com/loanrequirement" data-link target="_blank">here</a></code></div>
+                                    <div class="accordion-body">See Personal & Business Loan Requirements: <code> <a href="https://pallywad.com/loanrequirement" target="_blank">here</a></code></div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
@@ -106,7 +106,7 @@ export default class extends DefaultView {
                                     <div class="accordion-body">
                                         <ul>
                                             <li>Experience is fully online until the point of collateral delivery.</li>
-                                            <li>Personal Loans Terms & Conditions and Business Loans Terms & Conditions (Links will be provided on the WebApp) </li>
+                                            <li><a href="https://pallywad.com/loanrequirement" target="_blank">Personal Loans Terms & Conditions and Business Loans Terms & Conditions. </a> </li>
                                         </ul>
                                     </div>
                                     </div>

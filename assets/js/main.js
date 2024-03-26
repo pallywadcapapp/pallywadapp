@@ -1089,6 +1089,8 @@ function fetchLoanProductType() {
         }
     })
 }
+
+var notificationRecord = '';
 function fetchNotifications() {
     let api_endpoint = "/api/notifications";
     $.ajax({
@@ -1100,11 +1102,15 @@ function fetchNotifications() {
             $('.icon-button__badge').html(0);
         },
         success: function (d) {
+            notificationRecord = d;
             $('.icon-button__badge').html(d.length);
             var display = '';
             for (let i = 0; i < d.length; i++) {
+                let loanTypeStyle = (d.readStatus == false)
+                ? "notification-status-read"
+                : "notification-status-unread"
                 display += `
-            <li onclick="loadNotification(${d[i].id})"><a href="javascript:void(0);" class="dropdown-item notify-item">
+            <li onclick="loadNotification(${d[i].id}, ${i})"><a href="javascript:void(0);" class="${loanTypeStyle} dropdown-item notify-item">
     <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
     <p class="notify-details"><b>${d[i].subject}</b><br/><small class="text-muted">${d[i].message.slice(0, 40)}.</small></p>
 </a></li>
@@ -1116,9 +1122,15 @@ function fetchNotifications() {
     })
 }
 
-function loadNotification(id) {
-    sessionStorage.setItem('notificationId', id);
-    window.location.href = '/notifications'
+function loadNotification(id, index) {
+    //sessionStorage.setItem('notificationId', id);
+    //window.location.href = '/notifications';
+    $('#prembd').html(notificationRecord[index].message);
+    $('.modal-title').html(notificationRecord[index].subject);
+    myModal.show({
+        keyboard: false,
+        backdrop: 'static'
+    });
 }
 
 function number_format(number, decimals, dec_point, thousands_sep) {

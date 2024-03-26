@@ -72,6 +72,7 @@ function preloadProfileDetails(email) {
             $('.othernamesOutput').html(d.othernames);
             $('.dobOutput').html(newdate.date2);
             $('.emailOutput').html(d.email);
+            $('.genderOutput').html(d.sex);
             $('.phoneOutput').html(d.phoneNumber);
             $('.addressOutput').html(d.address);
             $('.bvnOutput').html(d.bvn);

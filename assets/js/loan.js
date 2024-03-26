@@ -68,11 +68,11 @@ function loanRequestView(loanRequest){
                             </div>
                             <br />
                             <div class="col-md-12" style="border-width: medium;">
-                                <span>Possible amount to pay monthly as interest</span>
+                                <!--<span>Possible amount to pay monthly as interest</span>
                                 <span style="float:right;">
                                     <b>&#8358;${number_format(parseFloat(loanRequest.amount) * parseInt(loanRequest.loaninterest) / 100)} - 
                                     &#8358;${number_format(parseFloat(loanRequest.amount) * (parseInt(loanRequest.loaninterest) + 5) / 100)} </b>
-                                    </span>
+                                    </span>-->
                                     
                                 
                             </div>

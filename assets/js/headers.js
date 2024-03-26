@@ -50,8 +50,8 @@ class DefaultFooter extends HTMLElement {
         <footer class="py-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9 col-8 pe-5">
-                        <h4>PallyWad Capital, a dynamic and forward-thinking financial institution</h4>
+                    <div class="col-md-12 col-8 pe-5">
+                        <h4>PallyWad Capital, a dynamic and forward-thinking financial institution.</h4>
                     </div>
                     <div class="col-md-3 col-4 text-end">
                         <!--<p class="mt-2">
@@ -93,7 +93,7 @@ class DefaultFooter extends HTMLElement {
                                 <p class="footer-link-title">COMPANY</p>
                                 <ul class="footer-link">
                                     <li><a href="">Terms of Service</a></li>
-                                    <li><a href="">Privacy Policy</a></li>
+                                    <li><a href="https://pallywad.com/privacy" target="_blank">Privacy Policy.</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -119,11 +119,11 @@ class DefaultFooter extends HTMLElement {
                     </div>
                     <div class="col-md-3">
                     <ul class="footer-social-links">
-                        <li class="translate-top-50 transition-100 transition-delay-400"><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                        <li class="translate-top-50 transition-100 transition-delay-200"><a href="#" title="Twitter"><i class="fab fa-x-twitter"></i></a></li>
-                        <li class="translate-top-50 transition-100 transition-delay-100"><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                        <li class="translate-top-50 transition-100 transition-delay-400"><a href="https://www.linkedin.com/in/pallywad-capital-limited-60a9262b7/" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                        <li class="translate-top-50 transition-100 transition-delay-200"><a href="https://twitter.com/PallywadCapital" target="_blank" title="Twitter"><i class="fab fa-x-twitter"></i></a></li>
+                        <!--<li class="translate-top-50 transition-100 transition-delay-100"><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
                         <li class="translate-top-50 transition-100 transition-delay-300"><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="translate-top-50 transition-100 transition-delay-500"><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                        <li class="translate-top-50 transition-100 transition-delay-500"><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>-->
                         
                     </ul>
                     </div>

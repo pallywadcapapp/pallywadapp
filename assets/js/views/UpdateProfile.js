@@ -171,7 +171,7 @@ export default class extends DefaultView {
                                         <hr class="mt-4 mb-4">
                                         <div class="privacy-area text-center">
                                             <img src="../assets/img/shield-check.png" class="me-1" />PallyWad will not share your confidential data to a third party. Read our
-                                            <a href="">Privacy Policy.</a>
+                                            <a href="https://pallywad.com/privacy" target="_blank">Privacy Policy.</a>
                                         </div>
                                     </form>
                                     

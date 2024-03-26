@@ -17,7 +17,7 @@ export default class extends DefaultView {
                     <div id="stepsNotification" class="border border-danger hide p-2 mb-2 rounded"></div>
                     <h4 class="welcome-label">Welcome, <span id="loggedInUser">${this.userFirstname}</span></h4>
                     <div class="notEligible">
-                        <div><h6>Welcome to your dashboard. Here you will find all important updates</h6></div>
+                        <div><h6>Welcome to your dashboard. Here you will find all important updates.</h6></div>
                         <a hidden href="javascript:;" class="add-loan-button" onclick="addLoan('${this.userEmail}');">
                             <i class="fa fa-plus"></i> Request Loan
                         </a>

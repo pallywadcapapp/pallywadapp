@@ -4,7 +4,7 @@ import DefaultView from "./DefaultView.js";
 export default class extends DefaultView {
     constructor(params) {
         super(params);
-        this.setTitle("Update Profile  | PallyWad Capital ");
+        this.setTitle("Bank Account Details  | PallyWad Capital ");
         
     }
 
@@ -42,7 +42,7 @@ export default class extends DefaultView {
                                     <form id="updateBankSettingsForm">
                                         <div class="text-center mt-3 px-8">
                                             <h3>Update Payment</h3>
-                                            <p>Complete the form below to update your profile.</p>
+                                            <p>Complete the form below to provide your bank details.</p>
                                         </div>
                                        
                                         <div class="form-group mt-3">
@@ -71,7 +71,7 @@ export default class extends DefaultView {
                                         <hr class="mt-4 mb-4">
                                         <div class="privacy-area text-center">
                                             <img src="../assets/img/shield-check.png" class="me-1" />PallyWad will not share your confidential data to a third party. Read our
-                                            <a href="">Privacy Policy.</a>
+                                            <a href="https://pallywad.com/privacy" target="_blank">Privacy Policy.</a>
                                         </div>
                                     </form>
                                 </div>

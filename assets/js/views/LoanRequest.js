@@ -66,11 +66,11 @@ export default class extends DefaultView {
                                                 <input id="businessname" type="text" placeholder="Enter the name of business" />
                                             </div>
                                             <div class="form-group mt-3 mb-4 busLoanView">
-                                                <label><b>Industry sector</b></label><br>
+                                                <label><b>Industry Sector</b></label><br>
                                                 <input id="sector" type="text" placeholder="Enter the industry sector" />
                                             </div>
                                             <div class="form-group mt-3 mb-4 busLoanView">
-                                                <label><b>How long in business (Months)</b></label><br>
+                                                <label><b>How long in Business (Months)</b></label><br>
                                                 <input id="age" type="number" placeholder="Enter how long you've been in business" />
                                             </div>
                                             <div class="form-group mt-3 mb-4">

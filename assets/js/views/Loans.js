@@ -25,7 +25,7 @@ export default class extends DefaultView {
                         <div class="row">
 
                             <div class="col-md-12 mt-5">
-                                <p class="about-title">LOAN REQUESTS</p>
+                                <p class="about-title"></p>
                                 <div id="allLoanRequests">
                                     <p class="placeholder-glow">
                                         <span class="placeholder col-3"></span>
