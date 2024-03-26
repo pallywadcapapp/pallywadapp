@@ -24,7 +24,7 @@ export default class extends DefaultView {
                         <div class="row">
                         
                         <div id="settingsArea" class="deeper-grey p-5 mt-3 rounded mb-5">
-                            <p class="about-title mb-3">Settings</p>
+                            <p class="about-title mb-3"></p>
                             <div class="card">
                                 <div class="card-body">
                                     <ul class="list-group">

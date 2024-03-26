@@ -56,6 +56,13 @@ function loadBanksHistory() {
                 $('#payBankItems').html('<h5>No list of bank payment record found</h5>');
             }else{
             for (let i = 0; i < lists.length; i++) {
+                show_delete = (lists[i].isDefault == true)
+                    ? ``
+                    : `<i class="fa fa-trash"  onclick="deleteItem(${lists[i].id})"
+                    style="color:#eb3d5d; background-color:#fff2f5; border-radius: 60px; box-shadow: 0 0 2px #888;padding: 0.5em 0.6em;"></i>`;
+                show_default = (lists[i].isDefault == true)
+                    ? ``
+                    : `<span class="badge text-bg-success" style="cursor:pointer;" onclick="makedefault(${lists[i].id})">Make Default</span>`;
                 payment_status = (lists[i].isDefault == true)
                     ? `<span class="badge text-bg-success">Default</span>`
                     : `<span class="badge text-bg-warning">Not Default</span>`;
@@ -70,7 +77,7 @@ function loadBanksHistory() {
                     <div class="col-md-3 repayment-item2">
                         <small class="black-text"><b>Status:</b>
                         <br> ${payment_status} </small><br />
-                        <span class="badge text-bg-success" style="cursor:pointer;" onclick="makedefault(${lists[i].id})">Make Default</span>
+                        ${show_default}
                     </div>
                     <div class="col-md-3 repayment-item2">
                         <small>${formatDate3(lists[i].created_date).time}</small><br>
@@ -78,8 +85,7 @@ function loadBanksHistory() {
                         
                     </div>
                     <div class="col-md-1 repayment-item2">
-                        <i class="fa fa-trash"  onclick="deleteItem(${lists[i].id})"
-                         style="color:#eb3d5d; background-color:#fff2f5; border-radius: 60px; box-shadow: 0 0 2px #888;padding: 0.5em 0.6em;"></i>
+                        ${show_delete}
                     </div>
                 </div>
                 `;
@@ -121,7 +127,7 @@ function deleteItem(id){
     let api_endpoint = "/api/UserBank/deletebank?id=" + id;
     $('#payBankItems').pleaseWait();
             $.ajax({
-                type: 'del',
+                type: 'DELETE',
                 url: loan_app_url + api_endpoint,
                 //data: JSON.stringify(data),
                 "content-Type": "application/json",
