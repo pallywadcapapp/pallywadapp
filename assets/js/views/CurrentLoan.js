@@ -38,7 +38,7 @@ export default class extends DefaultView {
                                 </p>
                                 <div class="mt-3">
                                     <input type="text" id="repayment-amount" placeholder="Enter amount you want to repay">
-                                    <p class="grey-text mt-4">Repayment methods</p>
+                                    <!--<p class="grey-text mt-4">Repayment methods</p>
                                     <div>
                              
 
@@ -63,7 +63,7 @@ export default class extends DefaultView {
                                             <input class="form-check-input payment-radio " type="radio" name="flexRadioDefault">
                                         </div>
                                         
-                                    </div>
+                                    </div>-->
                                     <div>
                                         <a href="javascript:;"  class="uploadPaymentProof default-button block text-center mt-4">Repay</a>
                                     </div>
