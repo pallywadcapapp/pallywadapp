@@ -1335,6 +1335,8 @@ $(document).ready(function () {
                 fileReader.onload = () => {
                     let fileURL = fileReader.result;
                     let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`;
+                    if(fileType == "application/pdf")
+                    imgTag = `<img src="assets/img/pdf.png" class="imgTag2" alt="">`;
                     let output = `
                         ${imgTag}
                     `;
@@ -1525,6 +1527,8 @@ $(document).ready(function () {
                     console.log(fileReader)
                     let fileURL = fileReader.result;
                     let imgTag = `<img src="/assets/img/card-illustration.png" class="imgTag" alt="">`;
+                    if(fileType == "application/pdf")
+                    imgTag = `<img src="assets/img/pdf.png" class="imgTag" alt="">`;
                     imgPreview.innerHTML = imgTag;
                     $('#upload-from-gallery').hide();
                     $('#uploadDocumentExtrafields').removeClass('hide');
@@ -1716,6 +1720,8 @@ $('body').on('click', '#uploadPaymentProofFile', function () {
             fileReader.onload = () => {
                 let fileURL = fileReader.result;
                 let imgTag = `<img src="${fileURL}" class="imgTag2" alt="">`;
+                if(fileType == "application/pdf")
+                imgTag = `<img src="assets/img/pdf.png" class="imgTag2" alt="">`;
                 let output = `
                     ${imgTag}
                 `;

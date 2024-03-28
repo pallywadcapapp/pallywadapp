@@ -26,7 +26,7 @@ export default class extends DefaultView {
                                         
 
                                         <div class="row text-center">
-                                            <h3>Provide Collateral Details </h3>
+                                            <h3>Provide Collateral Details</h3>
                                             <div class="text-center illustration-space-3">
                                             
                                                 <div id="uploadedFilesPreview" class="table table-striped table-hover"> 
