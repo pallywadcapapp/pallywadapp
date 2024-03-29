@@ -722,7 +722,7 @@ function loadCollateralTypes() {
                     </option>
                 `;
             }
-            //localStorage.setItem('selCollateral', lists[0].name);
+            localStorage.setItem('selCollateral', lists[0].name);
             $('#collateralType').html(documents);
             $('#collateralTypeDescription').html(`<br>${lists[0].description}`);
             $('.collat').html(lists[0].name);
@@ -1022,7 +1022,8 @@ function fetchLoanRequests() {
                         : (lists[i].status == "Declined" ? "loan-status-declined"
                             : (lists[i].status == "Awaiting Approval" ? "loan-status-awaiting"
                                 : (lists[i].status == "Approved" ? "loan-status-approved"
-                                    : "loan-status-running")));
+                                : (lists[i].status == "Collaterized" ? "loan-status-collaterized"
+                                    : "loan-status-running"))));
 
                     //Handle date and time formatting
                     let records = formatDate(lists[i]);
@@ -1462,6 +1463,9 @@ $(document).ready(function () {
             otherdetails = 'No details available';
         }
 
+        try{
+            
+        console.log(file);
         formData = new FormData();
         formData.append("file", file);
 
@@ -1471,8 +1475,8 @@ $(document).ready(function () {
         formData.append("otherdetails", otherdetails);
 
         if (amount == null || amount < 1 || amount == '') {
-            $('.modal-content').pleaseWait('stop');
             displayToast('error', 'amount must be greater than 0', "Error");
+            $('.modal-content').pleaseWait('stop');
         } else if (files.length < 1) {
             $('.modal-content').pleaseWait('stop');
             displayToast('error', 'kindly upload a proof of payment', "Error");
@@ -1498,6 +1502,11 @@ $(document).ready(function () {
                 }
             });
         }
+        
+    }catch{
+        displayToast('error', 'Please, kindly attach payment proof document', "Error");
+        $('.modal-content').pleaseWait('stop');
+    }
 
     })
 
@@ -1771,7 +1780,7 @@ $('body').on('click', '.uploadPaymentProof', function () {
             <div class="col-md-12 mb-3 black-text">
                 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <b>Amount Paid (&#8358;)</b>
                         <input type="number" 
                         class="form-control" 
@@ -1779,7 +1788,7 @@ $('body').on('click', '.uploadPaymentProof', function () {
                         id="amount" 
                         placeholder="Amount you paid eg 30000">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 hide">
 
                         <b>Method of payment</b>
                         <select id="channel" class="form-control">

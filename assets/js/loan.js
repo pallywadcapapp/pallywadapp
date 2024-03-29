@@ -174,6 +174,8 @@ function loanRequestView(loanRequest){
                                     <span>Collateral: <b>${loanRequest.collateral}</b></span>
                                     <br/>
                                     <span>Loan duration: <b>${loanRequest.duration} months</b></span>
+                                    <br/>
+                                    <span>Interest Rate: <b>${loanRequest.loaninterest} %</b></span>
                                 </p>
                             </div>
                         </div>
@@ -185,47 +187,57 @@ function loanRequestView(loanRequest){
         `
     }
     else{
+        
         content = `
-        <div class="px-2 py-3 payment-details-bank">
-                 
+        
         <div class="px-4 py-2">
+        <div class="row"">
+                            <div class="col-md-5">
+                                <span class="${loanTypeStyle}">Collateralized</span>
+                            </div>
+                            <div class="col-md-7 loan-display">
+                                <h4>&#8358;${number_format(loanRequest.amount)}</h4>
+                                <p class="grey-text"></p>
+                            </div>
+                            <div class="col-md-12">
+                                <span><b>Collateralized Date and Time</b> </span>
+                                <p class="grey-text">
+                                ${timeOutput} - 
+                                ${dayOutput}
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <span style="font-family: Helvetica Neue;
+                                color: #737272;
+                                font-size: 16px;
+                                font-weight: 400;
+                                line-height: 20px;
+                                letter-spacing: 0em;
+                                text-align: left;
+                                ">Purpose of the Loan: </span>
+                                <div class="grey-text form-control" style="border-color: #ADADAD; color: #ADADAD;
+                                border-width: medium; height:100px;">
+                                <span> ${loanRequest.purpose} </span>
+                                </div>
+                                <br />
+                                <span class="loan-status-running">${loanRequest.category}</span>
+                                <br />
+                                <p class="grey-text">
+                                    <span>Collateral: <b>${loanRequest.collateral}</b></span>
+                                    <br/>
+                                    <span>Collateral Value: <b>&#8358;${number_format(loanRequest.collateralValue)}</b></span>
+                                    <br/>
+                                    <span>Loan duration: <b>${loanRequest.duration} months</b></span>
+                                    <br/>
+                                    <span>Interest Rate: <b>${loanRequest.loaninterest} %</b></span>
+                                </p>
+                            </div>
+                        </div>
             
             <div class="col-md-12 black-text mb-2">
-            <div class="px-4 py-2">
-            <div class="row"">
-                                <div class="col-md-5">
-                                    <span class="${loanTypeStyle}">${loanRequest.status}</span>
-                                </div>
-                                <div class="col-md-7 loan-display">
-                                    <h4>&#8358;${number_format(loanRequest.amount)}</h4>
-                                    <p class="grey-text"></p>
-                                </div>
-                                <div class="col-md-12">
-                                    <span><b>Request Date and Time: </b> </span>
-                                    <p class="grey-text">
-                                    ${timeOutput} - 
-                                    ${dayOutput}
-                                    </p>
-                                </div>
-                                <div class="col-md-12">
-                                    <span>Reason for decline</span>
-                                    <div class="grey-text form-control" style="border-width: medium; height:100px;"
-                                    </div>
-                                    <br />
-                                    <span class="loan-status-running">${loanRequest.category}</span>
-                                    <br />
-                                    <p class="grey-text">
-                                        <span>Collateral: <b>${loanRequest.collateral}</b></span><br/>
-                                        <span><b>Repayment Plan: </b>${loanRequest.repaymentPlan}</span><br/>
-                                        <span style="float:right">Loan duration: <b>${loanRequest.duration} months</b></span>
-                                    </p>
-                                </div>
-                            </div>
-                
-                <div class="col-md-12 black-text mb-2">
-                   
-                </div>
+               
             </div>
+        </div>
         `
     }
 

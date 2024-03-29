@@ -31,7 +31,7 @@ export default class extends DefaultView {
                                     <h3>${this.currency} <span class="loanAmount">0</span></h3>
                                     <!--<a href="javascript:;" class="default-button-green makePayment">Pay </a> -->
                                 </div>
-                                <p class="about-title">APPROVED LOAN DETAILS</p>
+                                <p class="about-title"></p>
                                 <p class="mt-3">
                                     Dear <b>${this.userFirstname}</b>, Please enter the amount you want to
                                     repay and select the repayment method.
@@ -122,21 +122,21 @@ export default class extends DefaultView {
                             </div>
 
                             <div class="col-md-12 mt-3 currentLoan" >
-                                <p class="about-title mb-2">Disbursement Information</p>
+                                <p class="about-title mb-2">APPROVED LOAN DETAILS</p>
                                 <div class="row">
                                     <div class="col-md-7">
                                         <div class="proof-of-payment">
                                             <div class="info-area mt-2">
                                                 <div class="row">
-                                                    <div class="col-md-6">Disbursement Date</div>
+                                                    <div class="col-md-6">Disbursed Date</div>
                                                     <div class="col-md-6"><span class="disbursementDate">0</span></div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">Disbursement Amount</div>
+                                                    <div class="col-md-6">Disbursed Amount</div>
                                                     <div class="col-md-6">${this.currency}<span class="disbursedAmount">0</span></div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">Disbursement Tenor</div>
+                                                    <div class="col-md-6">Tenor</div>
                                                     <div class="col-md-6"><span class="loanDuration">0</span></div>
                                                 </div>
                                                 
@@ -144,11 +144,11 @@ export default class extends DefaultView {
                                         </div>
                                     </div>
                                     <div class="col-md-5">
-                                        <div class="proof-of-payment">
+                                        <!--<div class="proof-of-payment">
                                             Complele loan Repayment due on <span><b id="duedate">Thur, Feb 17 2024</b></span> with
                                             Interest Rate of <b><span class="interestDisplay">0.9</span>%</b>
                                             <hr>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>

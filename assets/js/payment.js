@@ -87,7 +87,7 @@ function getBankAccount() {
                             id="amount" 
                             placeholder="Amount you paid eg 30000">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 hide">
     
                             <b>Method of payment</b>
                             <select id="channel" class="form-control">
