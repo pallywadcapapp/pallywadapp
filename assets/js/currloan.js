@@ -91,6 +91,10 @@ function processLoanDetails(d, pl){
         let lists = d;
         if(pl != null){
             localStorage.setItem('processedLoans', JSON.stringify(pl));
+        }else{
+            var pol = [];
+            pol.push(d);
+            localStorage.setItem('processedLoans', JSON.stringify(pol));
         }
         
         var today = new Date();

@@ -141,7 +141,7 @@ function loanRequestView(loanRequest){
         <div class="px-4 py-2">
         <div class="row"">
                             <div class="col-md-5">
-                                <span class="${loanTypeStyle}">${loanRequest.status}</span>
+                                <span class="${loanTypeStyle}">${formatType(loanRequest.status)}</span>
                             </div>
                             <div class="col-md-7 loan-display">
                                 <h4>&#8358;${number_format(loanRequest.amount)}</h4>
@@ -193,7 +193,7 @@ function loanRequestView(loanRequest){
         <div class="px-4 py-2">
         <div class="row"">
                             <div class="col-md-5">
-                                <span class="${loanTypeStyle}">Collateralized</span>
+                                <span class="${loanTypeStyle}">${formatType(loanRequest.status)}</span>
                             </div>
                             <div class="col-md-7 loan-display">
                                 <h4>&#8358;${number_format(loanRequest.amount)}</h4>

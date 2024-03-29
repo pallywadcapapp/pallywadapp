@@ -993,6 +993,15 @@ function fetchUploadedCollaterals() {
         }
     })
 }
+function formatType(type){
+    if(type == 'Approved'){
+        return 'Pre-Approved'
+    }else if(type == 'Collaterized'){
+        return 'Collateralized'
+    }else{
+        return type;
+    }
+}
 
 function fetchLoanRequests() {
     let api_endpoint = "/api/LoanRequest";
@@ -1034,7 +1043,7 @@ function fetchLoanRequests() {
                 <div class="top-line py-2">
                         <div class="row loanView" id="lview${i}" onclick="lvClick('${i}')">
                             <div class="col-md-3">
-                                <span class="${loanTypeStyle}">${lists[i].status}</span>
+                                <span class="${loanTypeStyle}">${formatType(lists[i].status)}</span>
                             </div>
                             <div class="col-md-6 loan-display">
                                 <h4>&#8358;${number_format(lists[i].amount)}</h4>

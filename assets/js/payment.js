@@ -31,6 +31,25 @@ $('body').on('click', '#requestBankAccount', function () {
     getBankAccount();
 });
 
+function GetProcessedLoans(){
+    api_endpoint = "/api/LoanRequest/ProcessedLoanRequests";
+    $.ajax({
+        type: 'get',
+        url: loan_app_url + api_endpoint,
+        headers: { 'Content-Type': 'application/json' },
+        error: function (d) {
+            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+        },
+        success: function (d) {
+            if(d.length > 0){
+                localStorage.setItem('processedLoans', JSON.stringify(d));
+                uploadPaymentProof();
+            }
+            
+        }
+    })
+}
+
 function getBankAccount() {
     let api_endpoint = "/api/Payments/CompanyAccount";
     $.ajax({
@@ -44,7 +63,7 @@ function getBankAccount() {
         success: function (d) {
             $('.imodal').pleaseWait('stop');
             displayToast('success','A copy of payment bank account have been sent to your email', 'Bank Account Details');
-            uploadPaymentProof();
+            GetProcessedLoans();
         }
     })
   }
