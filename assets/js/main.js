@@ -998,6 +998,8 @@ function formatType(type){
         return 'Pre-Approved'
     }else if(type == 'Collaterized'){
         return 'Collateralized'
+    }else if(type == 'Processed'){
+        return 'Disbursed'
     }else{
         return type;
     }

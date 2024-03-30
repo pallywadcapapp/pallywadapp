@@ -51,7 +51,7 @@ function loanRequestView(loanRequest){
                             <div class="col-md-12">
                                 <span><b>Loan Type: </b></span><span style="float:rigt">${loanRequest.category}</span><br/>
                                 <span><b>Collateral: </b>${loanRequest.collateral}</span><br/>
-                                <span><b>Collateral Value: </b>${loanRequest.estimatedCollateralValue}</span><br/>
+                                <span><b>Collateral Value: </b>&#8358;${number_format(loanRequest.estimatedCollateralValue)}</span><br/>
                                 <span><b>Preferred Tenor: </b>${loanRequest.preferredTenor}</span><br/>
                                 <span><b>Preferred Rate: </b>${loanRequest.preferredRate}%</span><br/>
                                 <span><b>Repayment Plan: </b>${loanRequest.repaymentPlan}</span><br/>
@@ -62,7 +62,7 @@ function loanRequestView(loanRequest){
                                     ${ parseInt(loanRequest.loaninterest) + 5}% </b>
                                 </span>-->
                                 <span style="float:right;">
-                                    (you will get your exact rate on loan approval. Rate is dynamic)
+                                    (Approved interest rate will be communicated)
                                 </span>
                                 
                             </div>
