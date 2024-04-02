@@ -32,8 +32,8 @@ export default class extends DefaultView {
                                 </div>
                                 <p class="about-title">APPROVED LOAN DETAILS</p>
                                 <p class="mt-3">
-                                    Dear <b>${this.userFirstname}</b>, Please enter the amount you want to
-                                    repay and select the repayment method.
+                                    Dear <b>${this.userFirstname}</b>, please enter the amount you want to
+                                    repay.
                                 </p>
                                 <div class="mt-3">
                                     <input type="text" id="repayment-amount" placeholder="Enter amount you want to repay">

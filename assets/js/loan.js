@@ -163,8 +163,7 @@ function loanRequestView(loanRequest){
                                 letter-spacing: 0em;
                                 text-align: left;
                                 ">Purpose of the Loan: </span>
-                                <div class="grey-text form-control" style="border-color: #ADADAD; color: #ADADAD;
-                                border-width: medium; height:100px;">
+                                <div >
                                 <span> ${loanRequest.purpose} </span>
                                 </div>
                                 <br />
@@ -172,6 +171,8 @@ function loanRequestView(loanRequest){
                                 <br />
                                 <p class="grey-text">
                                     <span>Collateral: <b>${loanRequest.collateral}</b></span>
+                                    <br/>
+                                    <span>Estimated Collateral Value: <b>&#8358;${number_format(loanRequest.estimatedCollateralValue)}</b></span>
                                     <br/>
                                     <span>Loan duration: <b>${loanRequest.duration} months</b></span>
                                     <br/>
@@ -215,8 +216,7 @@ function loanRequestView(loanRequest){
                                 letter-spacing: 0em;
                                 text-align: left;
                                 ">Purpose of the Loan: </span>
-                                <div class="grey-text form-control" style="border-color: #ADADAD; color: #ADADAD;
-                                border-width: medium; height:100px;">
+                                <div >
                                 <span> ${loanRequest.purpose} </span>
                                 </div>
                                 <br />

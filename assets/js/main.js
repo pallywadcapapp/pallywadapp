@@ -1830,7 +1830,7 @@ $('body').on('click', '.uploadPaymentProof', function () {
                 <a href="javascript:;" 
                     id="uploadPaymentProofFile"
                     class="continue-button-5 mb-3"><i class="fa fa-upload"></i> 
-                    Upload Payment Proof Screenshot
+                    Upload Proof of Payment
                 </a>
                 
             </div>
