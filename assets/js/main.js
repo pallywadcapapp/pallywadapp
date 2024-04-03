@@ -1456,7 +1456,7 @@ $(document).ready(function () {
     console.log((JSON.parse(localStorage.getItem('loanProducts'))[localStorage.getItem('pindex')].loaninterest))
 
     $('body').on('click', '#submitPaymentProof', function (e) {
-        $('.modal-content').pleaseWait();
+        $('.signin-form').pleaseWait();
         let api_endpoint = "/api/Payments";
 
         let files = uploadedFilesHolder;
@@ -1487,9 +1487,9 @@ $(document).ready(function () {
 
         if (amount == null || amount < 1 || amount == '') {
             displayToast('error', 'amount must be greater than 0', "Error");
-            $('.modal-content').pleaseWait('stop');
+            $('.signin-form').pleaseWait('stop');
         } else if (files.length < 1) {
-            $('.modal-content').pleaseWait('stop');
+            $('.signin-form').pleaseWait('stop');
             displayToast('error', 'kindly upload a proof of payment', "Error");
         } else {
 
@@ -1502,12 +1502,12 @@ $(document).ready(function () {
                 cache: false,
                 processData: false,
                 error: function (d) {
-                    $('.modal-content').pleaseWait('stop');
+                    $('.signin-form').pleaseWait('stop');
                     console.log(d.responseJSON.errors);
                     displayToast('error', d.responseJSON.errors.toString(), "Error");
                 },
                 success: function (data) {
-                    $('.modal-content').pleaseWait('stop');
+                    $('.signin-form').pleaseWait('stop');
                     displayToast('success', 'Payment Proof Document was uploaded successfully.', 'Upload successful');
                     hideModal();
                 }
@@ -1516,7 +1516,7 @@ $(document).ready(function () {
         
     }catch{
         displayToast('error', 'Please, kindly attach payment proof document', "Error");
-        $('.modal-content').pleaseWait('stop');
+        $('.signin-form').pleaseWait('stop');
     }
 
     })
@@ -1761,7 +1761,31 @@ $('body').on('click', '#uploadPaymentProofFile', function () {
 var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'));
 
 //upload proof of payment
-$('body').on('click', '.uploadPaymentProof', function () {
+$('body').on('click','.uploadPaymentProof', function(){
+    let content = `
+        
+    <div class="px-4 py-2 signin-form">
+        <p>Click on button below to receive payment details in your email.</p>
+        <div class="col-md-12 black-text mb-2">
+            <div class="tab-pane fade show active" id="bankTransfer" role="tabpanel" aria-labelledby="nav-bankTransfer-tab" tabindex="0">
+                        <div class="px-2 py-3">
+                        <a href="javascript:;" id="requestLoanBankAccount" class="btn default-button">Request Bank Account</a> 
+                        </div>
+
+                        
+                    </div>
+        </div>
+    </div>
+`;
+$('.modal-body').html(content);
+$('.modal-title').html('Make Loan Repayment');
+//var myModal = new bootstrap.Modal(document.getElementById('pallywadModal'))
+myModal.show({
+    keyboard: false,
+    backdrop: 'static'
+});
+});
+$('body').on('click', '.uploadPaymentProofss', function () {
     let providedAmount = 0;
     var repaymentamount = $('#repayment-amount').val();
     if (repaymentamount > 0) {
