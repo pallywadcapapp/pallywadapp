@@ -35,6 +35,10 @@ $(function (e) {
             $('.totalLoanBalance').html('xxxxxx');
         }
       });
+
+      $('#skip-intro').click(function(){
+        $('.modal-backdrop').remove();
+      })
 })
 
 function loadDashboard(loanId) {
