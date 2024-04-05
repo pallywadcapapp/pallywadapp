@@ -450,7 +450,7 @@ function checkEligibility() {
 7. update profile
 -------------------------------------*/
 $('body').on('click', '#update-profile', function (e) {
-
+    var stt = qs['status'];
     if ($("#updateProfileForm").valid()) {
         $('#updateProfileForm').pleaseWait();
         e.preventDefault();
@@ -523,7 +523,7 @@ $('body').on('click', '#update-profile', function (e) {
 
                 displayToast('success', "Your profile was updated successfully", "Profile update successful")
                 let redirect = localStorage.getItem('gotoDocuments');
-                if (redirect) {
+                if (stt == 'new') {
                     localStorage.removeItem('gotoDocuments');
                     location.href = "/upload-documents";
                 }
