@@ -191,8 +191,14 @@ class DashboardHeader extends HTMLElement {
                                     <span class="user-name-label">${localStorage.getItem("firstname") + " " + localStorage.getItem("lastname")}</span>
                                 </button>
                                 <ul class="dropdown-menu">
+                                    <li class="inav"><a class="dropdown-item" href="/dashboard" ><i class="fa fa-dashboard"></i> Overview</a></li>
+                                    <li class="inav"><a class="dropdown-item" href="/loans" ><i class="fa fa-money"></i> Loans</a></li>
+                                    <li class="inav"><a class="dropdown-item" href="/payment-history" ><i class="fa fa-vault"></i> Payment History</a></li>
+                                    <li class="inav"><a class="dropdown-item" href="/uploaded-documents" ><i class="fa fa-file"></i> Document Upload</a></li>
+                                    <li class="inav"><a class="dropdown-item" href="/uploaded-collaterals" ><i class="fa fa-arrows-to-dot"></i> Collateral Upload</a></li>
                                     <li><a class="dropdown-item" href="/profile"><i class="fa fa-user-o"></i> Profile</a></li>
                                     <li><a class="dropdown-item" href="/settings"><i class="fa fa-cog"></i> Settings</a></li>
+                                    <li><a class="dropdown-item" href="/help"><i class="fa fa-question"></i> FAQ</a></li>
                                     <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
                                 </ul>
                             </div>

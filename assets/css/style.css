@@ -1103,6 +1103,7 @@ input[type="file"]{
 .dashboard-area {
     display: flex;
 }
+
 .users-dashboard-header {
     position: absolute;
     left: 0;
@@ -1748,10 +1749,15 @@ input[type="file"]{
 }
 
 
-
-@media (max-width: 767px) {
+.inav{
+    display: none;
+}
+@media (max-width: 967px) {
     left-sidebar{
         display: none;
+    }
+    .inav{
+        display:block;
     }
     .left-sidebar{
         margin-left: -75px;
@@ -1763,6 +1769,10 @@ input[type="file"]{
     padding-top: 7px;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.dashboard-area{
+    margin-top: 15%;
 }
 }
 @media (max-width: 480px) {
@@ -1781,5 +1791,9 @@ input[type="file"]{
         padding-top: 5px;
         padding-left: 3px;
         padding-right: 3px;
+    }
+
+    .dashboard-area{
+        margin-top: 15%;
     }
   }

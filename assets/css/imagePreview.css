@@ -76,9 +76,34 @@
         cursor: pointer;
     }
 
+    #splashmodal{
+        min-width:600px;
+         min-height: 600px;
+    }
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
     .modal-content {
         width: 100%;
     }
+}
+
+@media only screen and (max-width: 480px){
+.modal-content {
+    width: 80%;
+}
+#splashmodal{
+    min-width:400px;
+     min-height: 600px;
+}
+.onboard-modal .onboard-curve-left {
+    width: 100%;
+    height: 500px;
+    background: transparent;
+    border-top-left-radius: 50% 50%;
+}
+.onboard-modal .onboard-slice-right.background-blue, .onboard-modal .onboard-slice-left.background-blue, .onboard-modal .onboard-curve-right.background-blue, .onboard-modal .onboard-curve-left.background-blue, .onboard-modal .onboard-straight-line.background-blue {
+    padding: 70px 20px 40px;
+    background-color: var(--blue);
+    margin-top: 30px;
+}
 }
