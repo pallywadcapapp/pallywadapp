@@ -19,8 +19,8 @@ export default class extends DefaultView {
                                 <h3>Collateral Upload</h3>
                             </div>
                             <div class="col-md-4 text-center ps-5">
-                                <a href="javascript:;" class="default-button mt-3 uploadedCollateral">
-                                <i class="fa fa-plus"></i> Upload Collateral</a>
+                                <!--<a href="javascript:;" class="default-button mt-3 uploadedCollateral">
+                                <i class="fa fa-plus"></i> Upload Collateral</a>-->
                             </div>
                         </div>
                         <div class="row">

@@ -60,7 +60,7 @@ export default class extends DefaultView {
                     <div class="row mt-4 Eligible">
                       
                         <div class="col-md-6">
-                        <p class="about-title">RECENT LOAN HISTORY</p>
+                        <p class="about-title"><b>RECENT LOAN HISTORY</b></p>
                         <div id="allLoanRequests">
                             <p class="placeholder-glow">
                                 <span class="placeholder col-3"></span>
@@ -75,7 +75,7 @@ export default class extends DefaultView {
                         </div>
                         </div>
                         <div class="col-md-6">
-                        <p class="about-title">PAYMENT HISTORY</p>
+                        <p class="about-title"><b>PAYMENT HISTORY</b></p>
                    <div id="loanRepaymentArea" class="">
                        <div id="repaymentItems2">
                            <p class="placeholder-glow mb-2">

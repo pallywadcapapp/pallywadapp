@@ -510,7 +510,8 @@ $('body').on('click', '#update-profile', function (e) {
                 if (d.responseText == "") {
                     displayToast('error', "Unable to Update Business Information Details", 'error')
                 } else {
-                    displayToast('error', d.responseText, 'error')
+                    displayToast('error', "Unable to Update Business Information Details", 'error')
+                    //displayToast('error', d.responseText, 'error')
                 }
             },
             success: function (d) {
@@ -1056,6 +1057,7 @@ function fetchLoanRequests() {
                                 ${timeOutput}<br>
                                 ${dayOutput}
                                 </p>
+                                <br/>
                             </div>
                         </div>
                     </div>
@@ -1560,9 +1562,15 @@ $(document).ready(function () {
                     $('#uploadDocumentExtrafields').removeClass('hide');
                 }
                 var doc = localStorage.getItem('chosenDocumentName');
-                if (doc == 'NIN' || doc == 'Voters Card') {
+                if (doc == 'NIN' || doc == 'Voters Card' || doc == 'Passport Photo' || doc == 'Proof of Address' ||
+                doc == 'CAC Document' || doc == 'Bank Account Statements' || doc == 'National Identity Card' ) {
 
                     $('.expirySeg').addClass('hide');
+                }
+
+                if (doc == 'Passport Photo' || doc == 'Proof of Address' || doc == 'Bank Account Statements') {
+
+                    $('.expiryDoc').addClass('hide');
                 }
             }
             fileReader.readAsDataURL(file);

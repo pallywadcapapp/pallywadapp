@@ -41,24 +41,28 @@ export default class extends DefaultView {
                                             <a href="javascript:;" id="upload-from-gallery" class="continue-button-3" >Upload From Gallery</a>
                                             
                                         </div>
-                                        <div id="uploadDocumentExtrafields" class="form-group mt-2 hide" >
-                                        <div class="input-group">
-                                        <div class="input-group-append" style="width:30%; align:justify">
-                                            <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Document No.</b></span>
-                                        </div>
+                                        <div id="uploadDocumentExtrafields" class="form-group mt-2 hide">
+                                            <div class="input-group expiryDoc">
+                                                <div class="input-group-append ilabel" style="width:30%; align:justify">
+                                                    <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Document No.</b></span>
+                                                </div>
                                         
-                                        <input type="text" id="documentNo" class="form-control mb-2" placeholder="Enter ${ localStorage.getItem('chosenDocumentName')} Number" />
-                                        </div>
+                                                <div class="input-group">
+                                                    <input type="text" id="documentNo" class="form-control mb-2" placeholder="Enter ${ localStorage.getItem('chosenDocumentName')} Number" />
+                                            
+                                                </div>
+                                            </div>
                                             
                                             
                                             <div class="input-group expirySeg">
-                                            <div class="input-group-append" style="width:30%; align:justify">
-                                                <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Expiry Date</b></span>
-                                            </div>
+                                                <div class="input-group-append ilabel" style="width:30%; align:justify">
+                                                    <span class="input-group-text" id="inputGroup-sizing-lg" style="height:100%;"> <b>Expiry Date</b></span>
+                                                </div>
                                             
-                                            <input type="date" id="expiryDate" class="form-control mb-2" placeholder="Expiry Date" />
+                                                <input type="text" onfocus="(this.type='date')" id="expiryDate" class="form-control mb-2" placeholder="Expiry Date" />
                                             </div>
                                             <a href="javascript:;" id="uploadDocumentTrans" class="continue-button-2 hide" >Submit Document</a>
+                                            
                                             
                                         </div>
 

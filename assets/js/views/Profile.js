@@ -23,7 +23,7 @@ export default class extends DefaultView {
                         </div>
                         <div class="row">
                         
-                            <div id="updateProfile" class="deeper-grey p-5 mt-3 rounded mb-5">
+                            <div id="updateProfile" class="deeper-grey mt-3 rounded mb-5">
                                 <p class="about-title mb-3"> </p>
                                 <div class="card">
                                     <div class="card-body">
@@ -76,8 +76,8 @@ export default class extends DefaultView {
                                     <div class="col-1">
                                         <a href="/dashboard" class="default-button-white" data-link><img src="assets/img/left-arrow.png" /></a>
                                     </div>
-                                    <div class="col-8"></div>
-                                    <div class="col-3">
+                                    <div class="col-5"></div>
+                                    <div class="col-6">
                                         <a href="/update-profile" class="default-button-green">Edit Profile</a>
                                     </div>
                                 </div>
