@@ -1797,3 +1797,9 @@ input[type="file"]{
         margin-top: 15%;
     }
   }
+  @media (max-width: 450px) {
+    
+    .dashboard-area{
+        margin-top: 22%;
+    }
+  }
