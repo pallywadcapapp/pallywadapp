@@ -152,6 +152,17 @@ $('body').on('click', '#change-pass', function (e) {
     }
 })
 
+$(function(){
+    $("#confirmpassword").on('keyup', function () {
+        var password = $("#password").val();
+        var confirmPassword = $("#confirmpassword").val();
+        if (password != confirmPassword)
+          $("#CheckPasswordMatch").html("Password does not match !").css("color", "red");
+        else
+          $("#CheckPasswordMatch").html("Password match !").css("color", "green");
+      });
+})
+
 
 function showError(error, value, xhr) {
     console.log(error);
@@ -178,3 +189,26 @@ function showError(error, value, xhr) {
     }
 
 }
+
+function checkPasswordStrength() {
+    var number = /([0-9])/;
+    var alphabets = /([a-zA-Z])/;
+    var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+    var password = $('#password').val().trim();
+    if (password.length < 8) {
+      $('#password-strength-status').removeClass();
+      $('#password-strength-status').addClass('weak-password');
+      $('#password-strength-status').html("Weak (should be atleast 8 characters.)");
+    } else {
+      if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
+        $('#password-strength-status').removeClass();
+        $('#password-strength-status').addClass('strong-password');
+        $('#password-strength-status').html("Strong");
+      }
+      else {
+        $('#password-strength-status').removeClass();
+        $('#password-strength-status').addClass('medium-password');
+        $('#password-strength-status').html("Medium (should include alphabets, numbers and special characters.)");
+      }
+    }
+  }

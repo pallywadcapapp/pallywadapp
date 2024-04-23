@@ -12,11 +12,11 @@ export default class extends DefaultViewNoAuth {
             <onboarding-header></onboarding-header>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7 col-12 ms-auto me-auto mt-4">
+                    <div class="col-md-9 col-12 ms-auto me-auto mt-4">
                         <div id="onboarding-forms" class="white-bg rounded div-shadow onboarding-form ">
                         
                             <form id="step-2">
-                                <div class="text-center mt-3 px-8">
+                                <div class="text-center mt-3">
                                     <a href="/onboarding" data-link><img src="../assets/img/top-continue-graphic.png" class="onboard-icon" /></a>
                                     <h3>Let's verify your email</h3>
                                     <p>A validation code has been sent to the email you provided in the previous page. 

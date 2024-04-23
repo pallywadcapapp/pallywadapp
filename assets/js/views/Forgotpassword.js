@@ -15,12 +15,12 @@ export default class extends DefaultViewNoAuth {
                     <div class="col-md-7 col-12 ms-auto me-auto mt-4">
                         <div id="onboarding-forms" class="white-bg rounded div-shadow signin-form ">
                             <form id="step-1"  >
-                                <div class="text-center mt-3 px-8">
+                                <div class="text-center mt-3">
                                     <img src="../assets/img/top-continue-3.png" class="onboard-icon" />
                                     <h3>Forgot Password</h3>
                                     <p>Enter your email address</p>
                                 </div>
-                                <div class="form-group px-7 mt-5">
+                                <div class="form-group mt-5">
                                     <input type="email" 
                                         required class="form-control" 
                                         id="email" 

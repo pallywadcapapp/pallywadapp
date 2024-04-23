@@ -1752,6 +1752,25 @@ input[type="file"]{
 .inav{
     display: none;
 }
+
+
+
+#password-strength-status {
+    color: black;
+    /*padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 5px;*/
+}
+.weak-password {
+    background-color: #FBE1E1;
+}
+.medium-password {
+    background-color: #fd0;
+}
+.strong-password {
+    background-color: #D5F9D5;
+}
+
 @media (max-width: 967px) {
     left-sidebar{
         display: none;
