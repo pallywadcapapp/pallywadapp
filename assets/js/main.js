@@ -980,7 +980,8 @@ function fetchUploadedCollaterals() {
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            displayToast('error', 'Oops, unable to get user collaterals', 'Collateral Error');
         },
         success: function (d) {
 
@@ -1506,7 +1507,8 @@ $(document).ready(function () {
                 error: function (d) {
                     $('.signin-form').pleaseWait('stop');
                     console.log(d.responseJSON.errors);
-                    displayToast('error', d.responseJSON.errors.toString(), "Error");
+                    //displayToast('error', d.responseJSON.errors.toString(), "Error");
+                    displayToast('error', 'Oops, unable to upload payment proof documents', 'Payment Proof Error');
                 },
                 success: function (data) {
                     $('.signin-form').pleaseWait('stop');

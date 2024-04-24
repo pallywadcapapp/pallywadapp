@@ -42,7 +42,8 @@ function preloadProfileDetails(email) {
         headers: { 'Content-Type': 'application/json' },
         data: data,
         error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            displayToast('error', 'Oops, unable to get user profile', 'Profile Error');
         },
         success: function (d) {
             tempImgUrl = d.imgUrl;
@@ -95,7 +96,8 @@ function uploadProfilePicture(){
         processData: false,
         error: function (d) {
             $('#updateProfileForm').pleaseWait('stop');
-            displayToast('error', d.responseJSON.message, d.responseJSON.title)
+            //displayToast('error', d.responseJSON.message, d.responseJSON.title)
+            displayToast('error', 'Oops, unable to save user profile picture', 'Profile Picture');
         },
         success: function (d) {
             $('#updateProfileForm').pleaseWait('stop');

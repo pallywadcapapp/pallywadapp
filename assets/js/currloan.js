@@ -5,7 +5,8 @@ function fetchCurrProcessedLoanRequests(loanId) {
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            displayToast('error', 'Oops, unable to get loans', 'Loans');
         },
         success: function (data) {
 
@@ -46,7 +47,8 @@ function fetchProcessedLoanRequests(loanId) {
             url: loan_app_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             error: function (d) {
-                displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                displayToast('error', 'Oops, unable to get loans', 'Loans');
             },
             success: function (d) {
                 if(d.length > 0){
@@ -63,7 +65,8 @@ function fetchProcessedLoanRequests(loanId) {
             url: loan_app_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             error: function (d) {
-                displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                displayToast('error', 'Oops, unable to get loans', 'Loans');
             },
             success: function (d) {
                 processLoanDetails(d)
@@ -144,7 +147,8 @@ function processLoanDetails(d, pl){
             url: loan_app_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             error: function (d) {
-                displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                displayToast('error', 'Oops, unable to get Loan Payment Details', 'Payment Details');
             },
             success: function (d) {
                 console.log(d)

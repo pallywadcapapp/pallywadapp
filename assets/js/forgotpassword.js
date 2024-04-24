@@ -19,7 +19,8 @@ $('body').on('click', '#reset-password', function (e) {
             headers: { 'Content-Type': 'application/json' },
             //data: JSON.stringify(data),
             error: function (d) {
-                displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                displayToast('error', 'Oops, unable to get reset password token', 'Token Error');
             },
             success: function (d) {
                 location.href = "/password-code";

@@ -43,7 +43,8 @@ function GetProcessedLoans(){
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
         error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+            displayToast('error', 'Oops, unable to get loans', 'Loans Error');
         },
         success: function (d) {
             if(d.length > 0){

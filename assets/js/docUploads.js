@@ -8,7 +8,8 @@ $(function(){
             url: setup_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             error: function (d) {
-                displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                displayToast('error', 'Oops, unable to get document types', 'Document Type Error');
             },
             success: function (d) {
                 let lists = d;
@@ -38,7 +39,8 @@ if ($("#docUpload-form").length > 0) {
             url: setup_url + api_endpoint,
             headers: { 'Content-Type': 'application/json' },
             error: function (d) {
-                displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                //displayToast('error', d.responseJSON.message, d.responseJSON.status)
+                displayToast('error', 'Oops, unable to get documents', 'Documents Error');
             },
             success: function (d) {
                 doclist = d;

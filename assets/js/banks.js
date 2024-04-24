@@ -45,9 +45,6 @@ function loadBanksHistory() {
         type: 'get',
         url: loan_app_url + api_endpoint,
         headers: { 'Content-Type': 'application/json' },
-        error: function (d) {
-            displayToast('error', d.responseJSON.message, d.responseJSON.status)
-        },
         success: function (d) {
             console.log(d)
             let lists = d;
